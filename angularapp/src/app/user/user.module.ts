@@ -4,10 +4,13 @@ import { RouterModule } from '@angular/router'
 import { UserRoutingModule } from './user-routing.module';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
+import { HomepageComponent } from './homepage/homepage.component';
+import { BookEventComponent } from './book-event/book-event.component';
+import { LayoutComponent } from './layout/layout.component';
 
 
 @NgModule({
-  declarations: [LoginComponent, SignupComponent],
+  declarations: [LoginComponent, SignupComponent, HomepageComponent, BookEventComponent, LayoutComponent],
   imports: [
     CommonModule,
     UserRoutingModule,
