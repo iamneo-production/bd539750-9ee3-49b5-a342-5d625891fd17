@@ -1,0 +1,54 @@
+<app-admin-header></app-admin-header>
+<div class="container-fluid">
+
+    <!--Venues-->
+    <div class="main container-fluid-md pb-5">
+
+        <!--Search Venues-->
+        <nav class="navbar bg-light">
+            <div class="container-fluid text justify-content-center">
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
+        </nav>
+
+
+
+        <!--Venues Card-->
+
+        <div class="row mt-5 venues-card" style="width: 80%; margin: auto;">
+            <div class="col-md-4 mb-3" *ngFor="let ven of VenueList" id="adminVenueGrid1">
+                <a class="nav-link">
+                    <div class="card">
+                        <img src={{ven.venueImageURL}} class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold">{{ven.venueName}}</h5>
+                            <p class="card-text">Place : {{ven.venueLocation}}</p>
+
+                            <span style="color: #feb900;"><i class="fa-solid fa-star"></i><i
+                                    class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                    class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
+
+                            <span class="float-end fs-4 me-2"><a id="deleteVenue" (click)="deleteVenue(ven.venueId)"
+                                    style="cursor:pointer"><i class="fa-solid fa-trash-can"></i></a></span>
+                            <span class="float-end fs-4 me-2"><a id="editVenue" [routerLink]="['/edit-venue',ven.venueId]"
+                                    style="color: rgb(55, 52, 52);"><i class="fa-solid fa-pen-to-square"></i></a></span>
+
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col-6">
+                    <button id="addVenue" type="submit" class="btn btn-success p-2 fw-bold" routerLink="/add-venue">ADD VENUE</button>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+

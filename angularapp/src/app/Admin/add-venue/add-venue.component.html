@@ -1,0 +1,86 @@
+<app-admin-header></app-admin-header>
+<div class="container-fluid-md">
+
+    <form [formGroup]="addVenueForm" class="p-5 ">
+
+        <!--Venue Name-->
+        <div class="row">
+            <div class="col-md-5 mt-2">
+                <div class="input-group flex-nowrap">
+                    <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-pen-fancy"></i></span>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="venueName" formControlName="venueName"
+                            placeholder="name@example.com">
+                        <label for="floatingInput">Enter the Venue name</label>
+                    </div>
+                </div>
+            </div>
+
+            <!--Image-->
+            <div class="col-md-5 mt-2">
+                <div class="input-group flex-nowrap">
+                    <span class="input-group-text" id="addon-wrapping"><i class="fa-regular fa-images"></i></span>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="imageUrl" formControlName="venueImageURL"
+                            placeholder="name@example.com">
+                        <label for="floatingInput">Enter the Venue image URL</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Location-->
+
+        <div class="row mt-2">
+            <div class="col-md-5 mt-2">
+                <div class="input-group flex-nowrap">
+                    <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-location-dot"></i></span>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="venueLocation" formControlName="venueLocation" placeholder="name@example.com">
+                        <label for="floatingInput">Enter the Venue location</label>
+                    </div>
+                </div>
+            </div>
+
+            <!--Capacity-->
+            <div class="col-md-5 mt-2">
+                <div class="input-group flex-nowrap">
+                    <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-user-group"></i></span>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="capacityOfVenue" formControlName="venueCapacity" placeholder="name@example.com">
+                        <label for="floatingInput">Enter the Venue capacity</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!--Price-->
+        <div class="row mt-2">
+            <div class="col-md-10">
+                <div class="input-group flex-nowrap">
+                    <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-wallet"></i></span>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="venuePrice" formControlName="venuePrice" placeholder="name@example.com"> 
+                        <label for="floatingInput">Enter the Venue Price</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Comments-->
+        <div class="row mt-2">
+            <div class="col-md-10 mt-2">
+                <div class="form-floating">
+                    <textarea class="form-control" placeholder="Leave a comment here" id="venueDescription"
+                        style="height: 14rem" formControlName="venueDescription"></textarea>
+                    <label for="floatingTextarea2">Comments</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-3 offset-8">
+            <button (click)="addVenueList()" class="btn btn-primary p-2">Submit Venue Details</button>
+        </div>
+    </form>
+</div>

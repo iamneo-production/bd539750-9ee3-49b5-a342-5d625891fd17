@@ -1,0 +1,146 @@
+<div class="container-fluid-md main">
+    <div class="row heading">
+        <div class="col">
+            <img src="/assets/logo.jpg" width="55" alt="" class="mt-3 me-2">
+            <h1 style="position: relative; top: 1rem;">Baseball League Management</h1>
+        </div>
+    </div>
+    <div class="row p-4 ">
+        <div class="col-md-6 p-5 d-flex image-container">
+            <img src="/assets/signup-img.jpg" alt="" style="width: 80%; margin-left: 5rem;">
+        </div>
+        <div class="col-md-4 signup-container">
+
+            <form [formGroup]="registerForm" class="p-2">
+
+                <div class="mb-2">
+                    <h3 class="fw-bold">Register Here...</h3>
+                </div>
+
+                <!--Admin/User-->
+                <div class="mb-1">
+                    <label for="" class="form-label">Admin/User</label>
+                    <select class="form-select" aria-label="Default select example" [(ngModel)]="UserRole"
+                        formControlName="userRole" id="admin/user">
+                        <option value="" disabled selected>Enter admin/user</option>
+                        <option value="admin">Admin</option>
+                        <option value="user">User</option>
+                    </select>
+
+                    <div *ngIf="Role.errors && (Role.touched || Role.dirty)">
+                        <div class="form-text text-danger" *ngIf="Role.errors.required" id="errorRole">
+                            Role is required.
+                        </div>
+                    </div>
+
+                </div>
+
+                <!--Email-->
+                <div class="mb-1">
+                    <label for="" class="form-label">Email</label>
+                    <div class="input-group flex-nowrap">
+                        <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-envelope"></i></span>
+                        <input type="text" class="form-control p-2" id="email" formControlName="email"
+                            placeholder="Enter Email">
+                    </div>
+
+                    <div *ngIf="Email.errors && (Email.touched || Email.dirty)">
+                        <div class="form-text text-danger" *ngIf="Email.errors.required" id="errorEmail">
+                            Email is required.
+                        </div>
+                        <div class="form-text text-danger" *ngIf="Email.errors.email" id="errorEmail">
+                            Invalid Email Format.
+                        </div>
+                    </div>
+
+                </div>
+
+                <!--Username-->
+                <div class="mb-1" *ngIf="this.UserRole=='user'">
+                    <label for="" class="form-label">Username</label>
+                    <div class="input-group flex-nowrap">
+                        <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-pencil"></i></span>
+                        <input type="text" class="form-control p-2" id="username" formControlName="username"
+                            placeholder="Enter Username">
+                    </div>
+
+                </div>
+
+                <!--Mobile Number-->
+                <div class="mb-1">
+                    <label for="" class="form-label">Mobile-Number</label>
+                    <div class="input-group flex-nowrap">
+                        <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-phone"></i></span>
+                        <input type="text" class="form-control p-2" id="mobileNumber" formControlName="mobileNumber"
+                            placeholder="Enter Mobilenumber">
+                    </div>
+
+                    <div *ngIf="Mobilenumber.errors && (Mobilenumber.touched || Mobilenumber.dirty)">
+                        <div class="form-text text-danger" *ngIf="Mobilenumber.errors.required" id="errormobilenumber">
+                            Mobile-Number is required.
+                        </div>
+                        <div class="form-text text-danger" *ngIf="Mobilenumber.errors.pattern" id="errormobilenumber">
+                            Invalid number format.
+                        </div>
+                    </div>
+
+                </div>
+
+                <!--Password-->
+                <div class="mb-1">
+                    <label for="" class="form-label">Password</label>
+                    <div class="input-group flex-nowrap">
+                        <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-key"></i></span>
+                        <input [type]="type" class="form-control p-2" id="password" formControlName="password"
+                            placeholder="Password"
+                            style="border-top-right-radius: 5px; border-bottom-right-radius: 5px;">
+                        <span (click)="hideShow()" style="position: absolute; right: 10px; top: 8px;"><i
+                                class="fa-solid {{eyeIcon}}"></i></span>
+                    </div>
+
+
+                    <div *ngIf="Password.errors && (Password.touched || Password.dirty)">
+                        <div class="form-text text-danger" *ngIf="Password.errors.required" id="errorPassword">
+                            Password is required.
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+                <!--Confirm Password-->
+                <div class="mb-1">
+                    <label for="" class="form-label">Confirm Password</label>
+                    <div class="input-group flex-nowrap">
+                        <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-key"></i></span>
+                        <input [type]="type1" class="form-control p-2" id="confirmPassword"
+                            formControlName="confirmpassword" placeholder="Confirm Password"
+                            style="border-top-right-radius: 5px; border-bottom-right-radius: 5px;">
+                        <span (click)="hideShow1()" style="position: absolute; right: 10px; top: 8px;"><i
+                                class="fa-solid {{eyeIcon1}}"></i></span>
+                    </div>
+
+
+                    <div class="form-text text-danger" *ngIf="registerForm.hasError('notSame')">Passwords do not match
+
+
+                    </div>
+
+                </div>
+
+
+                <div class="mt-1">
+                    <p>Already have an account? <a routerLink="/login" id="signinLink">Login</a></p>
+                </div>
+
+                <!--Submit-->
+                <div>
+                    <button (click)="onSignup()" id="submitButton" type="submit"
+                        class="btn btn-primary ps-4 pe-4">Submit</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
