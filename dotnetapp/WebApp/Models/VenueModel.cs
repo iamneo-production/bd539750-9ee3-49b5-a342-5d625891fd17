@@ -1,3 +1,4 @@
+//Venue Model
 using System.ComponentModel.DataAnnotations;
 
 namespace WebApp.Models

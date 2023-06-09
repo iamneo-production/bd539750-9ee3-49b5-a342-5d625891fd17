@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿//v2
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WebApp.Migrations
 {
