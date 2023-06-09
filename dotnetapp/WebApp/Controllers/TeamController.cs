@@ -30,7 +30,7 @@ namespace WebApp.Controllers
 
         // GET: api/Teams/id
         [HttpGet("{id}")]
-        public async Task<ActionResult<TeamModel>> GetTeam(int id)
+        public async Task<ActionResult<TeamModel>> getTeam(int id)
         {
             var team = await _context.teams.FindAsync(id);
 
@@ -59,7 +59,7 @@ namespace WebApp.Controllers
 
         // PUT: api/Teams/id
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTeam(int id, TeamModel team)
+        public async Task<IActionResult> editTeam(int id, TeamModel team)
         {
             if (id != team.teamId)
             {
@@ -89,7 +89,7 @@ namespace WebApp.Controllers
 
         // POST: api/Teams
         [HttpPost]
-        public async Task<ActionResult<TeamModel>> PostTeam(TeamModel team)
+        public async Task<ActionResult<TeamModel>> addTeam(TeamModel team)
         {
             _context.teams.Add(team);
             await _context.SaveChangesAsync();
@@ -99,7 +99,7 @@ namespace WebApp.Controllers
 
         // DELETE: api/Teams/id
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteTeam(int id)
+        public async Task<IActionResult> deleteTeam(int id)
         {
             var team = await _context.teams.FindAsync(id);
             if (team == null)

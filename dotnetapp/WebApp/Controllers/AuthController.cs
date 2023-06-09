@@ -29,7 +29,7 @@ namespace WebApp.Controllers
 
         [HttpPost("registerUser")]
 
-        public async Task<IActionResult> RegisterUser([FromBody] UserModel registerObj)
+        public async Task<IActionResult> saveUser([FromBody] UserModel registerObj)
         {
             if (registerObj == null)
             {
@@ -47,7 +47,7 @@ namespace WebApp.Controllers
 
         [HttpPost("registerAdmin")]
 
-        public async Task<IActionResult> RegisterAdmin([FromBody] AdminModel registerObj)
+        public async Task<IActionResult> saveAdmin([FromBody] AdminModel registerObj)
         {
             if (registerObj == null)
             {

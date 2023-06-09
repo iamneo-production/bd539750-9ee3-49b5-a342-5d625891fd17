@@ -30,7 +30,7 @@ namespace BaseballAPI.Controllers
 
         // GET: api/Referee/id
         [HttpGet("{id}")]
-        public async Task<ActionResult<RefereeModel>> GetRefereeModel(int id)
+        public async Task<ActionResult<RefereeModel>> getReferee(int id)
         {
             var refereeModel = await _context.referees.FindAsync(id);
 
@@ -45,7 +45,7 @@ namespace BaseballAPI.Controllers
         // PUT: api/Referee/id
   
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutRefereeModel(int id, RefereeModel refereeModel)
+        public async Task<IActionResult> editReferee(int id, RefereeModel refereeModel)
         {
             if (id != refereeModel.refereeId)
             {
@@ -75,7 +75,7 @@ namespace BaseballAPI.Controllers
 
         // POST: api/Referee
         [HttpPost]
-        public async Task<ActionResult<RefereeModel>> PostRefereeModel(RefereeModel refereeModel)
+        public async Task<ActionResult<RefereeModel>> addReferee(RefereeModel refereeModel)
         {
             _context.referees.Add(refereeModel);
             await _context.SaveChangesAsync();
@@ -85,7 +85,7 @@ namespace BaseballAPI.Controllers
 
         // DELETE: api/Referee/id
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteRefereeModel(int id)
+        public async Task<IActionResult> deleteReferee(int id)
         {
             var refereeModel = await _context.referees.FindAsync(id);
             if (refereeModel == null)

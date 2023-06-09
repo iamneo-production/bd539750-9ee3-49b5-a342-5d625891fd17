@@ -30,7 +30,7 @@ namespace BaseballAPI.Controllers
 
         // GET: api/Venues/id
         [HttpGet("{id}")]
-        public async Task<ActionResult<VenueModel>> GetVenue(int id)
+        public async Task<ActionResult<VenueModel>> getVenue(int id)
         {
             var venue = await _context.venues.FindAsync(id);
 
@@ -44,7 +44,7 @@ namespace BaseballAPI.Controllers
 
      
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutVenue(int id, VenueModel venue)
+        public async Task<IActionResult> editVenue(int id, VenueModel venue)
         {
             if (id != venue.venueId)
             {
@@ -74,7 +74,7 @@ namespace BaseballAPI.Controllers
 
     
         [HttpPost]
-        public async Task<ActionResult<VenueModel>> PostVenue(VenueModel venue)
+        public async Task<ActionResult<VenueModel>> addVenue(VenueModel venue)
         {
             _context.venues.Add(venue);
             await _context.SaveChangesAsync();
@@ -86,7 +86,7 @@ namespace BaseballAPI.Controllers
 
         // DELETE: api/Venues/id
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteVenue(int id)
+        public async Task<IActionResult> deleteVenue(int id)
         {
             var venue = await _context.venues.FindAsync(id);
             if (venue == null)
