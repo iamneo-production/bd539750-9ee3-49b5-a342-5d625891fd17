@@ -1,0 +1,89 @@
+<app-admin-header></app-admin-header>
+<div class=" main container-fluid-md">
+
+    <form #form="ngForm" class="p-5 " (ngSubmit)="UpdateVenue()">
+
+        <!--Venue Name-->
+        <div class="row">
+            <div class="col-md-5 mt-2">
+                <div class="input-group flex-nowrap">
+                    <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-pen-fancy"></i></span>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="floatingInput" name="venueName" [(ngModel)]="EditVenue.venueName"
+                            placeholder="name@example.com">
+                        <label for="floatingInput">Enter the Venue name</label>
+                    </div>
+                </div>
+            </div>
+
+            <!--Image-->
+            <div class="col-md-5 mt-2">
+                <div class="input-group flex-nowrap">
+                    <span class="input-group-text" id="addon-wrapping"><i class="fa-regular fa-images"></i></span>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="floatingInput" name="venueImageURL" [(ngModel)]="EditVenue.venueImageURL"
+                            placeholder="name@example.com">
+                        <label for="floatingInput">Enter the Venue image URL</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Location-->
+
+        <div class="row mt-2">
+            <div class="col-md-5 mt-2">
+                <div class="input-group flex-nowrap">
+                    <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-location-dot"></i></span>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="floatingInput" name="venueLoaction" [(ngModel)]="EditVenue.venueLocation"
+                            placeholder="name@example.com">
+                        <label for="floatingInput">Enter the Venue location</label>
+                    </div>
+                </div>
+            </div>
+
+            <!--Capacity-->
+            <div class="col-md-5 mt-2">
+                <div class="input-group flex-nowrap">
+                    <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-user-group"></i></span>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="floatingInput" name="venueCapacity" [(ngModel)]="EditVenue.venueCapacity"
+                            placeholder="name@example.com">
+                        <label for="floatingInput">Enter the Venue capacity</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!--Price-->
+        <div class="row mt-2">
+            <div class="col-md-10">
+                <div class="input-group flex-nowrap">
+                    <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-wallet"></i></span>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="floatingInput" name="venuePrice" [(ngModel)]="EditVenue.venuePrice"
+                            placeholder="name@example.com">
+                        <label for="floatingInput">Enter the Venue Price</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Comments-->
+        <div class="row mt-2">
+            <div class="col-md-10 mt-2">
+                <div class="form-floating">
+                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
+                        style="height: 14rem" name="venueDescription" [(ngModel)]="EditVenue.venueDescription"></textarea>
+                    <label for="floatingTextarea2">Comments</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-3 offset-8">
+            <button class="btn btn-primary p-2">Update Venue</button>
+        </div>
+    </form>
+</div>
