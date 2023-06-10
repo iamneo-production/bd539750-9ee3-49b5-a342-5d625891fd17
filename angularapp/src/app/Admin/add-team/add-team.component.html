@@ -62,7 +62,7 @@
                     </div>
 
                     <div class="form-text text-danger" *ngIf="teamForm.get('playerCounts').errors.pattern">
-                        Invalid Format.
+                        Only number allowed.
                     </div>
                 </div>
 
@@ -77,6 +77,14 @@
                     </div>
                 </div>
 
+                <!--Validation Team Locations-->
+                <div class="ms-2"
+                    *ngIf="teamForm.get('teamLocation').errors && (teamForm.get('teamLocation').touched ||teamForm.get('teamLocation').dirty)">
+                    <div class="form-text text-danger" *ngIf="teamForm.get('teamLocation').errors.required">
+                        Team Locations is required.
+                    </div>
+                </div>
+
                 <div class="form-floating mt-2">
                     <textarea class="form-control" placeholder="Leave a comment here" id="TeamDescription"
                         style="height: 5rem" formControlName="teamDescription"></textarea>
@@ -84,13 +92,15 @@
                 </div>
             </div>
 
-            <!--Validation Team Name-->
+            <!--Validation Team Description-->
             <div class="ms-2"
-                *ngIf="teamForm.get('teamLocation').errors && (teamForm.get('teamLocation').touched ||teamForm.get('teamName').dirty)">
-                <div class="form-text text-danger" *ngIf="teamForm.get('teamName').errors.required">
-                    Team Name is required.
+                *ngIf="teamForm.get('teamDescription').errors && (teamForm.get('teamDescription').touched ||teamForm.get('teamDescription').dirty)">
+                <div class="form-text text-danger" *ngIf="teamForm.get('teamDescription').errors.required">
+                    Team Description is required.
                 </div>
             </div>
+
+
 
 
 
@@ -113,6 +123,7 @@
                                         <label for="floatingInput">Enter Player Firstname</label>
                                     </div>
                                 </div>
+
                             </div>
 
                             <!--LastName-->
