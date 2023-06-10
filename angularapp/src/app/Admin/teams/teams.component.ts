@@ -9,12 +9,12 @@ import { TeamsService } from 'src/app/Services/teams.service';
 export class TeamsComponent implements OnInit {
 
   constructor(private teamService: TeamsService) {}
-  TeamList = [];
+  TeamList:any = [];
   ngOnInit() {
     console.log(this.TeamList.values);
 
     this.teamService.getAllTeamDetails().subscribe((result) => {
-      this.TeamList = <any>result;
+      this.TeamList =result;
     });
   }
 
