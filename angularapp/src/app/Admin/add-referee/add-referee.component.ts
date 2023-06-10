@@ -38,7 +38,7 @@ export class AddRefereeComponent implements OnInit {
 
     //Get All Refree Details
     this.refereeService.getAllRefreeDetails().subscribe((result) => {
-      this.RefreeList = <any>result;
+      this.RefreeList = result;
     });
 
   }
@@ -65,7 +65,7 @@ export class AddRefereeComponent implements OnInit {
   addRefreeList() {
     if (this.refereeForm.valid) {
       this.refereeService
-        .setRefreeDetails(<any>this.refereeForm.value)
+        .setRefreeDetails(this.refereeForm.value)
         .subscribe({
           next: (result) => {
             this.toast.success("Referee Added Successfully!", "Success");

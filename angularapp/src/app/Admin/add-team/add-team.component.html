@@ -35,7 +35,7 @@
                     </div>
                 </div>
 
-                <!--Validation Team Name-->
+                <!--Validation Team Image-->
                 <div class="ms-2"
                     *ngIf="teamForm.get('teamImage').errors && (teamForm.get('teamImage').touched ||teamForm.get('teamImage').dirty)">
                     <div class="form-text text-danger" *ngIf="teamForm.get('teamImage').errors.required">
@@ -84,17 +84,17 @@
                 </div>
             </div>
 
-            <!--Validation Team Name-->
+            <!--Validation Team Loaction-->
             <div class="ms-2"
-                *ngIf="teamForm.get('teamLocation').errors && (teamForm.get('teamLocation').touched ||teamForm.get('teamName').dirty)">
+                *ngIf="teamForm.get('teamLocation').errors && (teamForm.get('teamLocation').touched ||teamForm.get('teamLocation).dirty)">
                 <div class="form-text text-danger" *ngIf="teamForm.get('teamName').errors.required">
-                    Team Name is required.
+                    Team Loaction is required.
                 </div>
             </div>
 
 
 
-            <!--Players Detaail-->
+            <!--Players Detail-->
             <div class="col-8 mt-2">
                 <div formArrayName="Players">
                     <div class="row mt-2" *ngFor="let plrs of teamForm.get('Players')['controls']; let i=index"

@@ -14,10 +14,10 @@ export class AdminVenueListComponent implements OnInit {
     private route: Router,
   ) { }
 
-  VenueList = [];
+  VenueList:any = [];
   ngOnInit() {
     this.venueService.getAllVenue().subscribe((result) => {
-      this.VenueList = <any>result;
+      this.VenueList = result;
     });
   }
 
