@@ -1,4 +1,3 @@
-//Referee Controller
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using WebApp.Context;
 using WebApp.Models;
 
-namespace BaseballAPI.Controllers
+namespace WebApp.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -24,14 +23,14 @@ namespace BaseballAPI.Controllers
 
         // GET: api/Referee
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<RefereeModel>>> Getreferees()
+        public async Task<ActionResult<IEnumerable<RefereeModel>>> viewReferees()
         {
             return await _context.referees.ToListAsync();
         }
 
-        // GET: api/Referee/id
+        // GET: api/Referee/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<RefereeModel>> getReferee(int id)
+        public async Task<ActionResult<RefereeModel>> GetRefereeModel(int id)
         {
             var refereeModel = await _context.referees.FindAsync(id);
 
@@ -43,8 +42,7 @@ namespace BaseballAPI.Controllers
             return refereeModel;
         }
 
-        // PUT: api/Referee/id
-  
+        // PUT: api/Referee/5
         [HttpPut("{id}")]
         public async Task<IActionResult> editReferee(int id, RefereeModel refereeModel)
         {
@@ -76,7 +74,7 @@ namespace BaseballAPI.Controllers
 
         // POST: api/Referee
         [HttpPost]
-        public async Task<ActionResult<RefereeModel>> addReferee(RefereeModel refereeModel)
+        public async Task<ActionResult<RefereeModel>> addRefereeModel(RefereeModel refereeModel)
         {
             _context.referees.Add(refereeModel);
             await _context.SaveChangesAsync();
@@ -84,9 +82,9 @@ namespace BaseballAPI.Controllers
             return CreatedAtAction("GetRefereeModel", new { id = refereeModel.refereeId }, refereeModel);
         }
 
-        // DELETE: api/Referee/id
+        // DELETE: api/Referee/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> deleteReferee(int id)
+        public async Task<IActionResult> deleteRefereeModel(int id)
         {
             var refereeModel = await _context.referees.FindAsync(id);
             if (refereeModel == null)
