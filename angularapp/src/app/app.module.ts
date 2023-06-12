@@ -23,6 +23,7 @@ import { TeamsComponent } from './Admin/teams/teams.component';
 import { EditTeamComponent } from './Admin/edit-team/edit-team.component';
 import { NgxUiLoaderModule, NgxUiLoaderHttpModule } from 'ngx-ui-loader';
 import { AddRefereeComponent } from './Admin/add-referee/add-referee.component';
+import { BookEventComponent } from './User/book-event/book-event.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { AddRefereeComponent } from './Admin/add-referee/add-referee.component';
     TeamsComponent,
     EditTeamComponent,
     AddRefereeComponent,
+    BookEventComponent,
   ],
   imports: [
     BrowserModule,
