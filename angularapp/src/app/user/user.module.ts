@@ -5,12 +5,18 @@ import { UserRoutingModule } from './user-routing.module';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { HomepageComponent } from './homepage/homepage.component';
-import { BookEventComponent } from './book-event/book-event.component';
 import { LayoutComponent } from './layout/layout.component';
-
+import { ViewbookeventComponent } from './viewbookevent/viewbookevent.component';
+import { BookeventComponent } from './bookevent/bookevent.component';
 
 @NgModule({
-  declarations: [LoginComponent, SignupComponent, HomepageComponent, BookEventComponent, LayoutComponent],
+  declarations: [
+    LoginComponent,
+    SignupComponent, 
+    HomepageComponent, 
+    BookeventComponent, 
+    LayoutComponent, 
+    ViewbookeventComponent,],
   imports: [
     CommonModule,
     UserRoutingModule,
@@ -18,4 +24,4 @@ import { LayoutComponent } from './layout/layout.component';
   ],
   exports: [RouterModule]
 })
-export class UserModule { }
+export class UserModule {  }

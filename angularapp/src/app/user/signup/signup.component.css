@@ -1,0 +1,21 @@
+#sign_page
+{
+    text-align: center;
+    margin-top: 100px;
+}
+input{
+    padding: 10px 50px 10px 10px;
+    margin: 10px 10px 10px 10px;
+}
+select{
+    padding-left: 90px;
+    padding: 10px 130px 10px 10px;
+    margin: 10px 10px 10px 10px;
+}
+a
+{
+    text-decoration: none;
+}
+#user_link{
+    padding: 5px 20px 5px 20px;
+}

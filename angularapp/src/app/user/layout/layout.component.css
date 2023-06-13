@@ -1,0 +1,34 @@
+#header{
+    background: var(--dark-blue);
+    color:var(--white);
+    text-align: center;
+    font-size: 25px;
+    padding: 10px;
+    display: flex;
+}
+#header a
+{
+    color: var(--white);
+    text-decoration: none;
+}
+#header div{
+    width: 100%;
+    text-align: center;
+}
+#header .width50{
+    width: 50%;
+}
+#header .width50.leftcol{
+    text-align: left;
+}
+#header .width50.rightcol{
+    text-align: right;
+}
+#userviewbookevent
+{
+    margin-left: 80px;
+}
+a:hover {
+    background-color: #bdb2b2;
+    border-radius: 5px;
+  }

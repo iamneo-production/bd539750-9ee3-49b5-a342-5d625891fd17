@@ -1,2 +1,10 @@
-<p>login works!</p>
-<a [routerLink]="['/user/signup']">User Signup</a> 
+<div id="login_page">
+   <div>
+      <form id="login">
+         <input type="text"id="email" value="" placeholder="Email"><br>
+         <input type="text" id="Password" value="" placeholder="Password">
+      </form>
+      <button id="login"> <a [routerLink]="['/user/homepage']">Login</a> </button>
+   </div>
+   <a id="user_link" [routerLink]="['/user/signup']">Signup..</a>
+</div>

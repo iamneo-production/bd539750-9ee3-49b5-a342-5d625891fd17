@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-layout',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LayoutComponent implements OnInit {
 
-  constructor() { }
+  public title: string = 'No Title';
+  public hidelogout: boolean = false;
 
-  ngOnInit(): void {
+  constructor(private router: Router) {
+
   }
 
+  ngOnInit(): void {}
+
+  onActivate(component: any) {
+    this.title = component.title;
+    this.hidelogout = component.hidelogout ? true : false;
+  } 
 }
