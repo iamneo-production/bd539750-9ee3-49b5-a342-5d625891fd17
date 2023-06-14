@@ -43,7 +43,7 @@ export class EditVenueComponent implements OnInit {
   UpdateVenue() {
     this.venueService.updateVenue(this.EditVenue.venueId, this.EditVenue).subscribe({
       next: (response) => {
-        this.route.navigate(['/admin-homepage']);
+        this.route.navigate(['/admin-venue-list']);
       },
     });
   }

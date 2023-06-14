@@ -4,9 +4,7 @@ import { AddRefereeComponent } from './Admin/add-referee/add-referee.component';
 import { AddTeamComponent } from './Admin/add-team/add-team.component';
 import { AddVenueComponent } from './Admin/add-venue/add-venue.component';
 import { AdminHeaderComponent } from './Admin/admin-header/admin-header.component';
-import { AdminHomepageComponent } from './Admin/admin-homepage/admin-homepage.component';
 import { AdminVenueListComponent } from './Admin/admin-venue-list/admin-venue-list.component';
-import { EditTeamComponent } from './Admin/edit-team/edit-team.component';
 import { EditVenueComponent } from './Admin/edit-venue/edit-venue.component';
 import { TeamsComponent } from './Admin/teams/teams.component';
 import { AuthGuard } from './Guards/auth.guard';
@@ -32,11 +30,6 @@ const routes: Routes = [
   {
     path: 'user-homepage',
     component: UserHomepageComponent,
-    canActivate: [AuthGuard],
-  },
-  {
-    path: 'admin-homepage',
-    component: AdminHomepageComponent,
     canActivate: [AuthGuard],
   },
   {
@@ -68,11 +61,6 @@ const routes: Routes = [
   {
     path: 'add-team',
     component: AddTeamComponent,
-  },
-  {
-    path: 'edit-team/:id',
-    component: EditTeamComponent,
-    canActivate: [AuthGuard],
   },
   {
     path: 'add-referee',

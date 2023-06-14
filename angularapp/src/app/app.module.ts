@@ -11,7 +11,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ToastrModule } from 'ngx-toastr';
 import { UserHomepageComponent } from './User/user-homepage/user-homepage.component';
-import { AdminHomepageComponent } from './Admin/admin-homepage/admin-homepage.component';
 import { AdminHeaderComponent } from './Admin/admin-header/admin-header.component';
 import { UserHeaderComponent } from './User/user-header/user-header.component';
 import { AdminVenueListComponent } from './Admin/admin-venue-list/admin-venue-list.component';
@@ -20,7 +19,6 @@ import { EditVenueComponent } from './Admin/edit-venue/edit-venue.component';
 import { VenueListComponent } from './User/venue-list/venue-list.component';
 import { AddTeamComponent } from './Admin/add-team/add-team.component';
 import { TeamsComponent } from './Admin/teams/teams.component';
-import { EditTeamComponent } from './Admin/edit-team/edit-team.component';
 import { NgxUiLoaderModule, NgxUiLoaderHttpModule } from 'ngx-ui-loader';
 import { AddRefereeComponent } from './Admin/add-referee/add-referee.component';
 import { BookEventComponent } from './User/book-event/book-event.component';
@@ -31,7 +29,6 @@ import { BookEventComponent } from './User/book-event/book-event.component';
     LoginComponent,
     SignupComponent,
     UserHomepageComponent,
-    AdminHomepageComponent,
     AdminHeaderComponent,
     UserHeaderComponent,
     AdminVenueListComponent,
@@ -40,7 +37,6 @@ import { BookEventComponent } from './User/book-event/book-event.component';
     VenueListComponent,
     AddTeamComponent,
     TeamsComponent,
-    EditTeamComponent,
     AddRefereeComponent,
     BookEventComponent,
   ],

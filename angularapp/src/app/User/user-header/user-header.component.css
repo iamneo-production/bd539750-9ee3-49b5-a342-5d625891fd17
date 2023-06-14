@@ -1,13 +1,21 @@
 a {
-    font-family: cursive;
-  }
-  
-  nav li a{
-    margin: 0px 8px;
-    border: 4px solid transparent;
-  }
-  
-  nav li a:hover {
-    border-bottom: 4px solid #feb900;
-  }
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: aliceblue;
+}
+
+nav li a{
+  margin: 0px 8px;
+  border: 4px solid transparent;
+  color: whitesmoke;
+}
+
+nav li a:hover {
+  border-bottom: 4px solid #feb900;
+}
+
+
+nav{
+  background-color: #4f86ec;
+  background-image: linear-gradient(to bottom right, #a4fc98, #0f9689);
+}
   

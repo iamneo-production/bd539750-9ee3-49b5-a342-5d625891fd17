@@ -11,9 +11,12 @@ import { TeamsService } from 'src/app/Services/teams.service';
 export class TeamsComponent implements OnInit {
 
   constructor(private teamService: TeamsService, private toast: ToastrService) { }
+  
   TeamList: any = [];
 
   PlayerList: any = [];
+
+  //make a form used to update player data
   playerForm: FormGroup;
 
   //this variable is used to set teamId in playerForm
