@@ -16,6 +16,8 @@ namespace WebApp.Context
         public DbSet<TeamModel> teams { get; set; }
 
         public DbSet<PlayersDetails> playerInformations { get; set; }
+        
+        public DbSet<EmailModel> emails { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -23,6 +25,7 @@ namespace WebApp.Context
             modelBuilder.Entity<VenueModel>().ToTable("venues");
             modelBuilder.Entity<AdminModel>().ToTable("admins");
             modelBuilder.Entity<RefereeModel>().ToTable("referees");
+            modelBuilder.Entity<EmailModel>().ToTable("emails");
             modelBuilder.Entity<TeamModel>()
             .HasMany(t => t.Players)
             .WithOne(p => p.Team)
