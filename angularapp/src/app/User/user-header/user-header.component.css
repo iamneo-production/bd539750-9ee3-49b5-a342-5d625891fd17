@@ -1,9 +1,9 @@
 a {
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: aliceblue;
 }
 
-nav li a{
+nav li a {
   margin: 0px 8px;
   border: 4px solid transparent;
   color: whitesmoke;
@@ -14,8 +14,14 @@ nav li a:hover {
 }
 
 
-nav{
+nav {
   background-color: #4f86ec;
   background-image: linear-gradient(to bottom right, #a4fc98, #0f9689);
 }
-  
+
+
+@media screen and (max-width: 768px) {
+  .logo-text img {
+    display: none;
+  }
+}

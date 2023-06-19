@@ -14,14 +14,14 @@
 }
 #sticky-button1 {
   position: fixed;
-  top: 30%;
+  top: 50%;
   left: -2.3rem;
   z-index: 9999;
   -webkit-transform:rotate(-90deg);
 }
 #sticky-button2 {
   position: fixed;
-  top: 50%;
+  top: 72%;
   left: -2.8rem;
   z-index: 9999;
   -webkit-transform:rotate(-90deg);

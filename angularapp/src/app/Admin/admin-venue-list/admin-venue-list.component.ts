@@ -15,6 +15,8 @@ export class AdminVenueListComponent implements OnInit {
   ) { }
 
   VenueList:any = [];
+  Venue = [];
+  VenueID: any;
   ngOnInit() {
     this.venueService.getAllVenue().subscribe((result) => {
       this.VenueList = result;
@@ -27,5 +29,9 @@ export class AdminVenueListComponent implements OnInit {
         location.reload();
       },
     });
+  }
+
+  getVenue(id) {
+    this.VenueID = id;
   }
 }
