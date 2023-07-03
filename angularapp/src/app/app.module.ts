@@ -22,6 +22,11 @@ import { TeamsComponent } from './Admin/teams/teams.component';
 import { NgxUiLoaderModule, NgxUiLoaderHttpModule } from 'ngx-ui-loader';
 import { AddRefereeComponent } from './Admin/add-referee/add-referee.component';
 import { BookEventComponent } from './User/book-event/book-event.component';
+import { OrganiserListComponent } from './Admin/organiser-list/organiser-list.component';
+import { UpdateBookEventComponent } from './User/update-book-event/update-book-event.component';
+import { ViewbookEventComponent } from './User/viewbook-event/viewbook-event.component';
+import { SchedulesComponent } from './Admin/schedules/schedules.component';
+import { FilterPipePipe } from './pipes/filter-pipe.pipe';
 
 @NgModule({
   declarations: [
@@ -39,6 +44,11 @@ import { BookEventComponent } from './User/book-event/book-event.component';
     TeamsComponent,
     AddRefereeComponent,
     BookEventComponent,
+    OrganiserListComponent,
+    UpdateBookEventComponent,
+    ViewbookEventComponent,
+    SchedulesComponent,
+    FilterPipePipe,
   ],
   imports: [
     BrowserModule,

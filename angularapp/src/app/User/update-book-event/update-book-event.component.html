@@ -1,40 +1,16 @@
-
 <app-user-header></app-user-header>
-
 <div class=" main container-fluid-md">
-    
 
-    <form [formGroup]="bookEventForm" class="p-5 ">
-
-        <div class="row mt-2">
-            <div class="col-md-5 mt-2">
-
-                <select class="form-select p-2" aria-label="Default select example" formControlName="team1"
-                    (change)="onFirstTeamFieldChange()">
-                    <option value="" disabled selected>Choose First Team</option>
-                    <option *ngFor="let option of firstTeamOptions" [value]="option">{{ option }}</option>
-                </select>
-            </div>
-
-            <div class="col-md-5 mt-2">
-
-                <select class="form-select p-2" aria-label="Default select example" formControlName="team2"
-                    (change)="onSecondTeamFieldChange()">
-                    <option value="" disabled selected>Choose Second Team</option>
-                    <option *ngFor="let option of secondTeamOptions" [value]="option">{{ option }}</option>
-                </select>
-            </div>
-        </div>
+    <form #form="ngForm" (ngSubmit)="Update()" class="p-5 ">
 
         <!--Venue Name-->
-        <div class="row mt-2">
+        <div class="row">
             <div class="col-md-5 mt-2">
                 <div class="input-group flex-nowrap">
                     <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-pen-fancy"></i></span>
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="floatingInput" formControlName="eventName"
-                            name="eventName" readonly [(ngModel)]="bookEventForm.eventName"
-                            placeholder="name@example.com">
+                        <input type="text" class="form-control" id="floatingInput" name="eventName" readonly
+                            [(ngModel)]="UpdateEvent.eventName" placeholder="name@example.com">
                         <label for="floatingInput">Venue name</label>
                     </div>
                 </div>
@@ -45,8 +21,8 @@
                 <div class="input-group flex-nowrap">
                     <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-pen-fancy"></i></span>
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="floatingInput" formControlName="applicantName"
-                            placeholder="name@example.com" [(ngModel)]="name">
+                        <input type="text" class="form-control" id="floatingInput" name="applicantName"
+                            [(ngModel)]="UpdateEvent.applicantName" placeholder="name@example.com">
                         <label for="floatingInput">Applicant Name</label>
                     </div>
                 </div>
@@ -60,8 +36,8 @@
                 <div class="input-group flex-nowrap">
                     <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-location-dot"></i></span>
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="floatingInput" formControlName="applicantAddress"
-                            placeholder="name@example.com">
+                        <input type="text" class="form-control" id="floatingInput" name="applicantAddress"
+                            [(ngModel)]="UpdateEvent.applicantAddress" placeholder="name@example.com">
                         <label for="floatingInput">Application Address</label>
                     </div>
                 </div>
@@ -73,8 +49,8 @@
                 <div class="input-group flex-nowrap">
                     <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-phone"></i></span>
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="floatingInput" formControlName="applicantMobile"
-                            placeholder="name@example.com" [(ngModel)]="number">
+                        <input type="text" class="form-control" id="floatingInput" name="applicantMobile"
+                            [(ngModel)]="UpdateEvent.applicantMobile" placeholder="name@example.com">
                         <label for="floatingInput">Applicant Mobile</label>
                     </div>
                 </div>
@@ -88,8 +64,8 @@
                 <div class="input-group flex-nowrap">
                     <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-envelope"></i></span>
                     <div class="form-floating">
-                        <input type="email" class="form-control" id="floatingInput" formControlName="applicantEmail"
-                            placeholder="name@example.com" [(ngModel)]="to">
+                        <input type="email" class="form-control" id="floatingInput" name="applicantEmail"
+                            [(ngModel)]="UpdateEvent.applicantEmail" placeholder="name@example.com">
                         <label for="floatingInput">Application Email</label>
                     </div>
                 </div>
@@ -98,11 +74,10 @@
             <!--Event Address-->
             <div class="col-md-5 mt-2">
                 <div class="input-group flex-nowrap">
-                    <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-location-dot"></i></span>
+                    <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-user-group"></i></span>
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="floatingInput" formControlName="eventAddress"
-                            placeholder="name@example.com" readonly name="eventAddress"
-                            [(ngModel)]="bookEventForm.eventAddress">
+                        <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com"
+                            readonly name="eventAddress" [(ngModel)]="UpdateEvent.eventAddress">
                         <label for="floatingInput">Event Address</label>
                     </div>
                 </div>
@@ -116,11 +91,10 @@
             <!--From Date-->
             <div class="col-md-5 mt-2">
                 <div class="input-group flex-nowrap">
-                    <span class="input-group-text" id="addon-wrapping"><i
-                            class="fa-regular fa-calendar-days"></i></span>
+                    <span class="input-group-text" id="addon-wrapping"><i class="fa-regular fa-calendar-days"></i></span>
                     <div class="form-floating">
-                        <input type="date" class="form-control" id="floatingInput" formControlName="eventFromDate"
-                            placeholder="name@example.com" [(ngModel)]="selectedFromDate" min="{{minDate}}" (change)="checkDateValidity()">
+                        <input type="date" class="form-control" id="floatingInput" name="eventFromDate"
+                            [(ngModel)]="UpdateEvent.eventFromDate" placeholder="name@example.com">
                         <label for="floatingInput">Event Date From</label>
                     </div>
                 </div>
@@ -129,11 +103,10 @@
             <!--To Date-->
             <div class="col-md-5 mt-2">
                 <div class="input-group flex-nowrap">
-                    <span class="input-group-text" id="addon-wrapping"><i
-                            class="fa-regular fa-calendar-days"></i></span>
+                    <span class="input-group-text" id="addon-wrapping"><i class="fa-regular fa-calendar-days"></i></span>
                     <div class="form-floating">
-                        <input type="date" class="form-control" id="floatingInput" formControlName="eventToDate"
-                            placeholder="name@example.com"[(ngModel)]="selectedToDate" min="{{minDate}}" (change)="checkDateValidity1()">
+                        <input type="date" class="form-control" id="floatingInput" placeholder="name@example.com"
+                            name="eventToDate" [(ngModel)]="UpdateEvent.eventToDate">
                         <label for="floatingInput">Event Date To</label>
                     </div>
                 </div>
@@ -148,8 +121,8 @@
                 <div class="input-group flex-nowrap">
                     <span class="input-group-text" id="addon-wrapping"><i class="fa-regular fa-clock"></i></span>
                     <div class="form-floating">
-                        <input type="time" class="form-control" id="floatingInput" formControlName="time"
-                            placeholder="name@example.com">
+                        <input type="time" class="form-control" id="floatingInput" name="time"
+                            [(ngModel)]="UpdateEvent.time" placeholder="name@example.com">
                         <label for="floatingInput">Event Time</label>
                     </div>
                 </div>
@@ -160,32 +133,19 @@
                 <div class="input-group flex-nowrap">
                     <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-user-group"></i></span>
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="floatingInput" formControlName="members"
-                            placeholder="name@example.com">
+                        <input type="text" class="form-control" id="floatingInput" name="members"
+                            [(ngModel)]="UpdateEvent.members" placeholder="name@example.com">
                         <label for="floatingInput">No. of team members</label>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="row mt-2">
-            <div class="col-md-5 mt-2">
-
-                <select class="form-select p-2" aria-label="Default select example" formControlName="ReefreeName">
-                    <option value="" disabled selected>Choose Referee</option>
-                    <option *ngFor="let option of refreeOptions" [value]="option">{{ option }}</option>
-                </select>
-            </div>
-
-        </div>
-
-
-        <input hidden type="text" formControlName="eventPrice" name="eventPrice" [(ngModel)]="bookEventForm.eventPrice">
-
+        <input hidden  type="text" name="eventPrice" [(ngModel)]="UpdateEvent.members">
 
 
         <div class="mt-3 offset-9">
-            <button (click)="sendBookEventDetails()" class="btn btn-primary p-2">Book Event</button>
+            <button class="btn btn-primary p-2">Update Event</button>
         </div>
     </form>
 </div>

@@ -14,7 +14,7 @@ export class AdminVenueListComponent implements OnInit {
     private route: Router,
   ) { }
 
-  VenueList:any = [];
+  VenueList: any = [];
   Venue = [];
   VenueID: any;
   ngOnInit() {
@@ -33,5 +33,11 @@ export class AdminVenueListComponent implements OnInit {
 
   getVenue(id) {
     this.VenueID = id;
+  }
+
+  input = '';
+  searchInput = '';
+  onSearch() {
+    this.searchInput = this.input;
   }
 }

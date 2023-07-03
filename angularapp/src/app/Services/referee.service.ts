@@ -16,7 +16,7 @@ export class RefereeService {
   }
 
   getAllRefreeDetails() {
-    return this.http.get<any>(`https://8080-dffcfdfcebbadcdbbaadcffdfcbdfeeeb.project.examly.io/api/Referee/`);
+    return this.http.get<any>(`https://8080-dffcfdfcebbadcdbbaadcffdfcbdfeeeb.project.examly.io/api/Referee`);
   }
 
   getRefreeDetails(id: any) {

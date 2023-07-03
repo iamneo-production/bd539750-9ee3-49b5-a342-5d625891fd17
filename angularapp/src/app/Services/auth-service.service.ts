@@ -7,7 +7,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 })
 export class AuthServiceService {
 
-  constructor(private http: HttpClient,private route:Router) { }
+  constructor(private http: HttpClient, private route: Router) { }
   CheckRole: any;
   baseUrl: string = 'https://8080-dffcfdfcebbadcdbbaadcffdfcbdfeeeb.project.examly.io/api/Auth/';
 
@@ -19,6 +19,17 @@ export class AuthServiceService {
     return this.http.post<any>(`${this.baseUrl}registerAdmin`, userObj);
   }
 
+  getAllorganiser() {
+    return this.http.get<any>(`https://8080-dffcfdfcebbadcdbbaadcffdfcbdfeeeb.project.examly.io/api/Organiser`);
+  }
+
+  deleteOrganiser(id) {
+    return this.http.delete<any>(`https://8080-dffcfdfcebbadcdbbaadcffdfcbdfeeeb.project.examly.io/api/Organiser/` + id);
+  }
+
+  updateOrganiser(data, id) {
+    return this.http.put<any>(`https://8080-dffcfdfcebbadcdbbaadcffdfcbdfeeeb.project.examly.io/api/Organiser/` + id, data);
+  }
 
 
   login(loginObj: any) {

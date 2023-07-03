@@ -21,7 +21,7 @@
 }
 #sticky-button2 {
   position: fixed;
-  top: 72%;
+  top: 69%;
   left: -2.8rem;
   z-index: 9999;
   -webkit-transform:rotate(-90deg);

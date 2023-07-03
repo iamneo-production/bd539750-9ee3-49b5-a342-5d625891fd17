@@ -74,11 +74,8 @@ namespace WebApp.Controllers
 
             // Here users and admins is a Table in database
 
-            var user = await _authcontext.users.FirstOrDefaultAsync(x => x.email == registerObj.email && x.password == registerObj.password);
-            var admin = await _authcontext.admins.FirstOrDefaultAsync(y => y.email == registerObj.email && y.password == registerObj.password);
-
-
-
+            var user = await isUserPresent(registerObj.email,registerObj.password);
+            var admin = await isAdminPresent(registerObj.email,registerObj.password);
 
             if (user != null)
             {
@@ -89,9 +86,6 @@ namespace WebApp.Controllers
                     Message = "User Login Success!"
                 });
             }
-
-
-
 
             else if (admin != null)
             {
@@ -106,6 +100,9 @@ namespace WebApp.Controllers
 
             return Unauthorized();
         }
+
+          
+        
 
 
           //Authentication Using Jwt Token for Users
@@ -155,5 +152,22 @@ namespace WebApp.Controllers
             var token= jwtTokenHandler.CreateToken(tokenDescriptor);
             return jwtTokenHandler.WriteToken(token);
           }
+
+
+
+
+            //Check if User present in UserModel users Table
+            private async Task<UserModel> isUserPresent(string email, string password)
+             {
+             var user = await _authcontext.users.FirstOrDefaultAsync(x => x.email == email && x.password == password);
+             return user;
+             }
+
+            //Check if Admin present in AdminModel admins Table
+             private async Task<AdminModel> isAdminPresent(string email, string password)
+             {
+             var admin = await _authcontext.admins.FirstOrDefaultAsync(y => y.email == email && y.password == password);
+             return admin;
+             }
     }
 }

@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit {
 
             if (this.role == 'user') {
               this.route.navigate(['/user-homepage']).then(() => {
-                window.location.reload();
+                location.reload();
               });
 
             } else if (this.role == 'admin') {

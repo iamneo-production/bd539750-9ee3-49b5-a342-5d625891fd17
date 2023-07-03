@@ -14,12 +14,6 @@
     width: 30px;
   }
   
-  .red-date {
-    background-color: red;
-    color: white;
-  }
-  
-  
   @media (max-width: 500px) {
     form {
       width: 100%;

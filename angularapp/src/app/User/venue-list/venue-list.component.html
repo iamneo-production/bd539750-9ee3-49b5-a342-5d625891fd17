@@ -9,7 +9,8 @@
 
     <div class="row heading">
         <div class="col">
-            <h1 class="fs-3 p-2 text-center" style="position: relative; top: 1rem;">Click On the below Venues to book an event.....
+            <h1 class="fs-3 p-2 text-center" style="position: relative; top: 1rem;">Click On the below Venues to book an
+                event.....
             </h1>
         </div>
     </div>
@@ -88,9 +89,9 @@
     </div>
 
 
-     <!--Player List-->
+    <!--Player List-->
 
-     <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -123,6 +124,46 @@
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--Referee Details Popup-->
+    <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Referees...</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row mt-5 venues-card" style="width: 80%; margin: auto;" *ngFor="let ref of RefereeList">
+
+
+                        <div class="card">
+                            <img src={{ref.refereeImage}} class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between">
+                                    <h5 class="card-title fw-bold">{{ref.refereeName}}</h5>
+                                    <span style="color: #feb900;"><i class="fa-solid fa-star"></i><i
+                                            class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                            class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
+                                </div>
+
+                                <div class="d-flex justify-content-between mt-2">
+                                    <p class="card-text">{{ref.refereeLocation}}</p>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
                 </div>
             </div>
         </div>

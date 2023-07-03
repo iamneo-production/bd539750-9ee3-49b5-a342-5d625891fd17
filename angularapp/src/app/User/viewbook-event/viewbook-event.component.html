@@ -1,0 +1,38 @@
+<app-user-header></app-user-header>
+
+<div class="container-fluid mt-5">
+    <div class="row">
+        <div class="col-md-8 m-auto">
+            <table class="table table-striped-columns text-center">
+                <thead>
+                    <tr>
+                        <th>Venue Name</th>
+                        <th>Time</th>
+                        <th>From Date</th>
+                        <th>To Date</th>
+                        <th>Total Price</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tbody *ngFor="let event of EventDetails">
+                    <tr *ngIf="event.matchingId==userId">
+
+                        <td>{{event.eventName}}</td>
+                        <td>{{event.time}}</td>
+                        <td>{{event.eventFromDate}}</td>
+                        <td>{{event.eventToDate}}</td>
+                        <td>{{event.eventPrice}}</td>
+                        <td><a style="color: rgb(55, 52, 52);" [routerLink]="['/update-book-event', event.eventId]"><i
+                                    class="fa-solid fa-pen-to-square"></i></a></td>
+                        <td><a style="cursor:pointer" (click)="deleteEvent(event.eventId,event.applicantEmail,event.applicantName)"><i
+                                    class="fa-solid fa-trash-can"></i></a></td>
+
+                    </tr>
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+</div>

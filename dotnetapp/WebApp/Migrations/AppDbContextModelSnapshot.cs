@@ -115,7 +115,7 @@ namespace WebApp.Migrations
                     b.Property<string>("eventToDate")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("matchingUserId")
+                    b.Property<int>("matchingId")
                         .HasColumnType("int");
 
                     b.Property<string>("members")
@@ -129,6 +129,9 @@ namespace WebApp.Migrations
 
                     b.Property<string>("time")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("venueId")
+                        .HasColumnType("int");
 
                     b.HasKey("eventId");
 

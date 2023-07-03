@@ -8,10 +8,20 @@ import { AuthServiceService } from 'src/app/Services/auth-service.service';
 })
 export class AdminHeaderComponent {
 
-  constructor(private auth:AuthServiceService) { }
+  constructor(private auth: AuthServiceService) { }
 
-  
-  logOut(){
+
+  logOut() {
     this.auth.signout();
   }
+
+  isDropdownOpen = false;
+  toggleDropdown() {
+    this.isDropdownOpen = !this.isDropdownOpen;
+  }
+
+  closeDropdown() {
+    this.isDropdownOpen = false;
+  }
+
 }

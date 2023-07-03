@@ -1,0 +1,117 @@
+<app-admin-header></app-admin-header>
+
+<div class="container-fluid mt-5">
+    <div class="row">
+        <div class="col-md-8 m-auto">
+            <table class="table table-striped-columns text-center">
+                <thead>
+                    <tr>
+                        <th>User-ID</th>
+                        <th>User-Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tbody *ngFor="let org of OrganiserDetails">
+                    <tr>
+
+                        <td>{{org.userId}}</td>
+                        <td>{{org.username}}</td>
+                        <td>{{org.email}}</td>
+                        <td>{{org.mobileNumber}}</td>
+                        <td><a style="color: rgb(55, 52, 52);"><i class="fa-solid fa-pen-to-square"></i></a></td>
+                        <td><a style="cursor:pointer"><i class="fa-solid fa-trash-can"
+                                    (click)="deleteOrganiser(org.userId)"></i></a></td>
+                    </tr>
+                </tbody>
+
+            </table>
+            <div class="container-fluid">
+                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Add
+                    Organiser</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Add User through Admin-->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Add Organiser</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="col-md signup-container">
+
+                    <form [formGroup]="registerForm" class="p-2">
+
+                        <!--Email-->
+                        <div class="mb-1">
+                            <label for="" class="form-label">Email</label>
+                            <div class="input-group flex-nowrap">
+                                <span class="input-group-text" id="addon-wrapping"><i
+                                        class="fa-solid fa-envelope"></i></span>
+                                <input type="text" class="form-control p-2" id="email" formControlName="email"
+                                    placeholder="Enter Email">
+                            </div>
+
+                        </div>
+
+                        <!--Username-->
+                        <div class="mb-1">
+                            <label for="" class="form-label">Username</label>
+                            <div class="input-group flex-nowrap">
+                                <span class="input-group-text" id="addon-wrapping"><i
+                                        class="fa-solid fa-pencil"></i></span>
+                                <input type="text" class="form-control p-2" id="username" formControlName="username"
+                                    placeholder="Enter Username">
+                            </div>
+
+                        </div>
+
+                        <!--Mobile Number-->
+                        <div class="mb-1">
+                            <label for="" class="form-label">Mobile-Number</label>
+                            <div class="input-group flex-nowrap">
+                                <span class="input-group-text" id="addon-wrapping"><i
+                                        class="fa-solid fa-phone"></i></span>
+                                <input type="text" class="form-control p-2" id="mobileNumber"
+                                    formControlName="mobileNumber" placeholder="Enter Mobilenumber">
+                            </div>
+
+                        </div>
+
+                        <!--Password-->
+                        <div class="mb-1">
+                            <label for="" class="form-label">Password</label>
+                            <div class="input-group flex-nowrap">
+                                <span class="input-group-text" id="addon-wrapping"><i
+                                        class="fa-solid fa-key"></i></span>
+                                <input type="password" class="form-control p-2" id="password" formControlName="password"
+                                    placeholder="Password"
+                                    style="border-top-right-radius: 5px; border-bottom-right-radius: 5px;">
+                            </div>
+
+                        </div>
+
+
+                        <!--Submit-->
+                        <div class="mt-2">
+                            <button (click)="onSignup()" id="submitButton" type="submit"
+                                class="btn btn-primary ps-4 pe-4">Submit</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

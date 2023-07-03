@@ -9,7 +9,7 @@ using WebApp.Context;
 namespace WebApp.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230616120926_v5")]
+    [Migration("20230630035217_v5")]
     partial class v5
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -117,7 +117,7 @@ namespace WebApp.Migrations
                     b.Property<string>("eventToDate")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("matchingUserId")
+                    b.Property<int>("matchingId")
                         .HasColumnType("int");
 
                     b.Property<string>("members")
@@ -131,6 +131,9 @@ namespace WebApp.Migrations
 
                     b.Property<string>("time")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("venueId")
+                        .HasColumnType("int");
 
                     b.HasKey("eventId");
 

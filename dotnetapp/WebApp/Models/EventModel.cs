@@ -35,7 +35,9 @@ namespace WebApp.Models
 
         public string team2 { get; set; }
 
-        public int matchingUserId { get; set; }
+        public int matchingId { get; set; }
+
+        public int venueId { get; set; }
 
 
     }

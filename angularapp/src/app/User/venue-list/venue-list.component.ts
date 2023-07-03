@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RefereeService } from 'src/app/Services/referee.service';
 import { TeamsService } from 'src/app/Services/teams.service';
 import { VenueServiceService } from 'src/app/Services/venue-service.service';
 
@@ -11,15 +12,16 @@ export class VenueListComponent implements OnInit {
 
   constructor(
     private venueService: VenueServiceService,
-    private teamService:TeamsService,
-  ) {}
+    private teamService: TeamsService,
+    private refereeService: RefereeService,
+  ) { }
 
 
   VenueList = [];
 
   TeamList = [];
 
-  RefreeList = [];
+  RefereeList = [];
 
   PlayerList = [];
 
@@ -31,6 +33,11 @@ export class VenueListComponent implements OnInit {
     this.teamService.getAllTeamDetails().subscribe((result) => {
       this.TeamList = <any>result;
     });
+
+    this.refereeService.getAllRefreeDetails().subscribe((result) => {
+      this.RefereeList = <any>result;
+    });
+
   }
 
   playerDetailsfunction(id) {

@@ -12,46 +12,47 @@ namespace WebApp.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EventController : ControllerBase
+    public class OrganiserController : ControllerBase
     {
         private readonly AppDbContext _context;
 
-        public EventController(AppDbContext context)
+        public OrganiserController(AppDbContext context)
         {
             _context = context;
         }
 
-        // GET: api/BookEvents
+        // GET: api/registers
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<EventModel>>> GetbookEvents()
+        public async Task<ActionResult<IEnumerable<UserModel>>> GetUser()
         {
-            return await _context.bookEvents.ToListAsync();
+            return await _context.users.ToListAsync();
         }
 
-        // GET: api/BookEvents/5
+        // GET: api/registers/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<EventModel>> GetBookEvent(int id)
+        public async Task<ActionResult<UserModel>> Getuser(int id)
         {
-            var bookEvent = await _context.bookEvents.FindAsync(id);
+            var user = await _context.users.FindAsync(id);
 
-            if (bookEvent == null)
+            if (user == null)
             {
                 return NotFound();
             }
 
-            return bookEvent;
+            return user;
         }
 
-        // PUT: api/BookEvents/5
+        // PUT: api/registers/5
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutBookEvent(int id, EventModel bookEvent)
+        public async Task<IActionResult> Putuser(int id, UserModel user)
         {
-            if (id != bookEvent.eventId)
+            if (id != user.userId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(bookEvent).State = EntityState.Modified;
+            _context.Entry(user).State = EntityState.Modified;
 
             try
             {
@@ -59,7 +60,7 @@ namespace WebApp.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!BookEventExists(id))
+                if (!registerExists(id))
                 {
                     return NotFound();
                 }
@@ -72,36 +73,36 @@ namespace WebApp.Controllers
             return NoContent();
         }
 
-        // POST: api/BookEvents
+        // POST: api/registers
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<EventModel>> PostBookEvent(EventModel bookEvent)
+        public async Task<ActionResult<UserModel>> Postuser(UserModel user)
         {
-            _context.bookEvents.Add(bookEvent);
+            _context.users.Add(user);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetBookEvent", new { id = bookEvent.eventId }, bookEvent);
+            return CreatedAtAction("Getuser", new { id = user.userId }, user);
         }
 
-        // DELETE: api/BookEvents/5
+        // DELETE: api/registers/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteBookEvent(int id)
+        public async Task<IActionResult> Deleteuser(int id)
         {
-            var bookEvent = await _context.bookEvents.FindAsync(id);
-            if (bookEvent == null)
+            var user = await _context.users.FindAsync(id);
+            if (user == null)
             {
                 return NotFound();
             }
 
-            _context.bookEvents.Remove(bookEvent);
+            _context.users.Remove(user);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool BookEventExists(int id)
+        private bool registerExists(int id)
         {
-            return _context.bookEvents.Any(e => e.eventId == id);
+            return _context.users.Any(e => e.userId == id);
         }
     }
 }
