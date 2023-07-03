@@ -1,0 +1,49 @@
+.register-header {
+    height: 40px;
+    padding-top: 5px;
+    color: white;
+    background-color: #b30000;
+    font-size: 24px;
+    font-style: bold;
+    text-align: center;
+    border-style: solid;
+    border-color: #660000;
+    border-radius: 5px;
+}
+.register-body {
+    font-size: 18px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+}
+select {
+    margin: 10px 0px;
+    height: 30px;
+    width: 20.5%;
+}
+input {
+    margin: 10px 0px;
+    height: 25px;
+    width: 20%;
+}
+.register-login {
+    margin: 10px;
+}
+.register-button {
+    padding: 5px;
+    color: white;
+    background-color: #ff3333;
+    text-align: center;
+    border-radius: 5px;
+}
+.register-button:hover {
+    cursor: pointer;
+    background-color: #b30000;
+}
+#signinLink {
+    color: blue;
+}
+#signinLink:hover {
+    cursor: pointer;
+}

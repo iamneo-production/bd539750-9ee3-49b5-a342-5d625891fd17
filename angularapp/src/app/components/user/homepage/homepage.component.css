@@ -1,0 +1,55 @@
+.homepage-toolbar {
+    height: 40px;
+    padding-top: 5px;
+    color: white;
+    background-color: #b30000;
+    font-size: 20px;
+    font-style: bold;
+    text-align: center;
+    border-style: solid;
+    border-color: #660000;
+    border-radius: 5px;
+}
+
+.left-toolbar {
+    padding-left: 20px;
+    display: flex;
+    float: left;
+}
+
+.right-toolbar  {
+    padding-top: 10px;
+    padding-right: 20px;
+    float: right;
+}
+
+#BaseballEvent {
+    padding-bottom: 15px;
+    font-size: 24px;
+}
+
+#BookEvent {
+    padding-top: 10px;
+    padding-left: 25px;
+}
+
+#UserViewBookEvent {
+    padding-top: 10px;
+    padding-left: 25px;
+}
+
+
+#BookEvent:hover {
+    cursor: pointer;
+    font-size: 22px;
+}
+
+#UserViewBookEvent:hover {
+    cursor: pointer;
+    font-size: 22px;
+}
+
+#logout:hover {
+    cursor: pointer;
+    font-size: 22px;
+}

@@ -1,0 +1,50 @@
+.viewbookedevent-toolbar {
+    height: 40px;
+    padding-top: 15px;
+    color: white;
+    background-color: #b30000;
+    font-size: 20px;
+    font-style: bold;
+    text-align: center;
+    border-style: solid;
+    border-color: #660000;
+    border-radius: 5px;
+}
+
+.left-toolbar {
+    padding-left: 150px;
+    display: flex;
+    float: left;
+}
+
+.right-toolbar  {
+    padding-right: 20px;
+    float: right;
+}
+
+#BookEvent {
+    padding-top: 10px;
+    padding-left: 25px;
+}
+
+#UserViewBookEvent {
+    padding-left: 25px;
+    font-size: 24px;
+}
+
+#BookEvent:hover {
+    cursor: pointer;
+    font-size: 22px;
+}
+
+#logout:hover {
+    cursor: pointer;
+    font-size: 22px;
+}
+
+.viewbookedevent-body {
+    background-color: #b613138f;
+    border-style: solid;
+    border-color: #660000;
+    height: 630px;
+}
