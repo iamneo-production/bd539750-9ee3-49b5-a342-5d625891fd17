@@ -46,7 +46,6 @@ namespace WebApp
                                    IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("veryverysecret.....")),
                                    ValidateAudience = false,
                                    ValidateIssuer= false,
-                                   ClockSkew= TimeSpan.Zero, 
                                };
                         });
           }

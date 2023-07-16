@@ -45,4 +45,10 @@ export class VenueListComponent implements OnInit {
       this.PlayerList = result;
     });
   }
+
+  input = '';
+  searchInput = '';
+  onSearch() {
+    this.searchInput = this.input;
+  }
 }

@@ -1,6 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
@@ -52,8 +52,8 @@ export class BookEventComponent implements OnInit {
       next: (params) => {
         const id = params.get('id');
         this.VenueId = id;
-       
-        
+
+
         if (id) {
           this.venueService.getVenue(id).subscribe((result) => {
             this.bookEventForm.eventName = result.venueName;
@@ -61,7 +61,7 @@ export class BookEventComponent implements OnInit {
             this.bookEventForm.eventPrice = result.venuePrice;
             this.emailDetails.eventVenueName = result.venueName;
             console.log(this.bookEventForm);
-            
+
           });
 
           //used to fetch Book Dates from praticular Venue Booked-Event Details using venueID
@@ -109,14 +109,14 @@ export class BookEventComponent implements OnInit {
 
     this.refreeService.getAllRefreeDetails().subscribe((result) => {
       this.refreeArray = result;
-     
-      
+
+
       for (let i = 0; i < this.refreeArray.length; i++) {
         this.refreeOptions.push(this.refreeArray[i].refereeName);
-        
+
       }
 
-      
+
     });
   }
 
@@ -131,27 +131,41 @@ export class BookEventComponent implements OnInit {
     mobileNumber: '',
     To: '',
     Subject:
-      'Partial Booking Confirmation - Please Complete Payment to Successfully Book Event',
+      ' Booking Confirmation - Successfully Book Event',
     Message: '',
   };
 
   //Book Event
   bookEventForm: any = new FormGroup({
     eventName: new FormControl('', [Validators.required]),
-    applicantName: new FormControl('', [Validators.required]),
-    applicantAddress: new FormControl('', [Validators.required]),
-    applicantMobile: new FormControl('', [Validators.required]),
-    applicantEmail: new FormControl('', [Validators.required]),
+    applicantName: new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-Z\s]*$/)]),
+    applicantAddress: new FormControl('', [Validators.required, Validators.pattern(/^(?!.*\s$)(?=.*[a-zA-Z])[a-zA-Z0-9\s,]+$/),Validators.minLength(20)]),
+    applicantMobile: new FormControl('', [Validators.required, Validators.pattern(/^\d{10}$/)]),
+    applicantEmail: new FormControl('', [Validators.required,Validators.email]),
     eventAddress: new FormControl('', [Validators.required]),
     eventFromDate: new FormControl('', [Validators.required]),
     eventToDate: new FormControl('', [Validators.required]),
-    eventPrice: new FormControl('', [Validators.required]),
+    eventPrice: new FormControl('', [Validators.required, Validators.pattern(/^(?!0+$)\d+$/)]),
     time: new FormControl('', [Validators.required]),
-    members: new FormControl('', [Validators.required]),
+    members: new FormControl('', [Validators.required, Validators.pattern(/^(?!0+$)\d+$/)]),
     ReefreeName: new FormControl('', [Validators.required]),
     team1: new FormControl('', [Validators.required]),
     team2: new FormControl('', [Validators.required]),
-  });
+  }, { validators: this.dateRangeValidator });
+
+
+  //this function check if the FromDate is greater than ToDate or not
+  dateRangeValidator(control: FormGroup): { [key: string]: boolean } | null {
+    const fromDate = control.get('eventFromDate').value;
+    const toDate = control.get('eventToDate').value;
+
+    if (fromDate && toDate && fromDate > toDate) {
+      return { 'dateRangeInvalid': true };
+    }
+
+    return null;
+  }
+
 
   //Choose Teams Methods
   onFirstTeamFieldChange() {
@@ -209,7 +223,7 @@ export class BookEventComponent implements OnInit {
       this.emailDetails.applicantName +
       '</b>,</p>     <p>We hope this email finds you well. We are writing to inform you that your event booking request for <b>' +
       this.bookEventForm.eventName +
-      '</b> has been temporarily reserved. To confirm your booking, we kindly request you to make the full payment.</p> <p>If you have any questions or require further assistance, please feel free to contact our customer support team at <b>[+91-9876543210]</b>. We are here to help!</p>  <p>Thank you for choosing our services. We look forward to hosting you at <b>' +
+      '</b> has been booked successfully. To confirm your booking, we send the further details if there is any updation.</p> <p>If you have any questions or require further assistance, please feel free to contact our customer support team at <b>[+91-9876543210]</b>. We are here to help!</p>  <p>Thank you for choosing our services. We look forward to hosting you at <b>' +
       this.bookEventForm.eventName +
       '</b>.</p>  <p><b>Best Regards</b>,<br><b>Admin</b><br><b>Baseball Event Management</b><br><b>+91-98765432010</b></p>';
 
@@ -258,9 +272,10 @@ export class BookEventComponent implements OnInit {
       this.selectedDateArray.splice(0, this.selectedDateArray.length);
     }
   }
+  
 
   //Code to hide EventFromDate
-  public checkDateValidity(): void {
+  public checkDateValidityFrom(): void {
     const selectedDateTime = new Date(this.selectedFromDate).setHours(
       0,
       0,
@@ -285,7 +300,7 @@ export class BookEventComponent implements OnInit {
 
   //Code to hide EventToDate
   selectedToDate: any;
-  public checkDateValidity1(): void {
+  public checkDateValidityTo(): void {
     const selectedDateTime = new Date(this.selectedToDate).setHours(0, 0, 0, 0);
     const isHidden1 = this.dateArray.some(
       (hiddenDate) =>

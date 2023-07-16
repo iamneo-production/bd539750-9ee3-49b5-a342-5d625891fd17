@@ -1,8 +1,7 @@
-
 <app-user-header></app-user-header>
 
 <div class=" main container-fluid-md">
-    
+
 
     <form [formGroup]="bookEventForm" class="p-5 ">
 
@@ -14,6 +13,14 @@
                     <option value="" disabled selected>Choose First Team</option>
                     <option *ngFor="let option of firstTeamOptions" [value]="option">{{ option }}</option>
                 </select>
+
+                <!--Validation Team 1-->
+                <div class="ms-2"
+                    *ngIf="bookEventForm.get('team1').errors && (bookEventForm.get('team1').touched ||bookEventForm.get('team1').dirty)">
+                    <div class="form-text text-danger" *ngIf="bookEventForm.get('team1').errors.required">
+                        Team-1 is required.
+                    </div>
+                </div>
             </div>
 
             <div class="col-md-5 mt-2">
@@ -23,6 +30,14 @@
                     <option value="" disabled selected>Choose Second Team</option>
                     <option *ngFor="let option of secondTeamOptions" [value]="option">{{ option }}</option>
                 </select>
+
+                <!--Validation Team 2-->
+                <div class="ms-2"
+                    *ngIf="bookEventForm.get('team2').errors && (bookEventForm.get('team2').touched ||bookEventForm.get('team2').dirty)">
+                    <div class="form-text text-danger" *ngIf="bookEventForm.get('team2').errors.required">
+                        Team-2 is required.
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -38,6 +53,8 @@
                         <label for="floatingInput">Venue name</label>
                     </div>
                 </div>
+
+
             </div>
 
             <!--Applicant Name-->
@@ -48,6 +65,18 @@
                         <input type="text" class="form-control" id="floatingInput" formControlName="applicantName"
                             placeholder="name@example.com" [(ngModel)]="name">
                         <label for="floatingInput">Applicant Name</label>
+                    </div>
+                </div>
+
+                <!--Validation Applicant Name-->
+                <div class="ms-2"
+                    *ngIf="bookEventForm.get('applicantName').errors && (bookEventForm.get('applicantName').touched ||bookEventForm.get('applicantName').dirty)">
+                    <div class="form-text text-danger" *ngIf="bookEventForm.get('applicantName').errors.required">
+                        Applicant Name is required.
+                    </div>
+
+                    <div class="form-text text-danger" *ngIf="bookEventForm.get('applicantName').errors.pattern">
+                        Invalid Applicant Name format.
                     </div>
                 </div>
             </div>
@@ -62,7 +91,23 @@
                     <div class="form-floating">
                         <input type="text" class="form-control" id="floatingInput" formControlName="applicantAddress"
                             placeholder="name@example.com">
-                        <label for="floatingInput">Application Address</label>
+                        <label for="floatingInput">Applicant Address</label>
+                    </div>
+                </div>
+
+                <!--Validation Applicant Address-->
+                <div class="ms-2"
+                    *ngIf="bookEventForm.get('applicantAddress').errors && (bookEventForm.get('applicantAddress').touched ||bookEventForm.get('applicantAddress').dirty)">
+                    <div class="form-text text-danger" *ngIf="bookEventForm.get('applicantAddress').errors.required">
+                        Applicant Address is required.
+                    </div>
+
+                    <div class="form-text text-danger" *ngIf="bookEventForm.get('applicantAddress').errors.pattern">
+                        Invalid Applicant Address format.
+                    </div>
+
+                    <div class="form-text text-danger" *ngIf="bookEventForm.get('applicantAddress').errors.minlength">
+                        Applicant Address is too short!
                     </div>
                 </div>
             </div>
@@ -78,6 +123,18 @@
                         <label for="floatingInput">Applicant Mobile</label>
                     </div>
                 </div>
+
+                <!--Validation Applicant Mobile Number-->
+                <div class="ms-2"
+                    *ngIf="bookEventForm.get('applicantMobile').errors && (bookEventForm.get('applicantMobile').touched ||bookEventForm.get('applicantMobile').dirty)">
+                    <div class="form-text text-danger" *ngIf="bookEventForm.get('applicantMobile').errors.required">
+                        Applicant Mobile Number is required.
+                    </div>
+
+                    <div class="form-text text-danger" *ngIf="bookEventForm.get('applicantMobile').errors.pattern">
+                        Invalid Applicant Mobile Number format.
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -90,7 +147,19 @@
                     <div class="form-floating">
                         <input type="email" class="form-control" id="floatingInput" formControlName="applicantEmail"
                             placeholder="name@example.com" [(ngModel)]="to">
-                        <label for="floatingInput">Application Email</label>
+                        <label for="floatingInput">Applicant Email</label>
+                    </div>
+                </div>
+
+                <!--Validation Applicant Email-->
+                <div class="ms-2"
+                    *ngIf="bookEventForm.get('applicantEmail').errors && (bookEventForm.get('applicantEmail').touched ||bookEventForm.get('applicantEmail').dirty)">
+                    <div class="form-text text-danger" *ngIf="bookEventForm.get('applicantEmail').errors.required">
+                        Applicant Email is required.
+                    </div>
+
+                    <div class="form-text text-danger" *ngIf="bookEventForm.get('applicantEmail').errors.email">
+                        Invalid Email format.
                     </div>
                 </div>
             </div>
@@ -106,6 +175,7 @@
                         <label for="floatingInput">Event Address</label>
                     </div>
                 </div>
+
             </div>
         </div>
 
@@ -120,10 +190,21 @@
                             class="fa-regular fa-calendar-days"></i></span>
                     <div class="form-floating">
                         <input type="date" class="form-control" id="floatingInput" formControlName="eventFromDate"
-                            placeholder="name@example.com" [(ngModel)]="selectedFromDate" min="{{minDate}}" (change)="checkDateValidity()">
+                            placeholder="name@example.com" [(ngModel)]="selectedFromDate" min="{{minDate}}"
+                            (change)="checkDateValidityFrom()">
                         <label for="floatingInput">Event Date From</label>
                     </div>
                 </div>
+
+                <!--Validation Event From Date-->
+                <div class="ms-2"
+                    *ngIf="bookEventForm.get('eventFromDate').errors && (bookEventForm.get('eventFromDate').touched ||bookEventForm.get('eventFromDate').dirty)">
+                    <div class="form-text text-danger" *ngIf="bookEventForm.get('eventFromDate').errors.required">
+                        Event From Date is required.
+                    </div>
+                </div>
+
+                <div class="text-danger" *ngIf="bookEventForm.hasError('dateRangeInvalid')">Date range is Invalid!</div>
             </div>
 
             <!--To Date-->
@@ -133,8 +214,17 @@
                             class="fa-regular fa-calendar-days"></i></span>
                     <div class="form-floating">
                         <input type="date" class="form-control" id="floatingInput" formControlName="eventToDate"
-                            placeholder="name@example.com"[(ngModel)]="selectedToDate" min="{{minDate}}" (change)="checkDateValidity1()">
+                            placeholder="name@example.com" [(ngModel)]="selectedToDate" min="{{minDate}}"
+                            (change)="checkDateValidityTo()">
                         <label for="floatingInput">Event Date To</label>
+                    </div>
+                </div>
+
+                <!--Validation Event To Date-->
+                <div class="ms-2"
+                    *ngIf="bookEventForm.get('eventToDate').errors && (bookEventForm.get('eventToDate').touched ||bookEventForm.get('eventToDate').dirty)">
+                    <div class="form-text text-danger" *ngIf="bookEventForm.get('eventToDate').errors.required">
+                        Event To Date is required.
                     </div>
                 </div>
             </div>
@@ -153,6 +243,14 @@
                         <label for="floatingInput">Event Time</label>
                     </div>
                 </div>
+
+                <!--Validation Time-->
+                <div class="ms-2"
+                    *ngIf="bookEventForm.get('time').errors && (bookEventForm.get('time').touched ||bookEventForm.get('time').dirty)">
+                    <div class="form-text text-danger" *ngIf="bookEventForm.get('time').errors.required">
+                        Event Time is required.
+                    </div>
+                </div>
             </div>
 
             <!--Team Members-->
@@ -165,9 +263,22 @@
                         <label for="floatingInput">No. of team members</label>
                     </div>
                 </div>
+
+                <!--Validation Applicant Members-->
+                <div class="ms-2"
+                    *ngIf="bookEventForm.get('members').errors && (bookEventForm.get('members').touched ||bookEventForm.get('members').dirty)">
+                    <div class="form-text text-danger" *ngIf="bookEventForm.get('members').errors.required">
+                        Applicant Members is required.
+                    </div>
+
+                    <div class="form-text text-danger" *ngIf="bookEventForm.get('members').errors.pattern">
+                        Invalid Applicant Members format.
+                    </div>
+                </div>
             </div>
         </div>
 
+        <!--Choose Referee-->
         <div class="row mt-2">
             <div class="col-md-5 mt-2">
 
@@ -175,6 +286,14 @@
                     <option value="" disabled selected>Choose Referee</option>
                     <option *ngFor="let option of refreeOptions" [value]="option">{{ option }}</option>
                 </select>
+            </div>
+
+            <!--Validation Referee Name-->
+            <div class="ms-2"
+                *ngIf="bookEventForm.get('ReefreeName').errors && (bookEventForm.get('ReefreeName').touched ||bookEventForm.get('ReefreeName').dirty)">
+                <div class="form-text text-danger" *ngIf="bookEventForm.get('ReefreeName').errors.required">
+                    Referee Name is required.
+                </div>
             </div>
 
         </div>

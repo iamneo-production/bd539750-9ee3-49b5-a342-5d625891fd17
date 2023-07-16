@@ -3,7 +3,7 @@
     <div class="col text-center">
       <img src="/assets/logo.jpg" width="55" alt="" style="position: relative; top: 2.5rem" class="me-3" />
       <h1 style="position: relative; top: 2.5rem">
-        Baseball League Management
+        Baseball League Management System
       </h1>
     </div>
   </div>
@@ -56,13 +56,22 @@
             <div class="form-text text-danger" *ngIf="Password.errors.required" id="errorPassword">
               Password is required.
             </div>
+
+            <div class="form-text text-danger" *ngIf="Password.errors.pattern" id="errorPassword">
+
+              <p> Invalid Password Format!
+                <br>
+                Required atleast one special character!
+                <br>
+                Required atleast one lowecase & uppercase character!
+              </p>
+            </div>
           </div>
         </div>
 
         <!--Submit Button-->
         <div class="mt-3">
-          <button type="submit" (click)="onLogin()" id="loginButton"
-            class="btn btn-primary ps-3 pe-3">
+          <button type="submit" (click)="onLogin()" id="loginButton" class="btn btn-primary ps-3 pe-3">
             Login
           </button>
         </div>
@@ -71,7 +80,7 @@
         <div class="mt-3 text-center">
           <p>
             Don't have an account?
-            <a routerLink="/signup" id="signupLink" >Signup</a>
+            <a routerLink="/signup" id="signupLink">Signup</a>
           </p>
         </div>
 

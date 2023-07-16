@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
 
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required]),
+    password: new FormControl('', [Validators.required,Validators.pattern(/^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]+$/)]),
   });
 
 
@@ -66,6 +66,10 @@ export class LoginComponent implements OnInit {
           this.toast.error("Incorrect email or password", "Failed");
         },
       });
+    }
+    else {
+      this.loginForm.markAllAsTouched();
+      this.toast.error("Please fill all the required fields", "ERROR");
     }
   }
 }

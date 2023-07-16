@@ -58,7 +58,7 @@ namespace WebApp.Controllers
         }
 
 
-        [HttpGet("/getplayerDetails/{id}")]
+        [HttpGet("/getplayerDetails_using_TeamId/{id}")]
         public async Task<ActionResult<PlayersDetails>> GetPlayer(int id)
         {
             var player = _context.playerInformations.Where(c => c.teamId == id);
@@ -138,6 +138,12 @@ namespace WebApp.Controllers
         [HttpPost]
         public async Task<ActionResult<TeamModel>> addTeam(TeamModel team)
         {
+
+            //Check Team
+            if (await CheckTeamExistAsync(team.teamName))
+            {
+                return BadRequest(new { Message = "Team Already Exist" });
+            }
             _context.teams.Add(team);
             await _context.SaveChangesAsync();
 
@@ -150,6 +156,13 @@ namespace WebApp.Controllers
         [HttpPost("/saveplayer")]
         public async Task<ActionResult<PlayersDetails>> PostPlayer(PlayersDetails player)
         {
+
+              //Check player
+            if (await CheckPlayerExistAsync(player.playerFirstName,player.playerLastName,player.playerAge))
+            {
+                return BadRequest(new { Message = "Player Already Exist" });
+            }
+
             _context.playerInformations.Add(player);
             await _context.SaveChangesAsync();
 
@@ -199,5 +212,9 @@ namespace WebApp.Controllers
         {
             return _context.playerInformations.Any(e => e.playerId == id);
         }
+
+
+         private Task<bool> CheckPlayerExistAsync(string firstname, string lastname, string age) => _context.playerInformations.AnyAsync(x => x.playerFirstName==firstname && x.playerLastName==lastname && x.playerAge==age);
+         private Task<bool> CheckTeamExistAsync(string teamName) => _context.teams.AnyAsync(x => x.teamName==teamName);
     }
 }

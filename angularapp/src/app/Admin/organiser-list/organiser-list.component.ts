@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthServiceService } from 'src/app/Services/auth-service.service';
+import { EmailService } from 'src/app/Services/email.service';
 
 @Component({
   selector: 'app-organiser-list',
@@ -11,54 +11,44 @@ import { AuthServiceService } from 'src/app/Services/auth-service.service';
 })
 export class OrganiserListComponent implements OnInit {
 
-  constructor(private authService: AuthServiceService,private toast:ToastrService,private route:Router) { }
+  constructor(private authService: AuthServiceService, private toast: ToastrService, private route: Router, private emailService: EmailService) { }
 
   OrganiserDetails = [];
-  pass:any;
-  registerForm: FormGroup;
+  //Emails Variables
+  to: '';
+  emailDetails = {
+    To: '',
+    Subject:
+      'Account Deleted! ',
+    Message: '',
+  };
+
   ngOnInit(): void {
-
-
-
-    this.registerForm = new FormGroup(
-      {
-        userRole: new FormControl('user', [Validators.required]),
-        email: new FormControl('', [Validators.required, Validators.email]),
-        username: new FormControl(''),
-        password: new FormControl(''),
-        confirmpassword: new FormControl(''),
-        mobileNumber: new FormControl('', [
-          Validators.required,
-          Validators.pattern(/^\d{10}$/),
-        ]),
-      },
-
-    );
-
     this.authService.getAllorganiser().subscribe((result) => {
       this.OrganiserDetails = result;
     });
   }
 
   deleteOrganiser(id) {
-    console.log(id);
 
-    this.authService.deleteOrganiser(id).subscribe((result) => {
-      location.reload();
-    });
-  }
-  
+    //this service get the particular organiser 
+    this.authService.getSingleOrganiser(id).subscribe((response) => {
+      this.to = response.email;
 
-  onSignup() {
-    this.authService.CheckRole = "user";
-    if (this.registerForm.valid) {
-      this.authService.signUp(<any>this.registerForm.value).subscribe({
-        next: (result) => {
-          this.toast.success(result.message,"Success");
+      this.emailDetails.To = this.to;
+
+      //this service delete the organiser
+      this.authService.deleteOrganiser(id).subscribe((result) => {
+        this.emailDetails.Message = '<p><b> Dear User</b>,</p><p>We hope this email finds you well. We are writing to inform you that your account was deleted by our Administration Team.</p><p>If you have any questions or require further assistance, please feel free to contact our customer support team at <b>[+91-9876543210]</b>. We are here to help!</p> <p>Thank you for choosing our services.</p><p><b>Best Regards</b>,<br><b>Admin</b><br><b>Baseball Event Management</b><br><b>+91-98765432010</b></p>';
+
+        console.log(this.emailDetails);
+
+        //this service send the mail to the organiser
+        this.emailService.sendEmail(this.emailDetails).subscribe((result) => {
           location.reload();
-        },
+        })
       });
-    }
+    })
   }
 
 }

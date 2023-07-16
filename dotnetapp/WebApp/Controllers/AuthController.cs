@@ -12,6 +12,7 @@ using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authorization;
 using System.Threading.Tasks;
+using System;
 
 namespace WebApp.Controllers
 {
@@ -28,6 +29,7 @@ namespace WebApp.Controllers
         }
 
 
+
         [HttpPost("registerUser")]
 
         public async Task<IActionResult> saveUser([FromBody] UserModel registerObj)
@@ -37,6 +39,11 @@ namespace WebApp.Controllers
                 return BadRequest();
             }
 
+             //Check Email
+            if (await CheckUserEmailExistAsync(registerObj.email))
+            {
+                return BadRequest(new { Message = "Email Already Exist" });
+            }
 
             registerObj.token = "";
             await _authcontext.users.AddAsync(registerObj);
@@ -53,6 +60,12 @@ namespace WebApp.Controllers
             if (registerObj == null)
             {
                 return BadRequest();
+            }
+
+             //Check Email
+            if (await CheckAdminEmailExistAsync(registerObj.email))
+            {
+                return BadRequest(new { Message = "Email Already Exist" });
             }
 
 
@@ -100,6 +113,10 @@ namespace WebApp.Controllers
 
             return Unauthorized();
         }
+
+
+        private Task<bool> CheckUserEmailExistAsync(string email) => _authcontext.users.AnyAsync(x => x.email==email);
+        private Task<bool> CheckAdminEmailExistAsync(string email) => _authcontext.admins.AnyAsync(x => x.email==email);
 
           
         

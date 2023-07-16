@@ -1,4 +1,5 @@
 using System;
+using System.Net;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -48,6 +49,48 @@ namespace WebApp.Controllers
         {
             var Events = await _context.bookEvents
                 .Where(be => be.venueId == id)
+                .ToListAsync();
+
+            if (Events.Count == 0)
+                return NotFound();
+
+            return Ok(Events);
+        }
+
+
+
+         [HttpGet("FetchEvent_Using_TeamOneName/{teamOneName}")]
+        public async Task<ActionResult<EventModel>> GetBookEventsByTeamOneName(string teamOneName)
+        {
+           
+            var Events = await _context.bookEvents
+                .Where(be => be.team1 == teamOneName)
+                .ToListAsync();
+
+            if (Events.Count == 0)
+                return NotFound();
+
+            return Ok(Events);
+        }
+
+          [HttpGet("FetchEvent_Using_TeamTwoName/{teamTwoName}")]
+        public async Task<ActionResult<EventModel>> GetBookEventsByTeamTwoName(string teamTwoName)
+        {
+            var Events = await _context.bookEvents
+                .Where(be => be.team2 == teamTwoName)
+                .ToListAsync();
+
+            if (Events.Count == 0)
+                return NotFound();
+
+            return Ok(Events);
+        }
+
+        [HttpGet("FetchEvent_Using_RefereeeeName/{refereeName}")]
+        public async Task<ActionResult<EventModel>> GetBookEventsByRefereeName(string refereeName)
+        {
+            var Events = await _context.bookEvents
+                .Where(be => be.ReefreeName == refereeName)
                 .ToListAsync();
 
             if (Events.Count == 0)

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { VenueServiceService } from 'src/app/Services/venue-service.service';
 
@@ -15,15 +16,16 @@ export class EditVenueComponent implements OnInit {
     private venueService: VenueServiceService,
   ) { }
 
-  EditVenue = {
-    venueId: '',
-    venueName: '',
-    venueImageURL: '',
-    venueLocation: '',
-    venuePrice: '',
-    venueCapacity: '',
-    venueDescription: '',
-  };
+
+  EditVenue = new FormGroup({
+    venueId: new FormControl(''),
+    venueName: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z]+([a-zA-Z0-9]*)$'), Validators.minLength(5)]),
+    venueImageURL: new FormControl('', [Validators.required]),
+    venueDescription: new FormControl('', [Validators.required]),
+    venueCapacity: new FormControl('', [Validators.required, Validators.pattern(/^(?!0+$)\d+$/)]),
+    venuePrice: new FormControl('', [Validators.required, Validators.pattern(/^(?!0+$)\d+$/)]),
+    venueLocation: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z0-9]+$'), Validators.minLength(10)]),
+  });
 
   ngOnInit(): void {
     this.router.paramMap.subscribe({
@@ -32,7 +34,14 @@ export class EditVenueComponent implements OnInit {
 
         if (id) {
           this.venueService.getVenue(id).subscribe((result) => {
-            this.EditVenue = result;
+            this.EditVenue.get('venueId').setValue(result.venueId);
+            this.EditVenue.get('venueImageURL').setValue(result.venueImageURL);
+            this.EditVenue.get('venueName').setValue(result.venueName);
+            this.EditVenue.get('venueCapacity').setValue(result.venueCapacity);
+            this.EditVenue.get('venueLocation').setValue(result.venueLocation);
+            this.EditVenue.get('venuePrice').setValue(result.venuePrice);
+            this.EditVenue.get('venueDescription').setValue(result.venueDescription);
+
           });
         }
       },
@@ -41,10 +50,13 @@ export class EditVenueComponent implements OnInit {
 
 
   UpdateVenue() {
-    this.venueService.updateVenue(this.EditVenue.venueId, this.EditVenue).subscribe({
-      next: (response) => {
-        this.route.navigate(['/admin-venue-list']);
-      },
-    });
+    if (this.EditVenue.valid) {
+      this.venueService.updateVenue(this.EditVenue.get('venueId').value, this.EditVenue.value).subscribe({
+        next: (response) => {
+          this.route.navigate(['/admin-venue-list']);
+        },
+      });
+
+    }
   }
 }

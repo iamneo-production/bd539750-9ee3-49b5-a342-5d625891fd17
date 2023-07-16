@@ -6,10 +6,11 @@
 
         <!--Search Venues-->
         <nav class="navbar bg-light">
-            <div class="container-fluid text justify-content-center mt-4">
+            <div class="container-fluid text justify-content-center mt-2">
                 <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
+                        name="search" [(ngModel)]="input" />
+                    <button (click)="onSearch()" class="btn btn-outline-success" type="submit">Search</button>
                 </form>
             </div>
         </nav>
@@ -19,7 +20,7 @@
         <!--Venues Card-->
 
         <div class="row mt-5 venues-card" style="width: 80%; margin: auto;">
-            <div class="col-md-4 mb-3" *ngFor="let team of TeamList">
+            <div class="col-md-4 mb-3" *ngFor="let team of TeamList | filterPipe : searchInput:'teamName';">
                 <a class="nav-link">
                     <div class="card">
                         <img src={{team.teamImage}} class="card-img-top" alt="...">
@@ -128,9 +129,17 @@
                                 <div class="form-floating">
                                     <input type="text" class="form-control" id="floatingInput"
                                         placeholder="name@example.com" name="playerFirstName"
-                                        [(ngModel)]="EditPlayer.playerFirstName">
+                                        [(ngModel)]="EditPlayer.playerFirstName" required>
                                     <label for="floatingInput">Player FirstName:</label>
                                 </div>
+                            </div>
+
+                            <!--Validation Player FirstName-->
+                            <div *ngIf="form.controls.playerFirstName.invalid && form.controls.playerFirstName.touched">
+                                <div class="text-danger" *ngIf="form.controls.playerFirstName.errors?.required">
+                                    FirstName is required.
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -277,6 +286,8 @@
             </div>
             <div class="modal-body">
                 <form [formGroup]="playerForm">
+
+                    <!--Player FirstName-->
                     <div class="row mt-2">
                         <div class="col">
                             <div class="input-group flex-nowrap">
@@ -284,6 +295,20 @@
                                     <input type="text" class="form-control" id="floatingInput"
                                         formControlName="playerFirstName" placeholder="name@example.com">
                                     <label for="floatingInput">Enter Player Firstname</label>
+                                </div>
+                            </div>
+
+                            <!--Validation Player FirstName-->
+                            <div class="ms-2"
+                                *ngIf="playerForm.get('playerFirstName').errors && (playerForm.get('playerFirstName').touched ||playerForm.get('playerFirstName').dirty)">
+                                <div class="form-text text-danger"
+                                    *ngIf="playerForm.get('playerFirstName').errors.required">
+                                    Player FirstName is required!
+                                </div>
+
+                                <div class="form-text text-danger"
+                                    *ngIf="playerForm.get('playerFirstName').errors.pattern">
+                                    Invalid Player FirstName format!
                                 </div>
                             </div>
                         </div>
@@ -297,8 +322,24 @@
                                     <label for="floatingInput">Enter Player Lastname</label>
                                 </div>
                             </div>
+
+                            <!--Validation Player LastName-->
+                            <div class="ms-2"
+                                *ngIf="playerForm.get('playerLastName').errors && (playerForm.get('playerLastName').touched ||playerForm.get('playerLastName').dirty)">
+                                <div class="form-text text-danger"
+                                    *ngIf="playerForm.get('playerLastName').errors.required">
+                                    Player LastName is required!
+                                </div>
+
+                                <div class="form-text text-danger"
+                                    *ngIf="playerForm.get('playerLastName').errors.pattern">
+                                    Invalid Player LastName format!
+                                </div>
+                            </div>
                         </div>
                     </div>
+
+
                     <div class="row mt-2">
                         <div class="col">
                             <div class="input-group flex-nowrap">
@@ -308,20 +349,40 @@
                                     <label for="floatingInput">Enter Player Age</label>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="row mt-2">
-                        <div class="col">
-                            <div class="input-group flex-nowrap">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="floatingInput"
-                                        formControlName="playerGender" placeholder="name@example.com">
-                                    <label for="floatingInput">Enter Player Gender</label>
+
+                            <!--Validation Player Age-->
+                            <div class="ms-2"
+                                *ngIf="playerForm.get('playerAge').errors && (playerForm.get('playerAge').touched ||playerForm.get('playerAge').dirty)">
+                                <div class="form-text text-danger" *ngIf="playerForm.get('playerAge').errors.required">
+                                    Player Age is required!
+                                </div>
+
+                                <div class="form-text text-danger" *ngIf="playerForm.get('playerAge').errors.pattern">
+                                    Invalid Player Age format!
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div class="row mt-2">
+                        <div class="col">
+                            <select class="form-select p-3" aria-label="Default select example"
+                                formControlName="playerGender" id="admin/user">
+                                <option value="" disabled selected>Select Gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Others">Others</option>
+                            </select>
 
+                            <!--Validation Player LastName-->
+                            <div class="ms-2"
+                                *ngIf="playerForm.get('playerGender').errors && (playerForm.get('playerGender').touched ||playerForm.get('playerGender').dirty)">
+                                <div class="form-text text-danger"
+                                    *ngIf="playerForm.get('playerGender').errors.required">
+                                    Player Gender is required!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                 </form>
             </div>

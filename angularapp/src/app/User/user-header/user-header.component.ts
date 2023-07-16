@@ -8,9 +8,42 @@ import { AuthServiceService } from 'src/app/Services/auth-service.service';
 })
 export class UserHeaderComponent implements OnInit {
 
-  constructor(private auth:AuthServiceService) { }
+  constructor(private auth: AuthServiceService) { }
 
-  ngOnInit(): void {
+  greetings: any;
+  icons: any;
+  animation:any;
+  name: any;
+  userId: any;
+  ngOnInit() {
+    this.greetings = this.getGreeting();
+    this.userId = this.auth.getIdFromToken();
+    this.auth.getSingleOrganiser(this.userId).subscribe((result) => {
+      this.name = result.username;
+    })
+  }
+
+  getGreeting(): string {
+    const currentTime = new Date();
+    const currentHour = currentTime.getHours();
+
+    let greeting: string;
+
+    if (currentHour >= 0 && currentHour < 12) {
+      greeting = 'Good morning';
+      this.icons = 'fa-mug-hot'
+      this.animation="fa-beat"
+    } else if (currentHour >= 12 && currentHour < 18) {
+      greeting = 'Good afternoon';
+      this.icons = 'fa-sun'
+      this.animation="fa-spin"
+    } else {
+      greeting = 'Good evening';
+      this.icons = 'fa-star-and-crescent'
+      this.animation='fa-beat'
+    }
+
+    return greeting;
   }
 
   logout() {

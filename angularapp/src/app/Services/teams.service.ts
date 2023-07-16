@@ -34,7 +34,7 @@ export class TeamsService {
   }
 
   getPlayerDetails(id: any) {
-    return this.http.get<any>(`https://8080-dffcfdfcebbadcdbbaadcffdfcbdfeeeb.project.examly.io/getplayerDetails/` + id);
+    return this.http.get<any>(`https://8080-dffcfdfcebbadcdbbaadcffdfcbdfeeeb.project.examly.io/getplayerDetails_using_TeamId/` + id);
   }
 
   getPlayerDetailsUsingPlayerId(id: any) {

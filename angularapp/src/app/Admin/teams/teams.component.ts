@@ -10,8 +10,10 @@ import { TeamsService } from 'src/app/Services/teams.service';
 })
 export class TeamsComponent implements OnInit {
 
-  constructor(private teamService: TeamsService, private toast: ToastrService) { }
-  
+  constructor(private teamService: TeamsService, private toast: ToastrService) {
+
+  }
+
   TeamList: any = [];
 
   PlayerList: any = [];
@@ -22,15 +24,6 @@ export class TeamsComponent implements OnInit {
   //this variable is used to set teamId in playerForm
   TeamID: any;
 
-  EditPlayer = {
-    playerId: '',
-    playerFirstName: '',
-    playerLastName: '',
-    playerGender: '',
-    playerAge: '',
-    teamId: '',
-  };
-
   EditTeam = {
     teamId: '',
     teamName: '',
@@ -38,6 +31,15 @@ export class TeamsComponent implements OnInit {
     teamImage: '',
     teamLocation: '',
   };
+
+  EditPlayer = {
+    playerId: '',
+    playerFirstName: '',
+    playerLastName: '',
+    playerGender: '',
+    playerAge: '',
+    teamId: '',
+  }
 
   EditPlayerCount = {
     teamId: '',
@@ -47,6 +49,9 @@ export class TeamsComponent implements OnInit {
     teamLocation: '',
     playerCounts: '',
   };
+
+
+
   ngOnInit() {
     console.log(this.TeamList.values);
 
@@ -55,12 +60,13 @@ export class TeamsComponent implements OnInit {
     });
 
     this.playerForm = new FormGroup({
-      playerFirstName: new FormControl('', Validators.required),
-      playerLastName: new FormControl('', Validators.required),
-      playerAge: new FormControl('', Validators.required),
+      playerFirstName: new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-Z\s]*$/)]),
+      playerLastName: new FormControl('',[Validators.required, Validators.pattern(/^[a-zA-Z\s]*$/)]),
+      playerAge: new FormControl('', [Validators.required, Validators.pattern('^[0-9]*$')]),
       playerGender: new FormControl('', Validators.required),
       teamId: new FormControl(''),
     });
+
   }
 
   //get all players belongs to particular team using teamId
@@ -173,10 +179,16 @@ export class TeamsComponent implements OnInit {
 
         },
         error: (err) => {
-          this.toast.error(err.message,"Failed");
+          this.toast.error(err?.error.message, "Failed");
         },
       });
     }
+  }
+
+  input = '';
+  searchInput = '';
+  onSearch() {
+    this.searchInput = this.input;
   }
 
 }

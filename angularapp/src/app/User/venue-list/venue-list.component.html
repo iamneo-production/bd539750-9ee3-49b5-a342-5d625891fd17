@@ -17,11 +17,12 @@
 
 
     <!--Search Venues-->
-    <nav class="navbar bg-light mt-4">
-        <div class="container-fluid text justify-content-center">
+    <nav class="navbar bg-light">
+        <div class="container-fluid text justify-content-center mt-2">
             <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search"
+                    [(ngModel)]="input"/>
+                <button (click)="onSearch()" class="btn btn-outline-success" type="submit">Search</button>
             </form>
         </div>
     </nav>
@@ -31,7 +32,7 @@
     <!--Venues Card-->
 
     <div class="row mt-5 venues-card" style="width: 80%; margin: auto;">
-        <div class="col-md-4 mb-3" *ngFor="let ven of VenueList">
+        <div class="col-md-4 mb-3" *ngFor="let ven of VenueList | filterPipe : searchInput:'venueName';">
             <a class="nav-link" [routerLink]="['/book-event',ven.venueId]">
                 <div class="card">
                     <img src={{ven.venueImageURL}} class="card-img-top" alt="...">

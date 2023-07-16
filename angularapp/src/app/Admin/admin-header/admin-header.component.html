@@ -4,9 +4,13 @@
             <!-- Logo Image -->
             <img src="/assets/logo.png" width="45" alt="" class="d-inline-block align-middle mr-2">
             <!-- Logo Text Image -->
-            <span class=" text-logo text-uppercase fw-bold ms-3"><img src="/assets/logoname.png" alt=""
-                    style="width: 50%;"></span>
+            <span class=" text-logo fw-bold ms-3"><img src="/assets/logoname.png" alt="" style="width: 50%;"></span>
+            <a class="greeting navbar-link ms-3"
+                style="position: relative; top: 8px; text-decoration: none; font-weight: 500;">Hello Admin,
+                {{this.greetings}} <i class="fa-solid {{icons}} {{animation}} ms-1"
+                    style="position: relative; top: 2px; color: #feb900; font-size: 30px;"></i></a>
         </a>
+
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -27,7 +31,7 @@
                 </li>
 
                 <li class="nav-item dropdown">
-                    <a style="font-size: 18px;" class="nav-link dropdown-toggle" role="button"
+                    <a style="font-size: 18px;" class="nav-link dropdown-toggle fw-bold" role="button"
                         (click)="toggleDropdown()">
                         More
                     </a>

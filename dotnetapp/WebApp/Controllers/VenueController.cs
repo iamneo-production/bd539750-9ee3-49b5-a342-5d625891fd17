@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using WebApp.Context;
 using WebApp.Models;
 
-namespace BaseballAPI.Controllers
+namespace WebApp.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -77,6 +77,13 @@ namespace BaseballAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<VenueModel>> addVenue(VenueModel venue)
         {
+               //Check Email
+            if (await CheckVenueExistAsync(venue.venueName,venue.venueLocation))
+            {
+                return BadRequest(new { Message = "Venue Already Exist" });
+            }
+              
+
             _context.venues.Add(venue);
             await _context.SaveChangesAsync();
 
@@ -105,5 +112,8 @@ namespace BaseballAPI.Controllers
         {
             return _context.venues.Any(e => e.venueId == id);
         }
+
+
+        private Task<bool> CheckVenueExistAsync(string name ,string location) => _context.venues.AnyAsync(x => x.venueName==name && x.venueLocation==location);
     }
 }

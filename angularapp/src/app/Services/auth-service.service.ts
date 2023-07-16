@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
@@ -23,6 +24,10 @@ export class AuthServiceService {
     return this.http.get<any>(`https://8080-dffcfdfcebbadcdbbaadcffdfcbdfeeeb.project.examly.io/api/Organiser`);
   }
 
+  getSingleOrganiser(id) {
+    return this.http.get<any>(`https://8080-dffcfdfcebbadcdbbaadcffdfcbdfeeeb.project.examly.io/api/Organiser/` + id);
+  }
+
   deleteOrganiser(id) {
     return this.http.delete<any>(`https://8080-dffcfdfcebbadcdbbaadcffdfcbdfeeeb.project.examly.io/api/Organiser/` + id);
   }
@@ -30,7 +35,6 @@ export class AuthServiceService {
   updateOrganiser(data, id) {
     return this.http.put<any>(`https://8080-dffcfdfcebbadcdbbaadcffdfcbdfeeeb.project.examly.io/api/Organiser/` + id, data);
   }
-
 
   login(loginObj: any) {
     return this.http.post<any>(`${this.baseUrl}authenticate`, loginObj);

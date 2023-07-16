@@ -30,4 +30,11 @@ nav {
   .text-logo {
     display: none;
   }
+
+  .greeting{
+    position: relative;
+    left: -10px;
+    font-size: 13px;
+    font-weight: bold;
+  }
 }
