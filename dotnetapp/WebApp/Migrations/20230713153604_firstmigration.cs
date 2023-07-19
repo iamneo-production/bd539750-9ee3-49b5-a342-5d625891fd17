@@ -2,10 +2,26 @@
 
 namespace WebApp.Migrations
 {
-    public partial class InitialSetup : Migration
+    public partial class firstmigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "referees",
+                columns: table => new
+                {
+                    refereeId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    refereeName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    refereeImage = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    noOfMatches = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    refereeLocation = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_referees", x => x.refereeId);
+                });
+
             migrationBuilder.CreateTable(
                 name: "user",
                 columns: table => new
@@ -26,6 +42,9 @@ namespace WebApp.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "referees");
+
             migrationBuilder.DropTable(
                 name: "user");
         }

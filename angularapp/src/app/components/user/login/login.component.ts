@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UsersService } from '../users.service';
+import { UsersService } from '../../services/users.service';
 
 @Component({
   selector: 'app-login',
@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
   }
 
   onClickLogin() {
-    this.usersservice.getData().subscribe(res => {
+    this.usersservice.getAllUserDetails().subscribe(res => {
       this.loginStatus = res.toString();
     })
     console.log(this.email, this.password, this.loginStatus);

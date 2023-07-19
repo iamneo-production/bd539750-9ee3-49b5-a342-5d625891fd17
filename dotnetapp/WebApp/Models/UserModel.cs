@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace WebApp.Models
 {
-    public class User 
+    public class UserModel 
     {
         [Key]
         public int Id { get; set; }

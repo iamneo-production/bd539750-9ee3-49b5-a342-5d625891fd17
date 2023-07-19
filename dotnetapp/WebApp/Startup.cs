@@ -31,7 +31,7 @@ namespace WebApp
             services.AddSwaggerGen(c =>{c.SwaggerDoc("v2", new OpenApiInfo { Title = "WebApp", Version = "v2" });});
             services.AddAuthorization(); 
             services.AddControllers(); 
-            services.AddDbContext<BaseballDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SqlServerConnStr")));
+            services.AddDbContext<BaseballDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("connectionString")));
           }
 
         public IConfiguration Configuration { get; }

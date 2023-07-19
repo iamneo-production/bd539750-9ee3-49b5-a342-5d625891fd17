@@ -1,0 +1,236 @@
+
+.adminreferee-page {
+    width: 100%;
+    height: 100%;
+}
+
+.adminreferee-toolbar {
+    height: 40px;
+    padding-top: 10px;
+    color: white;
+    background-color: #0048b3;
+    font-size: 20px;
+    font-style: bold;
+    text-align: center;
+    box-shadow:0px 0px 15px #000766;
+    border-style: solid;
+    border-color: #000766;
+    border-width: 2px;
+    border-radius: 2px;
+}
+
+.left-toolbar {
+    padding-left: 150px;
+    display: flex;
+    float: left;
+    text-align: center;
+}
+
+.right-toolbar  {
+    padding-right: 20px;
+    float: right;
+}
+
+#adminReferee {
+    padding: 0px 10px;
+    font-size: 24px;
+}
+
+#adminVenues {
+    padding: 0px 10px;
+}
+
+#adminTeams {
+    padding: 0px 10px;
+}
+
+#viewuser {
+    padding: 0px 10px;
+}
+
+#adminVenues:hover {
+    cursor: pointer;
+    font-size: 22px;
+}
+
+#adminTeams:hover {
+    cursor: pointer;
+    font-size: 22px;
+}
+
+#viewuser:hover {
+    cursor: pointer;
+    font-size: 22px;
+}
+
+#logout:hover {
+    cursor: pointer;
+    font-size: 22px;
+}
+
+.adminreferee-body {
+    padding: 40px;
+    background-color:gainsboro;
+    height: 100%;
+}
+
+.showreferees {
+    padding-bottom: 20px;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    background-color: white;
+    box-shadow:0px 0px 15px grey;
+    border-radius: 5px;
+}
+
+input {
+    border-radius: 5px;
+    height: 30px;
+}
+
+.searchreferee {
+    margin-top: 50px;
+}
+
+.searchbutton {
+    margin-left: 5px;
+    padding: 8px;
+    height: 30px;
+    color: white;
+    background-color: #0048b3;
+    border-radius: 3px;
+}
+
+.addrefereebutton {
+    margin-left: 40px;
+    padding-top: 8px;
+    height: 30px;
+    width: max-content;
+    color: white;
+    background-color: #0048b3;
+    border-radius: 3px;
+}
+
+.searchbutton:hover {
+    cursor: pointer;
+    box-shadow: 0px 0px 20px #000766;
+}
+
+.addrefereebutton:hover {
+    cursor: pointer;
+    box-shadow: 0px 0px 20px #000766;
+}
+
+.refereeStatus{
+    color: grey;
+}
+
+.displayreferee {
+    padding: 6px 0px;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    gap: 5px;
+    text-align: center;
+    justify-content: center;
+}
+
+.refereedetail {
+    margin: 0px 10px;
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    background-color: gainsboro;
+    box-shadow: 0px 0px 10px grey;
+    border-radius: 5px;
+}
+
+.refereedetail:hover {
+    background-color: aliceblue;
+}
+
+.refereeimg {
+    border-radius: 5px;
+}
+
+.bi-pencil-square {
+    padding: 10px;
+}
+
+.bi-trash3 {
+    padding: 10px;
+}
+
+.bi-check-square-fill {
+    padding: 10px;
+}
+
+.bi-x-circle {
+    padding: 10px;
+}
+
+.bi-pencil-square:hover {
+    cursor: pointer;
+}
+
+.bi-check-square-fill:hover {
+    cursor: pointer;
+}
+
+.bi-trash3:hover {
+    cursor: pointer;
+}
+
+.bi-x-circle:hover {
+    cursor: pointer;
+}
+
+.addrefereeContainer {
+    margin: 50px;
+    padding: 20px;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    background-color: white;
+    box-shadow:0px 0px 15px grey;
+    border-radius: 5px;
+}
+
+.errormsg{
+    color: red;
+}
+
+.addrefereebuttons {
+    padding: 30px;
+}
+
+.addrefereebutton {
+    padding: 2px;
+    height: 30px;
+    color: white;
+    background-color: #0048b3;
+    border-radius: 3px;
+}
+
+.addrefereebutton:hover {
+    cursor: pointer;
+    box-shadow: 0px 0px 20px #000766;
+}
+
+.veiwrefereesbutton {
+    padding: 2px;
+    height: 30px;
+    color: white;
+    background-color: #0048b3;
+    border-radius: 3px;
+}
+
+.veiwrefereesbutton:hover {
+    cursor: pointer;
+    box-shadow: 0px 0px 20px #000766;
+}

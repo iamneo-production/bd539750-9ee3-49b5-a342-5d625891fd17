@@ -3,31 +3,24 @@ using Microsoft.EntityFrameworkCore;
 
 namespace WebApp.Database
 {
-    public class BaseballDbContext : DbContext
+    public class BaseballDbContext: DbContext
     {
-        public BaseballDbContext()
-        {
-           
-        }
+        public BaseballDbContext(DbContextOptions<BaseballDbContext> options) : base(options) { }
 
-        public BaseballDbContext(DbContextOptions options) : base(options)
-        {
-          
-        }
+    
+        public DbSet<UserModel> user { get; set; }
+        public DbSet<RefereeModel> referees { get; set; }
 
-        public DbSet<User> User { get; set; }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder options)
-        {
-          if (!options.IsConfigured)
-          {
-            options.UseSqlServer("connectionString");
-          }
-        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-          modelBuilder.Entity<User>().ToTable("user");
+        
+            modelBuilder.Entity<RefereeModel>().ToTable("referees");
+            modelBuilder.Entity<UserModel>().ToTable("user");
+            
+           
         }
+
+    
     }
 }
