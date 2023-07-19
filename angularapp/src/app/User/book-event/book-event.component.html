@@ -9,8 +9,8 @@
             <div class="col-md-5 mt-2">
 
                 <select class="form-select p-2" aria-label="Default select example" formControlName="team1"
-                    (change)="onFirstTeamFieldChange()">
-                    <option value="" disabled selected>Choose First Team</option>
+                     (change)="onFirstTeamFieldChange()">
+                    <option value="" disabled selected >Choose First Team</option>
                     <option *ngFor="let option of firstTeamOptions" [value]="option">{{ option }}</option>
                 </select>
 
@@ -28,7 +28,8 @@
                 <select class="form-select p-2" aria-label="Default select example" formControlName="team2"
                     (change)="onSecondTeamFieldChange()">
                     <option value="" disabled selected>Choose Second Team</option>
-                    <option *ngFor="let option of secondTeamOptions" [value]="option">{{ option }}</option>
+                    <option *ngFor="let option of secondTeamOptions" [value]="option"
+                        [disabled]="disableTeam2Option(option)">{{ option }}</option>
                 </select>
 
                 <!--Validation Team 2-->
@@ -40,6 +41,29 @@
                 </div>
             </div>
         </div>
+
+
+        <!--Choose Referee-->
+        <div class="row mt-2">
+            <div class="col-md-5 mt-2">
+
+                <select class="form-select p-2" aria-label="Default select example" formControlName="ReefreeName"
+                    (change)="onRefereeChange()">
+                    <option value="" disabled selected>Choose Referee</option>
+                    <option *ngFor="let option of refreeOptions" [value]="option">{{ option }}</option>
+                </select>
+            </div>
+
+            <!--Validation Referee Name-->
+            <div class="ms-2"
+                *ngIf="bookEventForm.get('ReefreeName').errors && (bookEventForm.get('ReefreeName').touched ||bookEventForm.get('ReefreeName').dirty)">
+                <div class="form-text text-danger" *ngIf="bookEventForm.get('ReefreeName').errors.required">
+                    Referee Name is required.
+                </div>
+            </div>
+
+        </div>
+
 
         <!--Venue Name-->
         <div class="row mt-2">
@@ -278,25 +302,6 @@
             </div>
         </div>
 
-        <!--Choose Referee-->
-        <div class="row mt-2">
-            <div class="col-md-5 mt-2">
-
-                <select class="form-select p-2" aria-label="Default select example" formControlName="ReefreeName">
-                    <option value="" disabled selected>Choose Referee</option>
-                    <option *ngFor="let option of refreeOptions" [value]="option">{{ option }}</option>
-                </select>
-            </div>
-
-            <!--Validation Referee Name-->
-            <div class="ms-2"
-                *ngIf="bookEventForm.get('ReefreeName').errors && (bookEventForm.get('ReefreeName').touched ||bookEventForm.get('ReefreeName').dirty)">
-                <div class="form-text text-danger" *ngIf="bookEventForm.get('ReefreeName').errors.required">
-                    Referee Name is required.
-                </div>
-            </div>
-
-        </div>
 
 
         <input hidden type="text" formControlName="eventPrice" name="eventPrice" [(ngModel)]="bookEventForm.eventPrice">

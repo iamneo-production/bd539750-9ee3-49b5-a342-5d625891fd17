@@ -9,7 +9,7 @@ export class TeamsService {
 
 
   setTeamDetails(data: any) {
-    return this.http.post<any>(`https://8080-dffcfdfcebbadcdbbaadcffdfcbdfeeeb.project.examly.io/api/Team`, data);
+    return this.http.post<any>(`https://8080-dffcfdfcebbadcdbbaadcffdfcbdfeeeb.project.examly.io/admin/addTeam`, data);
   }
 
   setPlayer(id, data: any) {
@@ -18,7 +18,7 @@ export class TeamsService {
   }
 
   updateTeam(id: any, data: any) {
-    return this.http.put(`https://8080-dffcfdfcebbadcdbbaadcffdfcbdfeeeb.project.examly.io/api/Team/` + id, data);
+    return this.http.put(`https://8080-dffcfdfcebbadcdbbaadcffdfcbdfeeeb.project.examly.io/admin/editTeam/` + id, data);
   }
 
   updatePlayers(id: any, data: any) {
@@ -26,11 +26,11 @@ export class TeamsService {
   }
 
   getAllTeamDetails() {
-    return this.http.get<any>(`https://8080-dffcfdfcebbadcdbbaadcffdfcbdfeeeb.project.examly.io/api/Team`);
+    return this.http.get<any>(`https://8080-dffcfdfcebbadcdbbaadcffdfcbdfeeeb.project.examly.io/admin/getTeam`);
   }
 
   getTeamDetails(id: any) {
-    return this.http.get<any>(`https://8080-dffcfdfcebbadcdbbaadcffdfcbdfeeeb.project.examly.io/api/Team/` + id);
+    return this.http.get<any>(`https://8080-dffcfdfcebbadcdbbaadcffdfcbdfeeeb.project.examly.io/admin/getTeamById/` + id);
   }
 
   getPlayerDetails(id: any) {
@@ -39,12 +39,12 @@ export class TeamsService {
 
   getPlayerDetailsUsingPlayerId(id: any) {
     return this.http.get<any>(
-      `https://8080-dffcfdfcebbadcdbbaadcffdfcbdfeeeb.project.examly.io/api/Team/playerDetail_Using_PlayerId/` + id
+      `https://8080-dffcfdfcebbadcdbbaadcffdfcbdfeeeb.project.examly.io/playerDetail_Using_PlayerId/` + id
     );
   }
 
   deleteTeam(id: any) {
-    return this.http.delete(`https://8080-dffcfdfcebbadcdbbaadcffdfcbdfeeeb.project.examly.io/api/Team/` + id);
+    return this.http.delete(`https://8080-dffcfdfcebbadcdbbaadcffdfcbdfeeeb.project.examly.io/admin/deleteTeam/` + id);
   }
 
   deletePlayer(id: any) {

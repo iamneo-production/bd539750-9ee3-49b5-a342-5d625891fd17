@@ -64,7 +64,7 @@ namespace WebApp.Controllers
         {
            
             var Events = await _context.bookEvents
-                .Where(be => be.team1 == teamOneName)
+                .Where(be => be.team1 == teamOneName || be.team2==teamOneName)
                 .ToListAsync();
 
             if (Events.Count == 0)
@@ -77,7 +77,7 @@ namespace WebApp.Controllers
         public async Task<ActionResult<EventModel>> GetBookEventsByTeamTwoName(string teamTwoName)
         {
             var Events = await _context.bookEvents
-                .Where(be => be.team2 == teamTwoName)
+                .Where(be => be.team2 == teamTwoName || be.team1==teamTwoName)
                 .ToListAsync();
 
             if (Events.Count == 0)
@@ -100,8 +100,22 @@ namespace WebApp.Controllers
         }
 
 
+        [HttpGet("FetchEvent_Using_ApplicantEmail/{applicantEmail}")]
+        public async Task<ActionResult<EventModel>> GetBookEventsByApplicantEmail(string email)
+        {
+            var Events = await _context.bookEvents
+                .Where(be => be.applicantEmail == email)
+                .ToListAsync();
+
+            if (Events.Count == 0)
+                return NotFound();
+
+            return Ok(Events);
+        }
+
+
         
-        [HttpPut("editEvent/{id}")]
+        [HttpPut("/user/editEvent/{id}")]
         public async Task<IActionResult> PutBookEvent(int id, EventModel bookEvent)
         {
             if (id != bookEvent.eventId)
@@ -131,7 +145,7 @@ namespace WebApp.Controllers
         }
 
       
-        [HttpPost("bookEvent")]
+        [HttpPost("/user/bookEvent")]
         public async Task<ActionResult<EventModel>> PostBookEvent(EventModel bookEvent)
         {
             _context.bookEvents.Add(bookEvent);
@@ -141,7 +155,7 @@ namespace WebApp.Controllers
         }
 
 
-        [HttpDelete("deleteEvent/{id}")]
+        [HttpDelete("user/deleteEvent/{id}")]
         public async Task<IActionResult> DeleteBookEvent(int id)
         {
             var bookEvent = await _context.bookEvents.FindAsync(id);

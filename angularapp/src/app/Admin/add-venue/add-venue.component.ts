@@ -21,7 +21,7 @@ export class AddVenueComponent implements OnInit {
   ngOnInit(): void {
 
     this.addVenueForm = new FormGroup({
-      venueName: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z]+([a-zA-Z0-9]*)$'), Validators.minLength(5)]),
+      venueName: new FormControl('', [Validators.required, Validators.pattern(/^[A-Za-z0-9\s]+$/), Validators.minLength(5)]),
       venueImageURL: new FormControl('', [Validators.required]),
       venueDescription: new FormControl('', [Validators.required]),
       venueCapacity: new FormControl('', [Validators.required, Validators.pattern(/^(?!0+$)\d+$/)]),

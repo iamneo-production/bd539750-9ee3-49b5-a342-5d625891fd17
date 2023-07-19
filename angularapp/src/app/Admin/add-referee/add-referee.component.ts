@@ -92,4 +92,10 @@ export class AddRefereeComponent implements OnInit {
     });
   }
 
+  input = '';
+  searchInput = '';
+  onSearch() {
+    this.searchInput = this.input;
+  }
+
 }

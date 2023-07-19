@@ -11,7 +11,7 @@ using WebApp.Models;
 
 namespace WebApp.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("")]
     [ApiController]
     public class VenueController : ControllerBase
     {
@@ -23,14 +23,14 @@ namespace WebApp.Controllers
         }
 
         // GET: api/Venues
-        [HttpGet]
+        [HttpGet("admin/getVenue")]
         public async Task<ActionResult<IEnumerable<VenueModel>>> Getvenues()
         {
             return await _context.venues.ToListAsync();
         }
 
         // GET: api/Venues/id
-        [HttpGet("{id}")]
+        [HttpGet("admin/getVenueById/{id}")]
         public async Task<ActionResult<VenueModel>> getVenue(int id)
         {
             var venue = await _context.venues.FindAsync(id);
@@ -44,7 +44,7 @@ namespace WebApp.Controllers
         }
 
      
-        [HttpPut("{id}")]
+        [HttpPut("admin/editVenue/{id}")]
         public async Task<IActionResult> editVenue(int id, VenueModel venue)
         {
             if (id != venue.venueId)
@@ -74,7 +74,7 @@ namespace WebApp.Controllers
         }
 
     
-        [HttpPost]
+        [HttpPost("admin/addVenue")]
         public async Task<ActionResult<VenueModel>> addVenue(VenueModel venue)
         {
                //Check Email
@@ -93,7 +93,7 @@ namespace WebApp.Controllers
 
 
         // DELETE: api/Venues/id
-        [HttpDelete("{id}")]
+        [HttpDelete("admin/deleteVenue/{id}")]
         public async Task<IActionResult> deleteVenue(int id)
         {
             var venue = await _context.venues.FindAsync(id);

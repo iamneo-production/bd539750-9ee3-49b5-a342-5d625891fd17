@@ -23,9 +23,16 @@ export class BookEventComponent implements OnInit {
   refreeArray = [];
   refreeOptions = [];
   firstTeamOptions = [];
+  selectedTeam1: any;
   secondTeamOptions = [];
   Events = [];
+  EventsTeamOne = [];
+  EventsTeamTwo = [];
+  EventsReferee = [];
   dateArray = [];
+  dateArrayTeamOne = [];
+  dateArrayTeamTwo = [];
+  dateArrayReferee = [];
   selectedDateArray = [];
   fromDate: any;
   toDate: any;
@@ -100,9 +107,9 @@ export class BookEventComponent implements OnInit {
 
       for (let i = 0; i < this.teamArray.length; i++) {
         this.firstTeamOptions.push(this.teamArray[i].teamName);
+        this.secondTeamOptions.push(this.teamArray[i].teamName);
       }
 
-      console.log(this.firstTeamOptions);
     });
 
     //Send request to backend to fetch Refree Details
@@ -119,6 +126,12 @@ export class BookEventComponent implements OnInit {
 
     });
   }
+
+  disableTeam2Option(team: string): boolean {
+    this.selectedTeam1 = this.bookEventForm.get('team1').value;
+    return team === this.selectedTeam1;
+  }
+
 
   //Emails Variables
   to: '';
@@ -139,9 +152,9 @@ export class BookEventComponent implements OnInit {
   bookEventForm: any = new FormGroup({
     eventName: new FormControl('', [Validators.required]),
     applicantName: new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-Z\s]*$/)]),
-    applicantAddress: new FormControl('', [Validators.required, Validators.pattern(/^(?!.*\s$)(?=.*[a-zA-Z])[a-zA-Z0-9\s,]+$/),Validators.minLength(20)]),
-    applicantMobile: new FormControl('', [Validators.required, Validators.pattern(/^\d{10}$/)]),
-    applicantEmail: new FormControl('', [Validators.required,Validators.email]),
+    applicantAddress: new FormControl('', [Validators.required, Validators.pattern(/^(?!.*\s$)(?=.*[a-zA-Z])[a-zA-Z0-9\s,]+$/), Validators.minLength(20)]),
+    applicantMobile: new FormControl('', [Validators.required, Validators.pattern('^(\\+91)?[6-9]\\d{9}$')]),
+    applicantEmail: new FormControl('', [Validators.required, Validators.email]),
     eventAddress: new FormControl('', [Validators.required]),
     eventFromDate: new FormControl('', [Validators.required]),
     eventToDate: new FormControl('', [Validators.required]),
@@ -167,20 +180,111 @@ export class BookEventComponent implements OnInit {
   }
 
 
+  onRefereeChange() {
+    const selectedReferee = this.bookEventForm.get('ReefreeName').value;
+    this.dateArrayReferee.splice(0, this.dateArrayReferee.length);
+
+
+    //used to fetch Book Dates from praticular Team Booked-Event Details using team1
+    this.eventService.getEventsUisngRefereeName(selectedReferee).subscribe((result) => {
+      this.EventsReferee = result;
+
+
+
+      //pushed the dates to dateArrayReferee[]
+      for (let i = 0; i < this.EventsReferee.length; i++) {
+        this.fromDate = this.EventsReferee[i].eventFromDate;
+        this.toDate = this.EventsReferee[i].eventToDate;
+
+        while (this.fromDate <= this.toDate) {
+          this.dateArrayReferee.push(this.fromDate);
+          const incrementedDate = moment(this.fromDate, 'YYYY-MM-DD').add(
+            1,
+            'days'
+          );
+          this.fromDate = incrementedDate.format('YYYY-MM-DD');
+          const formattedDate = this.datePipe.transform(
+            this.fromDate,
+            'yyyy-MM-dd'
+          );
+          this.fromDate = formattedDate;
+        }
+      }
+
+    });
+  }
+
   //Choose Teams Methods
   onFirstTeamFieldChange() {
     const selectedOption = this.bookEventForm.get('team1').value;
-    this.secondTeamOptions = this.firstTeamOptions.filter(
-      (option) => option !== selectedOption
-    );
+    console.log(selectedOption);
+    this.dateArrayTeamOne.splice(0, this.dateArrayTeamOne.length);
+
+
+    //used to fetch Book Dates from praticular Team Booked-Event Details using team1
+    this.eventService.getEventsUisngTeamOneName(selectedOption).subscribe((result) => {
+      this.EventsTeamOne = result;
+
+
+
+      //pushed the dates to dateArrayTeamOne[]
+      for (let i = 0; i < this.EventsTeamOne.length; i++) {
+        this.fromDate = this.EventsTeamOne[i].eventFromDate;
+        this.toDate = this.EventsTeamOne[i].eventToDate;
+
+        while (this.fromDate <= this.toDate) {
+          this.dateArrayTeamOne.push(this.fromDate);
+          const incrementedDate = moment(this.fromDate, 'YYYY-MM-DD').add(
+            1,
+            'days'
+          );
+          this.fromDate = incrementedDate.format('YYYY-MM-DD');
+          const formattedDate = this.datePipe.transform(
+            this.fromDate,
+            'yyyy-MM-dd'
+          );
+          this.fromDate = formattedDate;
+        }
+      }
+      console.log(this.dateArrayTeamOne);
+
+    });
   }
 
   onSecondTeamFieldChange() {
     const selectedOption = this.bookEventForm.get('team2').value;
-    this.firstTeamOptions = this.firstTeamOptions.filter(
-      (option) => option !== selectedOption
-    );
+    this.dateArrayTeamTwo.splice(0, this.dateArrayTeamTwo.length);
+
+    //used to fetch Book Dates from praticular Team Booked-Event Details using team1
+    this.eventService.getEventsUisngTeamTwoName(selectedOption).subscribe((result) => {
+      this.EventsTeamTwo = result;
+
+
+
+      //pushed the dates to dateArrayTeamTwo[]
+      for (let i = 0; i < this.EventsTeamTwo.length; i++) {
+        this.fromDate = this.EventsTeamTwo[i].eventFromDate;
+        this.toDate = this.EventsTeamTwo[i].eventToDate;
+
+        while (this.fromDate <= this.toDate) {
+          this.dateArrayTeamTwo.push(this.fromDate);
+          const incrementedDate = moment(this.fromDate, 'YYYY-MM-DD').add(
+            1,
+            'days'
+          );
+          this.fromDate = incrementedDate.format('YYYY-MM-DD');
+          const formattedDate = this.datePipe.transform(
+            this.fromDate,
+            'yyyy-MM-dd'
+          );
+          this.fromDate = formattedDate;
+        }
+      }
+      console.log(this.dateArrayTeamTwo);
+
+    });
   }
+
 
   check: boolean;
   checkFromDate: any;
@@ -188,6 +292,18 @@ export class BookEventComponent implements OnInit {
   checkDatesPresent(dateArray: any, selectedDateArray: any): boolean {
     for (const date of this.selectedDateArray) {
       if (this.dateArray.includes(date)) {
+        return true;
+      }
+
+      if (this.dateArrayTeamOne.includes(date)) {
+        return true;
+      }
+
+      if (this.dateArrayTeamTwo.includes(date)) {
+        return true;
+      }
+
+      if (this.dateArrayReferee.includes(date)) {
         return true;
       }
     }
@@ -272,7 +388,8 @@ export class BookEventComponent implements OnInit {
       this.selectedDateArray.splice(0, this.selectedDateArray.length);
     }
   }
-  
+
+
 
   //Code to hide EventFromDate
   public checkDateValidityFrom(): void {
@@ -287,33 +404,311 @@ export class BookEventComponent implements OnInit {
         new Date(hiddenDate).setHours(0, 0, 0, 0) === selectedDateTime
     );
 
-    if (isHidden) {
+    const isHidden1 = this.dateArrayTeamOne.some(
+      (hiddenDate) =>
+        new Date(hiddenDate).setHours(0, 0, 0, 0) === selectedDateTime
+    );
+
+    const isHidden2 = this.dateArrayTeamTwo.some(
+      (hiddenDate) =>
+        new Date(hiddenDate).setHours(0, 0, 0, 0) === selectedDateTime
+    );
+
+    const isHidden3 = this.dateArrayReferee.some(
+      (hiddenDate) =>
+        new Date(hiddenDate).setHours(0, 0, 0, 0) === selectedDateTime
+    );
+
+    console.log(isHidden);
+    console.log(isHidden1);
+
+
+
+    if (isHidden == true && isHidden1 == true && isHidden2 == true && isHidden3 == true) {
       // Clear the selected date if it's hidden
       this.selectedFromDate = null;
 
       this.toast.error(
-        'Error',
-        'Date already booked',
+        'Venue, Teams and referee already booked for this date!',
+      );
+    }
+
+    if (isHidden && isHidden1 && isHidden2 && (isHidden3 == false)) {
+      // Clear the selected date if it's hidden
+      this.selectedFromDate = null;
+
+      this.toast.error(
+        'Venue, Team-1, Team-2 already booked for this date!',
+      );
+    }
+
+    if (isHidden && isHidden1 && isHidden3 && (isHidden2 == false)) {
+      // Clear the selected date if it's hidden
+      this.selectedFromDate = null;
+
+      this.toast.error('Venue, Team-1 and Referee already booked for this date!');
+    }
+
+    if (isHidden && isHidden2 && isHidden3 && (isHidden1 == false)) {
+      // Clear the selected date if it's hidden
+      this.selectedFromDate = null;
+
+      this.toast.error('Venue, Team-2 and Referee already booked for this date!');
+    }
+
+    if (isHidden1 && isHidden2 && isHidden3 && isHidden == false) {
+      // Clear the selected date if it's hidden
+      this.selectedFromDate = null;
+
+      this.toast.error(
+        'Team-1, Team-2 and Referee already booked for this date!',
+      );
+    }
+
+    if (isHidden && isHidden1 && (isHidden2 == false && isHidden3 == false)) {
+      // Clear the selected date if it's hidden
+      this.selectedFromDate = null;
+
+      this.toast.error(
+        'Venue, Team-1 already booked for this date!',
+      );
+    }
+
+    if (isHidden && isHidden2 && (isHidden1 == false && isHidden3 == false)) {
+      // Clear the selected date if it's hidden
+      this.selectedFromDate = null;
+
+      this.toast.error(
+        'Venue, Team-2 already booked for this date!',
+      );
+    }
+
+    if (isHidden && isHidden3 && (isHidden2 == false && isHidden1 == false)) {
+      // Clear the selected date if it's hidden
+      this.selectedFromDate = null;
+
+      this.toast.error(
+        'Venue, Referee already booked for this date!',
+      );
+    }
+
+    if (isHidden1 && isHidden2 && (isHidden == false && isHidden3 == false)) {
+      // Clear the selected date if it's hidden
+      this.selectedFromDate = null;
+
+      this.toast.error(
+        'Team-1, Team-2 already booked for this date!',
+      );
+    }
+
+    if (isHidden1 && isHidden3 && (isHidden2 == false && isHidden == false)) {
+      // Clear the selected date if it's hidden
+      this.selectedFromDate = null;
+
+      this.toast.error(
+        'Team-1, Referee already booked for this date!',
+      );
+    }
+
+    if (isHidden2 && isHidden3 && (isHidden == false && isHidden1 == false)) {
+      // Clear the selected date if it's hidden
+      this.selectedFromDate = null;
+
+      this.toast.error(
+        'Team-2, Referee already booked for this date!',
+      );
+    }
+
+    if (isHidden == true && (isHidden1 == false && isHidden2 == false && isHidden3 == false)) {
+      // Clear the selected date if it's hidden
+      this.selectedFromDate = null;
+
+      this.toast.error(
+        'Venue already booked for this date!',
+      );
+    }
+
+    if (isHidden1 && (isHidden == false && isHidden2 == false && isHidden3 == false)) {
+      // Clear the selected date if it's hidden
+      this.selectedFromDate = null;
+
+      this.toast.error(
+        'Team-1 already booked for this date!',
+      );
+    }
+
+    if (isHidden2 && (isHidden == false && isHidden1 == false && isHidden3 == false)) {
+      // Clear the selected date if it's hidden
+      this.selectedFromDate = null;
+
+      this.toast.error(
+        'Team-2 already booked for this date!',
+      );
+    }
+
+    if (isHidden3 && (isHidden == false && isHidden2 == false && isHidden1 == false)) {
+      // Clear the selected date if it's hidden
+      this.selectedFromDate = null;
+
+      this.toast.error(
+        'Referee already booked for this date!',
       );
     }
   }
+
 
   //Code to hide EventToDate
   selectedToDate: any;
   public checkDateValidityTo(): void {
     const selectedDateTime = new Date(this.selectedToDate).setHours(0, 0, 0, 0);
-    const isHidden1 = this.dateArray.some(
+    const isHidden = this.dateArray.some(
       (hiddenDate) =>
         new Date(hiddenDate).setHours(0, 0, 0, 0) === selectedDateTime
     );
 
-    if (isHidden1) {
+    const isHidden1 = this.dateArrayTeamOne.some(
+      (hiddenDate) =>
+        new Date(hiddenDate).setHours(0, 0, 0, 0) === selectedDateTime
+    );
+
+    const isHidden2 = this.dateArrayTeamTwo.some(
+      (hiddenDate) =>
+        new Date(hiddenDate).setHours(0, 0, 0, 0) === selectedDateTime
+    );
+
+    const isHidden3 = this.dateArrayReferee.some(
+      (hiddenDate) =>
+        new Date(hiddenDate).setHours(0, 0, 0, 0) === selectedDateTime
+    );
+
+    if (isHidden == true && isHidden1 == true && isHidden2 == true && isHidden3 == true) {
       // Clear the selected date if it's hidden
       this.selectedToDate = null;
 
       this.toast.error(
-        'Error',
-        'Date already booked',
+        'Venue, Teams and referee already booked for this date!',
+      );
+    }
+
+    if (isHidden && isHidden1 && isHidden2 && isHidden3 == false) {
+      // Clear the selected date if it's hidden
+      this.selectedToDate = null;
+
+      this.toast.error(
+        'Venue, Team-1, Team-2 already booked for this date!',
+      );
+    }
+
+    if (isHidden && isHidden1 && isHidden3 && (isHidden2 == false)) {
+      // Clear the selected date if it's hidden
+      this.selectedToDate = null;
+
+      this.toast.error('Venue, Team-1 and Referee already booked for this date!');
+    }
+
+    if (isHidden && isHidden2 && isHidden3 && isHidden1 == false) {
+      // Clear the selected date if it's hidden
+      this.selectedToDate = null;
+
+      this.toast.error('Venue, Team-2 and Referee already booked for this date!');
+    }
+
+    if (isHidden1 && isHidden2 && isHidden3 && isHidden == false) {
+      // Clear the selected date if it's hidden
+      this.selectedToDate = null;
+
+      this.toast.error(
+        'Team-1, Team-2 and Referee already booked for this date!',
+      );
+    }
+
+    if (isHidden && isHidden1 && (isHidden2 == false && isHidden3 == false)) {
+      // Clear the selected date if it's hidden
+      this.selectedToDate = null;
+
+      this.toast.error(
+        'Venue, Team-1 already booked for this date!',
+      );
+    }
+
+    if (isHidden && isHidden2 && (isHidden1 == false && isHidden3 == false)) {
+      // Clear the selected date if it's hidden
+      this.selectedToDate = null;
+
+      this.toast.error(
+        'Venue, Team-2 already booked for this date!',
+      );
+    }
+
+    if (isHidden && isHidden3 && (isHidden2 == false && isHidden1 == false)) {
+      // Clear the selected date if it's hidden
+      this.selectedToDate = null;
+
+      this.toast.error(
+        'Venue, Referee already booked for this date!',
+      );
+    }
+
+    if (isHidden1 && isHidden2 && (isHidden == false && isHidden3 == false)) {
+      // Clear the selected date if it's hidden
+      this.selectedToDate = null;
+
+      this.toast.error(
+        'Team-1, Team-2 already booked for this date!',
+      );
+    }
+
+    if (isHidden1 && isHidden3 && (isHidden2 == false && isHidden == false)) {
+      // Clear the selected date if it's hidden
+      this.selectedToDate = null;
+
+      this.toast.error(
+        'Team-1, Referee already booked for this date!',
+      );
+    }
+
+    if (isHidden2 && isHidden3 && (isHidden == false && isHidden1 == false)) {
+      // Clear the selected date if it's hidden
+      this.selectedToDate = null;
+
+      this.toast.error(
+        'Team-2, Referee already booked for this date!',
+      );
+    }
+
+    if (isHidden == true && (isHidden1 == false && isHidden2 == false && isHidden3 == false)) {
+      // Clear the selected date if it's hidden
+      this.selectedToDate = null;
+
+      this.toast.error(
+        'Venue already booked for this date!',
+      );
+    }
+
+    if (isHidden1 && (isHidden == false && isHidden2 == false && isHidden3 == false)) {
+      // Clear the selected date if it's hidden
+      this.selectedToDate = null;
+
+      this.toast.error(
+        'Team-1 already booked for this date!',
+      );
+    }
+
+    if (isHidden2 && (isHidden == false && isHidden1 == false && isHidden3 == false)) {
+      // Clear the selected date if it's hidden
+      this.selectedToDate = null;
+
+      this.toast.error(
+        'Team-2 already booked for this date!',
+      );
+    }
+
+    if (isHidden3 && (isHidden == false && isHidden2 == false && isHidden1 == false)) {
+      // Clear the selected date if it's hidden
+      this.selectedToDate = null;
+
+      this.toast.error(
+        'Referee already booked for this date!',
       );
     }
   }

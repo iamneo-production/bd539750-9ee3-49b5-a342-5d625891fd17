@@ -12,7 +12,7 @@ export class UserHeaderComponent implements OnInit {
 
   greetings: any;
   icons: any;
-  animation:any;
+  animation: any;
   name: any;
   userId: any;
   ngOnInit() {
@@ -32,15 +32,21 @@ export class UserHeaderComponent implements OnInit {
     if (currentHour >= 0 && currentHour < 12) {
       greeting = 'Good morning';
       this.icons = 'fa-mug-hot'
-      this.animation="fa-beat"
-    } else if (currentHour >= 12 && currentHour < 18) {
+      this.animation = "fa-beat"
+    } else if (currentHour >= 12 && currentHour < 16) {
       greeting = 'Good afternoon';
       this.icons = 'fa-sun'
-      this.animation="fa-spin"
-    } else {
+      this.animation = "fa-spin"
+    }
+    else if (currentHour >= 16 && currentHour < 20) {
+      greeting = 'Good Evening';
+      this.icons = 'fa-cloud-sun'
+      this.animation = "fa-beat"
+    }
+    else {
       greeting = 'Good evening';
-      this.icons = 'fa-star-and-crescent'
-      this.animation='fa-beat'
+      this.icons = 'fa-moon'
+      this.animation = 'fa-beat'
     }
 
     return greeting;

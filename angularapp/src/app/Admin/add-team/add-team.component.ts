@@ -71,7 +71,7 @@ export class AddTeamComponent implements OnInit {
             this.route.navigate(['/teams']);
           },
           error: (err) => {
-            this.toast.error(err.message, "Error");
+            this.toast.error(err?.error.message, "Error");
           },
         });
 

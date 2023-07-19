@@ -25,16 +25,23 @@ export class AdminHeaderComponent implements OnInit {
     let greeting: string;
 
     if (currentHour >= 0 && currentHour < 12) {
-      greeting = 'Good morning';
+      greeting = 'Good Morning';
       this.icons = 'fa-mug-hot'
       this.animation="fa-beat"
-    } else if (currentHour >= 12 && currentHour < 18) {
-      greeting = 'Good afternoon';
+    } else if (currentHour >= 12 && currentHour < 16) {
+      greeting = 'Good Afternoon';
       this.icons = 'fa-sun'
       this.animation="fa-spin"
-    } else {
-      greeting = 'Good evening';
-      this.icons = 'fa-star-and-crescent'
+    } 
+    else if (currentHour >= 16 && currentHour < 20) {
+      greeting = 'Good Evening';
+      this.icons = 'fa-cloud-sun'
+      this.animation="fa-beat"
+    }
+    
+    else {
+      greeting = 'Good Evening';
+      this.icons = 'fa-moon'
       this.animation='fa-beat'
     }
 

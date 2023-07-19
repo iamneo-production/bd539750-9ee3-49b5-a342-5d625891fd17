@@ -11,7 +11,7 @@ using WebApp.Models;
 
 namespace WebApp.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("")]
     [ApiController]
     public class TeamController : ControllerBase
     {
@@ -23,14 +23,14 @@ namespace WebApp.Controllers
         }
 
         // GET: api/Teams
-        [HttpGet]
+        [HttpGet("admin/getTeam")]
         public async Task<ActionResult<IEnumerable<TeamModel>>> Getteams()
         {
             return await _context.teams.ToListAsync();
         }
 
         // GET: api/Teams/id
-        [HttpGet("{id}")]
+        [HttpGet("admin/getTeamById/{id}")]
         public async Task<ActionResult<TeamModel>> getTeam(int id)
         {
             var team = await _context.teams.FindAsync(id);
@@ -73,7 +73,7 @@ namespace WebApp.Controllers
         
 
         // PUT: api/Teams/id
-        [HttpPut("{id}")]
+        [HttpPut("admin/editTeam/{id}")]
         public async Task<IActionResult> editTeam(int id, TeamModel team)
         {
             if (id != team.teamId)
@@ -135,7 +135,7 @@ namespace WebApp.Controllers
 
 
         // POST: api/Teams
-        [HttpPost]
+        [HttpPost("admin/addTeam")]
         public async Task<ActionResult<TeamModel>> addTeam(TeamModel team)
         {
 
@@ -144,6 +144,14 @@ namespace WebApp.Controllers
             {
                 return BadRequest(new { Message = "Team Already Exist" });
             }
+
+          foreach (var player in team.Players)
+              {
+                 if (await CheckPlayerExistAsync(player.playerFirstName, player.playerLastName, player.playerAge))
+                   {
+                   return BadRequest(new { Message = "Player Already Exists" });
+                   }
+               }
             _context.teams.Add(team);
             await _context.SaveChangesAsync();
 
@@ -170,7 +178,7 @@ namespace WebApp.Controllers
         }
 
         // DELETE: api/Teams/id
-        [HttpDelete("{id}")]
+        [HttpDelete("admin/deleteTeam/{id}")]
         public async Task<IActionResult> deleteTeam(int id)
         {
             var team = await _context.teams.FindAsync(id);

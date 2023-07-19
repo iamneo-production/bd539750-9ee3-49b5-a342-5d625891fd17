@@ -12,12 +12,13 @@ import { VenueServiceService } from 'src/app/Services/venue-service.service';
 export class ViewbookEventComponent implements OnInit {
 
   EventDetails = [];
+  SingleEventDetails = [];
   constructor(
     private bookEventService: BookEventService,
     private venueService: VenueServiceService,
     private auth: AuthServiceService,
     private emailService: EmailService
-  ) {}
+  ) { }
 
   userId: any;
   ngOnInit() {
@@ -27,6 +28,16 @@ export class ViewbookEventComponent implements OnInit {
     this.bookEventService.getAllEventDetails().subscribe((result) => {
       this.EventDetails = result;
     });
+  }
+
+  getEventDetails(id) {
+    this.bookEventService.getEventDetails(id).subscribe((result) => {
+      this.SingleEventDetails = result;
+      console.log(this.SingleEventDetails);
+      console.log(typeof(this.SingleEventDetails));
+      
+      
+    })
   }
 
   //Email
@@ -52,7 +63,7 @@ export class ViewbookEventComponent implements OnInit {
       next: (result) => {
         location.reload();
         this.emailService.sendEmail(<any>this.emailDetails).subscribe({
-          next: (result) => {},
+          next: (result) => { },
         });
       },
     });
