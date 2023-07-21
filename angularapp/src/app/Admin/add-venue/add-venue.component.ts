@@ -26,7 +26,7 @@ export class AddVenueComponent implements OnInit {
       venueDescription: new FormControl('', [Validators.required]),
       venueCapacity: new FormControl('', [Validators.required, Validators.pattern(/^(?!0+$)\d+$/)]),
       venuePrice: new FormControl('', [Validators.required, Validators.pattern(/^(?!0+$)\d+$/)]),
-      venueLocation: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z0-9]+$'), Validators.minLength(10)]),
+      venueLocation: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z0-9]+$'), Validators.minLength(3)]),
     });
   }
 
@@ -38,6 +38,7 @@ export class AddVenueComponent implements OnInit {
           this.route.navigate(['/admin-venue-list']);
         },
         error: (err) => {
+          this.toast.error(err?.error.message, "Error");
         },
       });
     }
