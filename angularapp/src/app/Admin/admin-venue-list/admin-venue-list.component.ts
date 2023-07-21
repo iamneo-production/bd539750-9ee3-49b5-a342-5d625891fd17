@@ -14,10 +14,12 @@ export class AdminVenueListComponent implements OnInit {
     private route: Router,
   ) { }
 
-  VenueList = [];
+  VenueList: any = [];
+  Venue = [];
+  VenueID: any;
   ngOnInit() {
     this.venueService.getAllVenue().subscribe((result) => {
-      this.VenueList = <any>result;
+      this.VenueList = result;
     });
   }
 
@@ -27,5 +29,15 @@ export class AdminVenueListComponent implements OnInit {
         location.reload();
       },
     });
+  }
+
+  getVenue(id) {
+    this.VenueID = id;
+  }
+
+  input = '';
+  searchInput = '';
+  onSearch() {
+    this.searchInput = this.input;
   }
 }

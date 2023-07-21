@@ -1,0 +1,151 @@
+<app-user-header></app-user-header>
+<div class=" main container-fluid-md">
+
+    <form #form="ngForm" (ngSubmit)="Update()" class="p-5 ">
+
+        <!--Venue Name-->
+        <div class="row">
+            <div class="col-md-5 mt-2">
+                <div class="input-group flex-nowrap">
+                    <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-pen-fancy"></i></span>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="floatingInput" name="eventName" readonly
+                            [(ngModel)]="UpdateEvent.eventName" placeholder="name@example.com">
+                        <label for="floatingInput">Venue name</label>
+                    </div>
+                </div>
+            </div>
+
+            <!--Applicant Name-->
+            <div class="col-md-5 mt-2">
+                <div class="input-group flex-nowrap">
+                    <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-pen-fancy"></i></span>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="floatingInput" name="applicantName"
+                            [(ngModel)]="UpdateEvent.applicantName" placeholder="name@example.com">
+                        <label for="floatingInput">Applicant Name</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Applicant Address-->
+
+        <div class="row mt-2">
+            <div class="col-md-5 mt-2">
+                <div class="input-group flex-nowrap">
+                    <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-location-dot"></i></span>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="floatingInput" name="applicantAddress"
+                            [(ngModel)]="UpdateEvent.applicantAddress" placeholder="name@example.com">
+                        <label for="floatingInput">Application Address</label>
+                    </div>
+                </div>
+            </div>
+
+
+            <!--Applicant Mobile Number-->
+            <div class="col-md-5 mt-2">
+                <div class="input-group flex-nowrap">
+                    <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-phone"></i></span>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="floatingInput" name="applicantMobile"
+                            [(ngModel)]="UpdateEvent.applicantMobile" placeholder="name@example.com">
+                        <label for="floatingInput">Applicant Mobile</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!--Applicant Email Id-->
+        <div class="row mt-2">
+            <div class="col-md-5 mt-2">
+                <div class="input-group flex-nowrap">
+                    <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-envelope"></i></span>
+                    <div class="form-floating">
+                        <input type="email" class="form-control" id="floatingInput" name="applicantEmail"
+                            [(ngModel)]="UpdateEvent.applicantEmail" placeholder="name@example.com">
+                        <label for="floatingInput">Application Email</label>
+                    </div>
+                </div>
+            </div>
+
+            <!--Event Address-->
+            <div class="col-md-5 mt-2">
+                <div class="input-group flex-nowrap">
+                    <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-user-group"></i></span>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com"
+                            readonly name="eventAddress" [(ngModel)]="UpdateEvent.eventAddress">
+                        <label for="floatingInput">Event Address</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!--Date Of Event-->
+        <div class="row mt-2">
+
+            <!--From Date-->
+            <div class="col-md-5 mt-2">
+                <div class="input-group flex-nowrap">
+                    <span class="input-group-text" id="addon-wrapping"><i class="fa-regular fa-calendar-days"></i></span>
+                    <div class="form-floating">
+                        <input type="date" class="form-control" id="floatingInput" name="eventFromDate"
+                            [(ngModel)]="UpdateEvent.eventFromDate" placeholder="name@example.com">
+                        <label for="floatingInput">Event Date From</label>
+                    </div>
+                </div>
+            </div>
+
+            <!--To Date-->
+            <div class="col-md-5 mt-2">
+                <div class="input-group flex-nowrap">
+                    <span class="input-group-text" id="addon-wrapping"><i class="fa-regular fa-calendar-days"></i></span>
+                    <div class="form-floating">
+                        <input type="date" class="form-control" id="floatingInput" placeholder="name@example.com"
+                            name="eventToDate" [(ngModel)]="UpdateEvent.eventToDate">
+                        <label for="floatingInput">Event Date To</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!--Time-->
+        <div class="row mt-2">
+            <div class="col-md-5 mt-2">
+                <div class="input-group flex-nowrap">
+                    <span class="input-group-text" id="addon-wrapping"><i class="fa-regular fa-clock"></i></span>
+                    <div class="form-floating">
+                        <input type="time" class="form-control" id="floatingInput" name="time"
+                            [(ngModel)]="UpdateEvent.time" placeholder="name@example.com">
+                        <label for="floatingInput">Event Time</label>
+                    </div>
+                </div>
+            </div>
+
+            <!--Team Members-->
+            <div class="col-md-5 mt-2">
+                <div class="input-group flex-nowrap">
+                    <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-user-group"></i></span>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="floatingInput" name="members"
+                            [(ngModel)]="UpdateEvent.members" placeholder="name@example.com">
+                        <label for="floatingInput">No. of team members</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <input hidden  type="text" name="eventPrice" [(ngModel)]="UpdateEvent.members">
+
+
+        <div class="mt-3 offset-9">
+            <button class="btn btn-primary p-2">Update Event</button>
+        </div>
+    </form>
+</div>

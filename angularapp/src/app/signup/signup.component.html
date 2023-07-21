@@ -2,7 +2,7 @@
     <div class="row heading">
         <div class="col">
             <img src="/assets/logo.jpg" width="55" alt="" class="mt-3 me-2">
-            <h1 style="position: relative; top: 1rem;">Baseball League Management</h1>
+            <h1 style="position: relative; top: 1rem;">Baseball League Management System</h1>
         </div>
     </div>
     <div class="row p-4 ">
@@ -22,7 +22,7 @@
                     <label for="" class="form-label">Admin/User</label>
                     <select class="form-select" aria-label="Default select example" [(ngModel)]="UserRole"
                         formControlName="userRole" id="admin/user">
-                        <option value="" disabled selected>Enter admin/user</option>
+                        <option value="" disabled selected>Select admin/user</option>
                         <option value="admin">Admin</option>
                         <option value="user">User</option>
                     </select>
@@ -100,9 +100,22 @@
 
 
                     <div *ngIf="Password.errors && (Password.touched || Password.dirty)">
-                        <div class="form-text text-danger" *ngIf="Password.errors.required" id="errorPassword">
+                        <div class="text-danger" *ngIf="Password.errors.required" id="errorPassword">
                             Password is required.
                         </div>
+
+                        <div class="text-danger" *ngIf="Password.errors.minlength" id="errorPassword">
+                            Password must be at least 8 characters.
+                        </div>
+
+                        <div class="text-danger" *ngIf="Password.errors.pattern" id="errorPassword">
+                            <p>
+                                Required atleast one special character!
+                                <br>
+                                Required atleast one lowecase & uppercase character!
+                            </p>
+                        </div>
+
 
                     </div>
 
@@ -123,9 +136,17 @@
 
 
                     <div class="form-text text-danger" *ngIf="registerForm.hasError('notSame')">Passwords do not match
+                    </div>
 
+                    <div *ngIf="Confirmpassword.errors && (Confirmpassword.touched || Confirmpassword.dirty)">
+
+                        <div class="form-text text-danger" *ngIf="Confirmpassword.errors.minlength" id="errorPassword">
+                            Password must be at least 8 characters.
+                        </div>
 
                     </div>
+
+
 
                 </div>
 
