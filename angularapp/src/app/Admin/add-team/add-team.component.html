@@ -1,0 +1,182 @@
+<app-admin-header></app-admin-header>
+
+<div class=" main container-fluid-md">
+    <form [formGroup]="teamForm">
+        <div class="row p-5">
+
+            <h3 class="ms-2">Enter Team Details...</h3>
+            <div class="col-md-4 mt-2">
+
+                <!--Team Name-->
+                <div class="input-group flex-nowrap">
+                    <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-pen-fancy"></i></span>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="addTeamName" formControlName="teamName"
+                            placeholder="name@example.com">
+                        <label for="floatingInput">Enter the Team name</label>
+                    </div>
+                </div>
+
+                <!--Validation Team Name-->
+                <div class="ms-2"
+                    *ngIf="teamForm.get('teamName').errors && (teamForm.get('teamName').touched ||teamForm.get('teamName').dirty)">
+                    <div class="form-text text-danger" *ngIf="teamForm.get('teamName').errors.required">
+                        Team Name is required.
+                    </div>
+                </div>
+
+                <!--Team Image-->
+                <div class="input-group flex-nowrap mt-2">
+                    <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-images"></i></span>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="addTeamImageUrl" formControlName="teamImage"
+                            placeholder="name@example.com">
+                        <label for="floatingInput">Enter the Team Image URL</label>
+                    </div>
+                </div>
+
+                <!--Validation Team Name-->
+                <div class="ms-2"
+                    *ngIf="teamForm.get('teamImage').errors && (teamForm.get('teamImage').touched ||teamForm.get('teamImage').dirty)">
+                    <div class="form-text text-danger" *ngIf="teamForm.get('teamImage').errors.required">
+                        Team Image is required.
+                    </div>
+                </div>
+
+
+                <!--Player Count-->
+                <div class="input-group flex-nowrap mt-2">
+                    <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-people-group"></i></span>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="addNoOfPlayers" [(ngModel)]="teamCount"
+                            formControlName="playerCounts" placeholder="name@example.com">
+                        <label for="floatingInput">Enter the no. of Players</label>
+                    </div>
+                </div>
+
+                <!--Validation Player Count-->
+                <div class="ms-2"
+                    *ngIf="teamForm.get('playerCounts').errors && (teamForm.get('playerCounts').touched ||teamForm.get('playerCounts').dirty)">
+                    <div class="form-text text-danger" *ngIf="teamForm.get('playerCounts').errors.required">
+                        Player No. is required.
+                    </div>
+
+                    <div class="form-text text-danger" *ngIf="teamForm.get('playerCounts').errors.pattern">
+                        Only number allowed.
+                    </div>
+                </div>
+
+
+                <!--Team Location-->
+                <div class="input-group flex-nowrap mt-2">
+                    <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-location-dot"></i></span>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="addTeamLocation" formControlName="teamLocation"
+                            placeholder="name@example.com">
+                        <label for="floatingInput">Enter the Team Location</label>
+                    </div>
+                </div>
+
+                <!--Validation Team Locations-->
+                <div class="ms-2"
+                    *ngIf="teamForm.get('teamLocation').errors && (teamForm.get('teamLocation').touched ||teamForm.get('teamLocation').dirty)">
+                    <div class="form-text text-danger" *ngIf="teamForm.get('teamLocation').errors.required">
+                        Team Locations is required.
+                    </div>
+                </div>
+
+                <div class="form-floating mt-2">
+                    <textarea class="form-control" placeholder="Leave a comment here" id="TeamDescription"
+                        style="height: 5rem" formControlName="teamDescription"></textarea>
+                    <label for="floatingTextarea2">Team Description</label>
+                </div>
+            </div>
+
+            <!--Validation Team Description-->
+            <div class="ms-2"
+                *ngIf="teamForm.get('teamDescription').errors && (teamForm.get('teamDescription').touched ||teamForm.get('teamDescription').dirty)">
+                <div class="form-text text-danger" *ngIf="teamForm.get('teamDescription').errors.required">
+                    Team Description is required.
+                </div>
+            </div>
+
+
+
+
+
+            <!--Players Detaail-->
+            <div class="col-8 mt-2">
+                <div formArrayName="Players">
+                    <div class="row mt-2" *ngFor="let plrs of teamForm.get('Players')['controls']; let i=index"
+                        formGroupName="{{i}}">
+                        <div class="players-row row" *ngIf="i<teamCount">
+                            <div class="container-fluid-md">
+                                <h6 class="fw-bold">Player: {{i+1}}</h6>
+                            </div>
+
+                            <!--First Name-->
+                            <div class="col">
+                                <div class="input-group flex-nowrap">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="firstName"
+                                            formControlName="playerFirstName" placeholder="name@example.com">
+                                        <label for="floatingInput">Enter Player Firstname</label>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!--LastName-->
+                            <div class="col">
+                                <div class="input-group flex-nowrap">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="lastName"
+                                            formControlName="playerLastName" placeholder="name@example.com">
+                                        <label for="floatingInput">Enter Player Lastname</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--Age-->
+
+                            <div class="col">
+                                <div class="input-group flex-nowrap">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="age" formControlName="playerAge"
+                                            placeholder="name@example.com">
+                                        <label for="floatingInput">Enter Player Age</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--Gender-->
+                            <div class="col">
+                                <div class="input-group flex-nowrap">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="gender"
+                                            formControlName="playerGender" placeholder="name@example.com">
+                                        <label for="floatingInput">Enter Player Gender</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-1 mt-2" *ngIf="i==0; else elseBlock">
+                                <button hidden (click)="removePlayer(i)" class="btn btn-danger ps-3 pe-3">X</button>
+                            </div>
+                            <ng-template #elseBlock>
+                                <div class="col-1 mt-2">
+                                    <button (click)="removePlayer(i)" class="btn btn-danger ps-3 pe-3">X</button>
+                                </div>
+                            </ng-template>
+                        </div>
+                    </div>
+                </div>
+
+                <button *ngIf="this.idx<this.teamCount" (click)="addPlayer()"
+                    class="btn btn-success mt-2 ps-3 pe-3">+</button>
+                <button [disabled]="teamForm.invalid" (click)="submitTeam()"
+                    class="btn btn-primary mt-2 ms-2">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,54 @@
+<app-admin-header></app-admin-header>
+<div class="container-fluid">
+
+    <!--Venues-->
+    <div class="main container-fluid-md pb-5">
+
+        <!--Search Venues-->
+        <nav class="navbar bg-light">
+            <div class="container-fluid text justify-content-center mt-4">
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
+        </nav>
+
+
+
+        <!--Venues Card-->
+
+        <div class="row mt-5 venues-card" style="width: 80%; margin: auto;">
+            <div class="col-md-4 mb-3" *ngFor="let team of TeamList" id="adminTeamGrid1">
+                <a class="nav-link">
+                    <div class="card">
+                        <img src={{team.teamImage}} class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <h5 class="card-title fw-bold">{{team.teamName}}</h5>
+                                <span style="color: #feb900;"><i class="fa-solid fa-star"></i><i
+                                        class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                        class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
+                            </div>
+
+                            <div class="d-flex justify-content-between mt-2">
+                                <p class="card-text">{{team.teamLocation}}</p>
+                                <span> <a id="deleteTeam" style="cursor:pointer" (click)="deleteTeamDetails(team.teamId)"><i
+                                            class="fa-solid fa-trash-can fs-4"></i></a>
+                                    <a id="editTeam" style="color: rgb(55, 52, 52);"><i
+                                            class="fa-solid fa-pen-to-square fs-4 ms-2"></i></a></span>
+                            </div>
+
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col-6">
+                    <button id="addTeamButton" type="submit" class="btn btn-success p-2 fw-bold" routerLink="/add-team">ADD TEAM</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
