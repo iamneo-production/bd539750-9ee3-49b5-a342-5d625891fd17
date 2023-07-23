@@ -29,7 +29,7 @@ namespace dotnetapp.Controllers
         }
 
         // GET: api/Referee/5
-        [HttpGet("getReferee/{id}")]
+        [HttpGet("admin/getRefereeById/{id}")]
         public async Task<ActionResult<RefereeModel>> GetRefereeModel(int id)
         {
             var refereeModel = await _context.referees.FindAsync(id);
@@ -43,7 +43,7 @@ namespace dotnetapp.Controllers
         }
 
         // PUT: api/Referee/5
-        [HttpPut("editReferee/{id}")]
+        [HttpPut("admin/editReferee/{id}")]
         public async Task<IActionResult> editReferee(int id, RefereeModel refereeModel)
         {
             if (id != refereeModel.refereeId)
@@ -73,7 +73,7 @@ namespace dotnetapp.Controllers
         }
 
         // POST: api/Referee
-        [HttpPost("saveReferee")]
+        [HttpPost("admin/addReferee")]
         public async Task<ActionResult<RefereeModel>> addRefereeModel(RefereeModel refereeModel)
         {
             _context.referees.Add(refereeModel);
@@ -83,7 +83,7 @@ namespace dotnetapp.Controllers
         }
 
         // DELETE: api/Referee/5
-        [HttpDelete("deleteRefree/{id}")]
+        [HttpDelete("admin/deleteRefree/{id}")]
         public async Task<IActionResult> deleteRefereeModel(int id)
         {
             var refereeModel = await _context.referees.FindAsync(id);

@@ -30,7 +30,7 @@ namespace BaseballAPI.Controllers
         }
 
         // GET: api/Venues/id
-        [HttpGet("getVenueUsingID/{id}")]
+        [HttpGet("admin/getVenueByID/{id}")]
         public async Task<ActionResult<VenueModel>> getVenue(int id)
         {
             var venue = await _context.venues.FindAsync(id);
@@ -44,7 +44,7 @@ namespace BaseballAPI.Controllers
         }
 
      
-        [HttpPut("editVenue/{id}")]
+        [HttpPut("admin/editVenue/{id}")]
         public async Task<IActionResult> editVenue(int id, VenueModel venue)
         {
             if (id != venue.venueId)
@@ -86,7 +86,7 @@ namespace BaseballAPI.Controllers
 
 
         // DELETE: api/Venues/id
-        [HttpDelete("deleteVenue/{id}")]
+        [HttpDelete("admin/deleteVenue/{id}")]
         public async Task<IActionResult> deleteVenue(int id)
         {
             var venue = await _context.venues.FindAsync(id);

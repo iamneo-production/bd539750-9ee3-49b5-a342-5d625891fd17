@@ -58,7 +58,63 @@ namespace dotnetapp.Controllers
 
 
         
-        [HttpPut("editEvent/{id}")]
+         [HttpGet("FetchEvent_Using_TeamOneName/{teamOneName}")]
+        public async Task<ActionResult<EventModel>> GetBookEventsByTeamOneName(string teamOneName)
+        {
+           
+            var Events = await _context.bookEvents
+                .Where(be => be.team1 == teamOneName || be.team2==teamOneName)
+                .ToListAsync();
+
+            if (Events.Count == 0)
+                return NotFound();
+
+            return Ok(Events);
+        }
+
+          [HttpGet("FetchEvent_Using_TeamTwoName/{teamTwoName}")]
+        public async Task<ActionResult<EventModel>> GetBookEventsByTeamTwoName(string teamTwoName)
+        {
+            var Events = await _context.bookEvents
+                .Where(be => be.team2 == teamTwoName || be.team1==teamTwoName)
+                .ToListAsync();
+
+            if (Events.Count == 0)
+                return NotFound();
+
+            return Ok(Events);
+        }
+
+        [HttpGet("FetchEvent_Using_RefereeeeName/{refereeName}")]
+        public async Task<ActionResult<EventModel>> GetBookEventsByRefereeName(string refereeName)
+        {
+            var Events = await _context.bookEvents
+                .Where(be => be.ReefreeName == refereeName)
+                .ToListAsync();
+
+            if (Events.Count == 0)
+                return NotFound();
+
+            return Ok(Events);
+        }
+
+
+        [HttpGet("FetchEvent_Using_ApplicantEmail/{applicantEmail}")]
+        public async Task<ActionResult<EventModel>> GetBookEventsByApplicantEmail(string email)
+        {
+            var Events = await _context.bookEvents
+                .Where(be => be.applicantEmail == email)
+                .ToListAsync();
+
+            if (Events.Count == 0)
+                return NotFound();
+
+            return Ok(Events);
+        }
+
+
+        
+        [HttpPut("user/editEvent/{id}")]
         public async Task<IActionResult> PutBookEvent(int id, EventModel bookEvent)
         {
             if (id != bookEvent.eventId)
@@ -88,7 +144,7 @@ namespace dotnetapp.Controllers
         }
 
       
-        [HttpPost("bookEvent")]
+        [HttpPost("user/bookEvent")]
         public async Task<ActionResult<EventModel>> PostBookEvent(EventModel bookEvent)
         {
             _context.bookEvents.Add(bookEvent);
@@ -98,7 +154,7 @@ namespace dotnetapp.Controllers
         }
 
 
-        [HttpDelete("deleteEvent/{id}")]
+        [HttpDelete("user/deleteEvent/{id}")]
         public async Task<IActionResult> DeleteBookEvent(int id)
         {
             var bookEvent = await _context.bookEvents.FindAsync(id);
