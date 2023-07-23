@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AdminHomepageComponent } from './admin-homepage.component';
+import { ViewbookEventComponent } from './viewbook-event.component';
 
-describe('AdminHomepageComponent', () => {
-  let component: AdminHomepageComponent;
-  let fixture: ComponentFixture<AdminHomepageComponent>;
+describe('ViewbookEventComponent', () => {
+  let component: ViewbookEventComponent;
+  let fixture: ComponentFixture<ViewbookEventComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AdminHomepageComponent ]
+      declarations: [ ViewbookEventComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AdminHomepageComponent);
+    fixture = TestBed.createComponent(ViewbookEventComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

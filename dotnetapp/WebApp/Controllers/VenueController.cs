@@ -9,9 +9,9 @@ using Microsoft.EntityFrameworkCore;
 using WebApp.Context;
 using WebApp.Models;
 
-namespace BaseballAPI.Controllers
+namespace WebApp.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("")]
     [ApiController]
     public class VenueController : ControllerBase
     {
@@ -23,14 +23,14 @@ namespace BaseballAPI.Controllers
         }
 
         // GET: api/Venues
-        [HttpGet]
+        [HttpGet("admin/getVenue")]
         public async Task<ActionResult<IEnumerable<VenueModel>>> Getvenues()
         {
             return await _context.venues.ToListAsync();
         }
 
         // GET: api/Venues/id
-        [HttpGet("{id}")]
+        [HttpGet("admin/getVenueById/{id}")]
         public async Task<ActionResult<VenueModel>> getVenue(int id)
         {
             var venue = await _context.venues.FindAsync(id);
@@ -44,7 +44,7 @@ namespace BaseballAPI.Controllers
         }
 
      
-        [HttpPut("{id}")]
+        [HttpPut("admin/editVenue/{id}")]
         public async Task<IActionResult> editVenue(int id, VenueModel venue)
         {
             if (id != venue.venueId)
@@ -74,9 +74,16 @@ namespace BaseballAPI.Controllers
         }
 
     
-        [HttpPost]
+        [HttpPost("admin/addVenue")]
         public async Task<ActionResult<VenueModel>> addVenue(VenueModel venue)
         {
+               //Check Email
+            if (await CheckVenueExistAsync(venue.venueName,venue.venueLocation))
+            {
+                return BadRequest(new { Message = "Venue Already Exist" });
+            }
+              
+
             _context.venues.Add(venue);
             await _context.SaveChangesAsync();
 
@@ -86,7 +93,7 @@ namespace BaseballAPI.Controllers
 
 
         // DELETE: api/Venues/id
-        [HttpDelete("{id}")]
+        [HttpDelete("admin/deleteVenue/{id}")]
         public async Task<IActionResult> deleteVenue(int id)
         {
             var venue = await _context.venues.FindAsync(id);
@@ -105,5 +112,8 @@ namespace BaseballAPI.Controllers
         {
             return _context.venues.Any(e => e.venueId == id);
         }
+
+
+        private Task<bool> CheckVenueExistAsync(string name ,string location) => _context.venues.AnyAsync(x => x.venueName==name && x.venueLocation==location);
     }
 }

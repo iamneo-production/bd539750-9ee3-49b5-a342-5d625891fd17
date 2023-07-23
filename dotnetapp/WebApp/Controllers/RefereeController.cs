@@ -10,7 +10,7 @@ using WebApp.Models;
 
 namespace WebApp.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("")]
     [ApiController]
     public class RefereeController : ControllerBase
     {
@@ -22,14 +22,14 @@ namespace WebApp.Controllers
         }
 
         // GET: api/Referee
-        [HttpGet]
+        [HttpGet("admin/getReferee")]
         public async Task<ActionResult<IEnumerable<RefereeModel>>> viewReferees()
         {
             return await _context.referees.ToListAsync();
         }
 
         // GET: api/Referee/5
-        [HttpGet("{id}")]
+        [HttpGet("admin/getRefereeById/{id}")]
         public async Task<ActionResult<RefereeModel>> GetRefereeModel(int id)
         {
             var refereeModel = await _context.referees.FindAsync(id);
@@ -43,7 +43,7 @@ namespace WebApp.Controllers
         }
 
         // PUT: api/Referee/5
-        [HttpPut("{id}")]
+        [HttpPut("admin/editReferee/{id}")]
         public async Task<IActionResult> editReferee(int id, RefereeModel refereeModel)
         {
             if (id != refereeModel.refereeId)
@@ -73,7 +73,7 @@ namespace WebApp.Controllers
         }
 
         // POST: api/Referee
-        [HttpPost]
+        [HttpPost("admin/addReferee")]
         public async Task<ActionResult<RefereeModel>> addRefereeModel(RefereeModel refereeModel)
         {
             _context.referees.Add(refereeModel);
@@ -83,7 +83,7 @@ namespace WebApp.Controllers
         }
 
         // DELETE: api/Referee/5
-        [HttpDelete("{id}")]
+        [HttpDelete("admin/deleteReferee/{id}")]
         public async Task<IActionResult> deleteRefereeModel(int id)
         {
             var refereeModel = await _context.referees.FindAsync(id);

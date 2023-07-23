@@ -1,6 +1,6 @@
-@import url("https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@600&display=swap');
 .heading h1 {
-  font-family: "Permanent Marker";
+  font-family: "Raleway";
 }
 
 .heading .col{
@@ -9,14 +9,20 @@
 }
 
 .main {
+  height: 100vh;
   background-image: url("/assets/pattern.jpg");
   background-size: 1500px;
+  background-repeat: no-repeat;
+  background-position: 0px 6rem;
 }
 .signup-container {
   box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
     rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
     rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
   border-radius: 15px;
+}
+.image-container img{
+  height: 60vh;
 }
 
 @media (max-width: 768px) {

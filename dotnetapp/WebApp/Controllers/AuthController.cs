@@ -12,10 +12,11 @@ using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authorization;
 using System.Threading.Tasks;
+using System;
 
 namespace WebApp.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("")]
     [ApiController]
 
     public class AuthController : Controller
@@ -28,6 +29,7 @@ namespace WebApp.Controllers
         }
 
 
+
         [HttpPost("registerUser")]
 
         public async Task<IActionResult> saveUser([FromBody] UserModel registerObj)
@@ -37,6 +39,11 @@ namespace WebApp.Controllers
                 return BadRequest();
             }
 
+             //Check Email
+            if (await CheckUserEmailExistAsync(registerObj.email))
+            {
+                return BadRequest(new { Message = "Email Already Exist" });
+            }
 
             registerObj.token = "";
             await _authcontext.users.AddAsync(registerObj);
@@ -55,6 +62,12 @@ namespace WebApp.Controllers
                 return BadRequest();
             }
 
+             //Check Email
+            if (await CheckAdminEmailExistAsync(registerObj.email))
+            {
+                return BadRequest(new { Message = "Email Already Exist" });
+            }
+
 
             registerObj.token = "";
             await _authcontext.admins.AddAsync(registerObj);
@@ -63,7 +76,7 @@ namespace WebApp.Controllers
 
         }
 
-        [HttpPost("authenticate")]
+        [HttpPost("admin/login")]
 
         public async Task<IActionResult> Authenticate([FromBody] LoginModel registerObj)
         {
@@ -74,11 +87,8 @@ namespace WebApp.Controllers
 
             // Here users and admins is a Table in database
 
-            var user = await _authcontext.users.FirstOrDefaultAsync(x => x.email == registerObj.email && x.password == registerObj.password);
-            var admin = await _authcontext.admins.FirstOrDefaultAsync(y => y.email == registerObj.email && y.password == registerObj.password);
-
-
-
+            var user = await isUserPresent(registerObj.email,registerObj.password);
+            var admin = await isAdminPresent(registerObj.email,registerObj.password);
 
             if (user != null)
             {
@@ -89,9 +99,6 @@ namespace WebApp.Controllers
                     Message = "User Login Success!"
                 });
             }
-
-
-
 
             else if (admin != null)
             {
@@ -106,6 +113,13 @@ namespace WebApp.Controllers
 
             return Unauthorized();
         }
+
+
+        private Task<bool> CheckUserEmailExistAsync(string email) => _authcontext.users.AnyAsync(x => x.email==email);
+        private Task<bool> CheckAdminEmailExistAsync(string email) => _authcontext.admins.AnyAsync(x => x.email==email);
+
+          
+        
 
 
           //Authentication Using Jwt Token for Users
@@ -155,5 +169,22 @@ namespace WebApp.Controllers
             var token= jwtTokenHandler.CreateToken(tokenDescriptor);
             return jwtTokenHandler.WriteToken(token);
           }
+
+
+
+
+            //Check if User present in UserModel users Table
+            private async Task<UserModel> isUserPresent(string email, string password)
+             {
+             var user = await _authcontext.users.FirstOrDefaultAsync(x => x.email == email && x.password == password);
+             return user;
+             }
+
+            //Check if Admin present in AdminModel admins Table
+             private async Task<AdminModel> isAdminPresent(string email, string password)
+             {
+             var admin = await _authcontext.admins.FirstOrDefaultAsync(y => y.email == email && y.password == password);
+             return admin;
+             }
     }
 }
