@@ -204,24 +204,71 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Team...</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Team</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form #form="ngForm">
+                <form [formGroup]="EditTeamForm">
                     <div class="row mt-2">
+
+                        <!--Team Name-->
                         <div class="col">
                             <div class="input-group flex-nowrap">
                                 <span class="input-group-text" id="addon-wrapping"><i
                                         class="fa-solid fa-pen-fancy"></i></span>
                                 <div class="form-floating">
                                     <input type="text" class="form-control" id="floatingInput"
-                                        placeholder="name@example.com" name="teamName" [(ngModel)]="EditTeam.teamName">
+                                        placeholder="name@example.com" formControlName="teamName">
                                     <label for="floatingInput">Team Name:</label>
                                 </div>
                             </div>
+
+                            <!--Validation Team Name-->
+                            <div class="ms-2"
+                                *ngIf="EditTeamForm.get('teamName').errors && (EditTeamForm.get('teamName').touched ||EditTeamForm.get('teamName').dirty)">
+                                <div class="form-text text-danger" *ngIf="EditTeamForm.get('teamName').errors.required">
+                                    Team Name is required.
+                                </div>
+                            </div>
+
+                            <div class="ms-2"
+                                *ngIf="EditTeamForm.get('teamName').errors && (EditTeamForm.get('teamName').touched ||EditTeamForm.get('teamName').dirty)">
+                                <div class="form-text text-danger" *ngIf="EditTeamForm.get('teamName').errors.pattern">
+                                    Invalid Team Name.
+                                </div>
+
+                                <div class="form-text text-danger"
+                                    *ngIf="EditTeamForm.get('teamName').errors.minlength">
+                                    Team Name is short.
+                                </div>
+                            </div>
                         </div>
                     </div>
+
+                    <!--Team Image-->
+                    <div class="row mt-2">
+                        <div class="col">
+                            <div class="input-group flex-nowrap">
+                                <span class="input-group-text" id="addon-wrapping"><i
+                                        class="fa-solid fa-pen-fancy"></i></span>
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="floatingInput"
+                                        placeholder="name@example.com" formControlName="teamImage"> <label
+                                        for="floatingInput">Team Image:</label>
+                                </div>
+                            </div>
+
+                            <!--Validation Team Image-->
+                            <div class="ms-2"
+                                *ngIf="EditTeamForm.get('teamImage').errors && (EditTeamForm.get('teamImage').touched ||EditTeamForm.get('teamImage').dirty)">
+                                <div class="form-text text-danger"
+                                    *ngIf="EditTeamForm.get('teamImage').errors.required">
+                                    Team Image is required.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
 
                     <div class="row mt-2">
                         <div class="col">
@@ -230,36 +277,44 @@
                                         class="fa-solid fa-pen-fancy"></i></span>
                                 <div class="form-floating">
                                     <input type="text" class="form-control" id="floatingInput"
-                                        placeholder="name@example.com" name="teamImage"
-                                        [(ngModel)]="EditTeam.teamImage">
-                                    <label for="floatingInput">Team Image:</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="row mt-2">
-                        <div class="col">
-                            <div class="input-group flex-nowrap">
-                                <span class="input-group-text" id="addon-wrapping"><i
-                                        class="fa-solid fa-pen-fancy"></i></span>
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="floatingInput" name="teamLocation"
-                                        placeholder="name@example.com" [(ngModel)]="EditTeam.teamLocation">
+                                        placeholder="name@example.com" formControlName="teamLocation">
                                     <label for="floatingInput">Team Location:</label>
                                 </div>
                             </div>
+
+                            <!--Validation Team Location-->
+                            <div class="ms-2"
+                                *ngIf="EditTeamForm.get('teamLocation').errors && (EditTeamForm.get('teamLocation').touched ||EditTeamForm.get('teamLocation').dirty)">
+                                <div class="form-text text-danger"
+                                    *ngIf="EditTeamForm.get('teamLocation').errors.required">
+                                    Team Location is required!
+                                </div>
+
+                                <div class="form-text text-danger"
+                                    *ngIf="EditTeamForm.get('teamLocation').errors.pattern">
+                                   Invalid Team Location!
+                                </div>
+                            </div>
                         </div>
                     </div>
 
+
+                    <!--Team Discription-->
                     <div class="row mt-2">
                         <div class="col">
                             <div class="form-floating mt-2">
                                 <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
-                                    style="height: 5rem" name="teamDescription"
-                                    [(ngModel)]="EditTeam.teamDescription"></textarea>
+                                    style="height: 5rem" formControlName="teamDescription"></textarea>
                                 <label for="floatingTextarea2">Team Description:</label>
+                            </div>
+                        </div>
+
+                        <!--Validation Team Description-->
+                        <div class="ms-2"
+                            *ngIf="EditTeamForm.get('teamDescription').errors && (EditTeamForm.get('teamDescription').touched ||EditTeamForm.get('teamDescription').dirty)">
+                            <div class="form-text text-danger"
+                                *ngIf="EditTeamForm.get('teamDescription').errors.required">
+                                Team Description is required!
                             </div>
                         </div>
                     </div>

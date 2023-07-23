@@ -16,7 +16,7 @@ using System;
 
 namespace WebApp.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("")]
     [ApiController]
 
     public class AuthController : Controller
@@ -76,7 +76,7 @@ namespace WebApp.Controllers
 
         }
 
-        [HttpPost("authenticate")]
+        [HttpPost("admin/login")]
 
         public async Task<IActionResult> Authenticate([FromBody] LoginModel registerObj)
         {

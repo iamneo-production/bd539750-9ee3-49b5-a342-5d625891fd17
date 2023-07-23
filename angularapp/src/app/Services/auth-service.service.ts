@@ -10,7 +10,7 @@ export class AuthServiceService {
 
   constructor(private http: HttpClient, private route: Router) { }
   CheckRole: any;
-  baseUrl: string = 'https://8080-dffcfdfcebbadcdbbaadcffdfcbdfeeeb.project.examly.io/api/Auth/';
+  baseUrl: string = 'https://8080-dffcfdfcebbadcdbbaadcffdfcbdfeeeb.project.examly.io/';
 
 
   signUp(userObj: any) {
@@ -37,7 +37,7 @@ export class AuthServiceService {
   }
 
   login(loginObj: any) {
-    return this.http.post<any>(`${this.baseUrl}authenticate`, loginObj);
+    return this.http.post<any>(`${this.baseUrl}admin/login`, loginObj);
   }
 
   storeToken(tokenValue: string) {

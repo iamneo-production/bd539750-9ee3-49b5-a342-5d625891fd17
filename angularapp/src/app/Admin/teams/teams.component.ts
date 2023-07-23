@@ -24,14 +24,18 @@ export class TeamsComponent implements OnInit {
   //this variable is used to set teamId in playerForm
   TeamID: any;
 
-  EditTeam = {
-    teamId: '',
-    teamName: '',
-    teamDescription: '',
-    teamImage: '',
-    teamLocation: '',
-  };
+  //This form is use to store the values of EditTeamForm
+  EditTeamForm = new FormGroup({
+    teamId: new FormControl('', [Validators.required]),
+    teamName: new FormControl('', [Validators.required, Validators.pattern(/^[A-Za-z0-9\s]+$/), Validators.minLength(5)
+    ]),
+    teamImage: new FormControl('', [Validators.required]),
+    playerCounts: new FormControl('', [Validators.required, Validators.pattern(/^(?!0+$)\d+$/)]),
+    teamLocation: new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-Z\s]*$/)]),
+    teamDescription: new FormControl('', [Validators.required]),
+  });
 
+  //This is use to store a values of EditPlayer 
   EditPlayer = {
     playerId: '',
     playerFirstName: '',
@@ -41,6 +45,7 @@ export class TeamsComponent implements OnInit {
     teamId: '',
   }
 
+  //We make this to update the PlayerCounts whether to increase or decrease
   EditPlayerCount = {
     teamId: '',
     teamName: '',
@@ -61,7 +66,7 @@ export class TeamsComponent implements OnInit {
 
     this.playerForm = new FormGroup({
       playerFirstName: new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-Z\s]*$/)]),
-      playerLastName: new FormControl('',[Validators.required, Validators.pattern(/^[a-zA-Z\s]*$/)]),
+      playerLastName: new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-Z\s]*$/)]),
       playerAge: new FormControl('', [Validators.required, Validators.pattern('^[0-9]*$')]),
       playerGender: new FormControl('', Validators.required),
       teamId: new FormControl(''),
@@ -90,8 +95,13 @@ export class TeamsComponent implements OnInit {
   //get particular team
   getTeam(id: any) {
     this.teamService.getTeamDetails(id).subscribe((result) => {
-      this.EditTeam = result;
-      console.log(this.EditTeam);
+      this.EditTeamForm.get('teamId').setValue(result.teamId);
+      this.EditTeamForm.get('teamName').setValue(result.teamName);
+      this.EditTeamForm.get('teamLocation').setValue(result.teamLocation);
+      this.EditTeamForm.get('playerCounts').setValue(result.playerCounts);
+      this.EditTeamForm.get('teamDescription').setValue(result.teamDescription);
+      this.EditTeamForm.get('teamImage').setValue(result.teamImage);
+      
     });
   }
 
@@ -141,7 +151,7 @@ export class TeamsComponent implements OnInit {
   }
 
   updateTeam() {
-    this.teamService.updateTeam(this.EditTeam.teamId, this.EditTeam).subscribe({
+    this.teamService.updateTeam(this.EditTeamForm.get('teamId').value, this.EditTeamForm.value).subscribe({
       next: (result) => {
         location.reload();
       },

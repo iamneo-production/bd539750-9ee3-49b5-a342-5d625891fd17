@@ -108,6 +108,14 @@
                     <textarea class="form-control" placeholder="Leave a comment here" id="TeamDescription"
                         style="height: 5rem" formControlName="teamDescription"></textarea>
                     <label for="floatingTextarea2">Team Description</label>
+
+                    <!--Validation Team Description-->
+                    <div class="ms-2"
+                        *ngIf="teamForm.get('teamDescription').errors && (teamForm.get('teamDescription').touched ||teamForm.get('teamDescription').dirty)">
+                        <div class="form-text text-danger" *ngIf="teamForm.get('teamDescription').errors.required">
+                            Team Description is required!
+                        </div>
+                    </div>
                 </div>
             </div>
 

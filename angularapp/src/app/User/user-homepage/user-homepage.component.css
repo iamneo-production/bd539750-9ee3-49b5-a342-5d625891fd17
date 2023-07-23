@@ -71,14 +71,13 @@
   }
 
   .stuck-content h1 {
-    font-size: 25px;
+    font-size: 22px;
   }
 
   .stuck-content p {
     font-size: 12px;
-    word-spacing: 2px;
-    letter-spacing: 1px;
     line-height: 20px;
+    text-align: justify;
   }
 
   .stuck-content hr {
@@ -88,5 +87,13 @@
   .heading .col {
     display: block;
     text-align: center;
+  }
+
+  .testimonial{
+    display: none;
+  }
+
+  .container-teams{
+    display: none;
   }
 }

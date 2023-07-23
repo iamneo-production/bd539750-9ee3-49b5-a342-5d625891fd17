@@ -1,7 +1,7 @@
 <app-user-header></app-user-header>
 <div class=" main container-fluid-md">
 
-    <form #form="ngForm" (ngSubmit)="Update()" class="p-5 ">
+    <form [formGroup]="EditEventForm" class="p-5 ">
 
         <!--Venue Name-->
         <div class="row">
@@ -9,8 +9,8 @@
                 <div class="input-group flex-nowrap">
                     <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-pen-fancy"></i></span>
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="floatingInput" name="eventName" readonly
-                            [(ngModel)]="UpdateEvent.eventName" placeholder="name@example.com">
+                        <input type="text" class="form-control" id="floatingInput" readonly formControlName="eventName"
+                            placeholder="name@example.com">
                         <label for="floatingInput">Venue name</label>
                     </div>
                 </div>
@@ -21,9 +21,21 @@
                 <div class="input-group flex-nowrap">
                     <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-pen-fancy"></i></span>
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="floatingInput" name="applicantName"
-                            [(ngModel)]="UpdateEvent.applicantName" placeholder="name@example.com">
+                        <input type="text" class="form-control" id="floatingInput" formControlName="applicantName"
+                            placeholder="name@example.com">
                         <label for="floatingInput">Applicant Name</label>
+                    </div>
+                </div>
+
+                <!--Validation Applicant Name-->
+                <div class="ms-2"
+                    *ngIf="EditEventForm.get('applicantName').errors && (EditEventForm.get('applicantName').touched ||EditEventForm.get('applicantName').dirty)">
+                    <div class="form-text text-danger" *ngIf="EditEventForm.get('applicantName').errors.required">
+                        Applicant Name is required.
+                    </div>
+
+                    <div class="form-text text-danger" *ngIf="EditEventForm.get('applicantName').errors.pattern">
+                        Invalid Applicant Name format.
                     </div>
                 </div>
             </div>
@@ -36,9 +48,25 @@
                 <div class="input-group flex-nowrap">
                     <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-location-dot"></i></span>
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="floatingInput" name="applicantAddress"
-                            [(ngModel)]="UpdateEvent.applicantAddress" placeholder="name@example.com">
+                        <input type="text" class="form-control" id="floatingInput" formControlName="applicantAddress"
+                            placeholder="name@example.com">
                         <label for="floatingInput">Application Address</label>
+                    </div>
+                </div>
+
+                <!--Validation Applicant Address-->
+                <div class="ms-2"
+                    *ngIf="EditEventForm.get('applicantAddress').errors && (EditEventForm.get('applicantAddress').touched ||EditEventForm.get('applicantAddress').dirty)">
+                    <div class="form-text text-danger" *ngIf="EditEventForm.get('applicantAddress').errors.required">
+                        Applicant Address is required.
+                    </div>
+
+                    <div class="form-text text-danger" *ngIf="EditEventForm.get('applicantAddress').errors.pattern">
+                        Invalid Applicant Address format.
+                    </div>
+
+                    <div class="form-text text-danger" *ngIf="EditEventForm.get('applicantAddress').errors.minlength">
+                        Applicant Address is too short!
                     </div>
                 </div>
             </div>
@@ -49,9 +77,21 @@
                 <div class="input-group flex-nowrap">
                     <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-phone"></i></span>
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="floatingInput" name="applicantMobile"
-                            [(ngModel)]="UpdateEvent.applicantMobile" placeholder="name@example.com">
+                        <input type="text" class="form-control" id="floatingInput" formControlName="applicantMobile"
+                            placeholder="name@example.com">
                         <label for="floatingInput">Applicant Mobile</label>
+                    </div>
+                </div>
+
+                <!--Validation Applicant Mobile Number-->
+                <div class="ms-2"
+                    *ngIf="EditEventForm.get('applicantMobile').errors && (EditEventForm.get('applicantMobile').touched ||EditEventForm.get('applicantMobile').dirty)">
+                    <div class="form-text text-danger" *ngIf="EditEventForm.get('applicantMobile').errors.required">
+                        Applicant Mobile Number is required.
+                    </div>
+
+                    <div class="form-text text-danger" *ngIf="EditEventForm.get('applicantMobile').errors.pattern">
+                        Invalid Applicant Mobile Number format.
                     </div>
                 </div>
             </div>
@@ -64,9 +104,21 @@
                 <div class="input-group flex-nowrap">
                     <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-envelope"></i></span>
                     <div class="form-floating">
-                        <input type="email" class="form-control" id="floatingInput" name="applicantEmail"
-                            [(ngModel)]="UpdateEvent.applicantEmail" placeholder="name@example.com">
+                        <input type="email" class="form-control" id="floatingInput" formControlName="applicantEmail"
+                            placeholder="name@example.com">
                         <label for="floatingInput">Application Email</label>
+                    </div>
+                </div>
+
+                <!--Validation Applicant Email-->
+                <div class="ms-2"
+                    *ngIf="EditEventForm.get('applicantEmail').errors && (EditEventForm.get('applicantEmail').touched ||EditEventForm.get('applicantEmail').dirty)">
+                    <div class="form-text text-danger" *ngIf="EditEventForm.get('applicantEmail').errors.required">
+                        Applicant Email is required.
+                    </div>
+
+                    <div class="form-text text-danger" *ngIf="EditEventForm.get('applicantEmail').errors.email">
+                        Invalid Email format.
                     </div>
                 </div>
             </div>
@@ -77,7 +129,7 @@
                     <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-user-group"></i></span>
                     <div class="form-floating">
                         <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com"
-                            readonly name="eventAddress" [(ngModel)]="UpdateEvent.eventAddress">
+                            readonly formControlName="eventAddress">
                         <label for="floatingInput">Event Address</label>
                     </div>
                 </div>
@@ -91,23 +143,43 @@
             <!--From Date-->
             <div class="col-md-5 mt-2">
                 <div class="input-group flex-nowrap">
-                    <span class="input-group-text" id="addon-wrapping"><i class="fa-regular fa-calendar-days"></i></span>
+                    <span class="input-group-text" id="addon-wrapping"><i
+                            class="fa-regular fa-calendar-days"></i></span>
                     <div class="form-floating">
-                        <input type="date" class="form-control" id="floatingInput" name="eventFromDate"
-                            [(ngModel)]="UpdateEvent.eventFromDate" placeholder="name@example.com">
+                        <input type="date" class="form-control" id="floatingInput" formControlName="eventFromDate"
+                            placeholder="name@example.com">
                         <label for="floatingInput">Event Date From</label>
                     </div>
                 </div>
+
+                <!--Validation Event From Date-->
+                <div class="ms-2"
+                    *ngIf="EditEventForm.get('eventFromDate').errors && (EditEventForm.get('eventFromDate').touched ||EditEventForm.get('eventFromDate').dirty)">
+                    <div class="form-text text-danger" *ngIf="EditEventForm.get('eventFromDate').errors.required">
+                        Event From Date is required.
+                    </div>
+                </div>
+
+                <div class="text-danger" *ngIf="EditEventForm.hasError('dateRangeInvalid')">Date range is Invalid!</div>
             </div>
 
             <!--To Date-->
             <div class="col-md-5 mt-2">
                 <div class="input-group flex-nowrap">
-                    <span class="input-group-text" id="addon-wrapping"><i class="fa-regular fa-calendar-days"></i></span>
+                    <span class="input-group-text" id="addon-wrapping"><i
+                            class="fa-regular fa-calendar-days"></i></span>
                     <div class="form-floating">
                         <input type="date" class="form-control" id="floatingInput" placeholder="name@example.com"
-                            name="eventToDate" [(ngModel)]="UpdateEvent.eventToDate">
+                            formControlName="eventToDate">
                         <label for="floatingInput">Event Date To</label>
+                    </div>
+                </div>
+
+                <!--Validation Event To Date-->
+                <div class="ms-2"
+                    *ngIf="EditEventForm.get('eventToDate').errors && (EditEventForm.get('eventToDate').touched ||EditEventForm.get('eventToDate').dirty)">
+                    <div class="form-text text-danger" *ngIf="EditEventForm.get('eventToDate').errors.required">
+                        Event To Date is required.
                     </div>
                 </div>
             </div>
@@ -121,9 +193,17 @@
                 <div class="input-group flex-nowrap">
                     <span class="input-group-text" id="addon-wrapping"><i class="fa-regular fa-clock"></i></span>
                     <div class="form-floating">
-                        <input type="time" class="form-control" id="floatingInput" name="time"
-                            [(ngModel)]="UpdateEvent.time" placeholder="name@example.com">
+                        <input type="time" class="form-control" id="floatingInput" formControlName="time"
+                            placeholder="name@example.com">
                         <label for="floatingInput">Event Time</label>
+                    </div>
+                </div>
+
+                <!--Validation Time-->
+                <div class="ms-2"
+                    *ngIf="EditEventForm.get('time').errors && (EditEventForm.get('time').touched ||EditEventForm.get('time').dirty)">
+                    <div class="form-text text-danger" *ngIf="EditEventForm.get('time').errors.required">
+                        Event Time is required.
                     </div>
                 </div>
             </div>
@@ -133,19 +213,31 @@
                 <div class="input-group flex-nowrap">
                     <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-user-group"></i></span>
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="floatingInput" name="members"
-                            [(ngModel)]="UpdateEvent.members" placeholder="name@example.com">
+                        <input type="text" class="form-control" id="floatingInput" formControlName="members"
+                            placeholder="name@example.com">
                         <label for="floatingInput">No. of team members</label>
+                    </div>
+                </div>
+
+                <!--Validation Applicant Members-->
+                <div class="ms-2"
+                    *ngIf="EditEventForm.get('members').errors && (EditEventForm.get('members').touched ||EditEventForm.get('members').dirty)">
+                    <div class="form-text text-danger" *ngIf="EditEventForm.get('members').errors.required">
+                        Applicant Members is required.
+                    </div>
+
+                    <div class="form-text text-danger" *ngIf="EditEventForm.get('members').errors.pattern">
+                        Invalid Applicant Members format.
                     </div>
                 </div>
             </div>
         </div>
 
-        <input hidden  type="text" name="eventPrice" [(ngModel)]="UpdateEvent.members">
+        <input hidden type="text" formControlName="eventPrice">
 
 
         <div class="mt-3 offset-9">
-            <button class="btn btn-primary p-2">Update Event</button>
+            <button class="btn btn-primary p-2" (click)="Update()">Update Event</button>
         </div>
     </form>
 </div>
