@@ -1,0 +1,33 @@
+<app-admin-header></app-admin-header>
+
+<div class="container-fluid mt-5">
+    <div class="row">
+        <div class="col-md-8 m-auto">
+            <table class="table table-striped-columns text-center">
+                <thead>
+                    <tr>
+                        <th>User-ID</th>
+                        <th>User-Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th></th>
+
+                    </tr>
+                </thead>
+
+                <tbody *ngFor="let org of OrganiserDetails">
+                    <tr>
+
+                        <td>{{org.userId}}</td>
+                        <td>{{org.username}}</td>
+                        <td>{{org.email}}</td>
+                        <td>{{org.mobileNumber}}</td>
+                        <td><a style="cursor:pointer"><i class="fa-solid fa-trash-can"
+                                    (click)="deleteOrganiser(org.userId)"></i></a></td>
+                    </tr>
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+</div>

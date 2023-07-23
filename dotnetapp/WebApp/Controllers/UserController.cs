@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using WebApp.Database;
+using WebApp.Context;
 using WebApp.Models;
 
 namespace WebApp.Controllers
@@ -14,46 +14,93 @@ namespace WebApp.Controllers
     [Route("/api/user")]
     public class UserController : Controller
     {
-        
         private readonly BaseballDbContext _context;
+
         public UserController(BaseballDbContext context)
         {
-            _context = context; 
+            _context = context;
         }
 
+        // GET: api/registers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<UserModel>>> GetUser()
         {
-            var user = await _context.user.ToListAsync();
-            return Ok(user);
+            return await _context.users.ToListAsync();
         }
 
-        // POST: api/Referee
-        [HttpPost]
-        public async Task<ActionResult<UserModel>> addUserModel(UserModel userModel)
+        // GET: api/registers/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<UserModel>> Getuser(int id)
         {
-            _context.user.Add(userModel);
-            await _context.SaveChangesAsync();
+            var user = await _context.users.FindAsync(id);
 
-            return CreatedAtAction("GetUserModel", new { id = userModel.Id }, userModel);
-        }
-
-        // DELETE: api/User/{id}
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> deleteUserModel(int id)
-        {
-            var userModel = await _context.user.FindAsync(id);
-            if (userModel == null)
+            if (user == null)
             {
                 return NotFound();
             }
 
-            _context.user.Remove(userModel);
+            return user;
+        }
+
+        // PUT: api/registers/5
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Putuser(int id, UserModel user)
+        {
+            if (id != user.userId)
+            {
+                return BadRequest();
+            }
+
+            _context.Entry(user).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!registerExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
+        // POST: api/registers
+        [HttpPost]
+        public async Task<ActionResult<UserModel>> Postuser(UserModel user)
+        {
+            _context.users.Add(user);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("Getuser", new { id = user.userId }, user);
+        }
+
+        // DELETE: api/registers/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Deleteuser(int id)
+        {
+            var user = await _context.users.FindAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            _context.users.Remove(user);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        
+        private bool registerExists(int id)
+        {
+            return _context.users.Any(e => e.userId == id);
+        }
     }
 }

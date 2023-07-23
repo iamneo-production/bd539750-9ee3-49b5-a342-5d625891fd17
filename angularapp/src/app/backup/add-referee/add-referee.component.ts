@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { RefereeService } from 'src/app/components/services/referee.service';
-import { Referee, EditRefereeCards } from 'src/app/components/admin/add-referee/add-referee.component.types';
+import { Referee, EditRefereeCards } from 'src/app/backup/add-referee/add-referee.component.types';
 
 @Component({
   selector: 'app-add-referee',

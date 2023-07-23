@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using WebApp.Database;
+using WebApp.Context;
 
 namespace WebApp.Migrations
 {
@@ -17,6 +17,155 @@ namespace WebApp.Migrations
                 .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.0");
+
+            modelBuilder.Entity("WebApp.Models.AdminModel", b =>
+                {
+                    b.Property<int>("adminId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("confirmpassword")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("mobileNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("password")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("token")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("userRole")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("adminId");
+
+                    b.ToTable("admins");
+                });
+
+            modelBuilder.Entity("WebApp.Models.EmailModel", b =>
+                {
+                    b.Property<int>("EmailId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("Message")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Subject")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("To")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("applicantName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("eventVenueName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("mobileNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("EmailId");
+
+                    b.ToTable("emails");
+                });
+
+            modelBuilder.Entity("WebApp.Models.EventModel", b =>
+                {
+                    b.Property<int>("eventId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("ReefreeName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("applicantAddress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("applicantEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("applicantMobile")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("applicantName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("eventAddress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("eventFromDate")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("eventName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("eventPrice")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("eventToDate")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("matchingId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("members")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("team1")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("team2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("time")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("venueId")
+                        .HasColumnType("int");
+
+                    b.HasKey("eventId");
+
+                    b.ToTable("bookEvents");
+                });
+
+            modelBuilder.Entity("WebApp.Models.PlayerModel", b =>
+                {
+                    b.Property<int>("playerId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("playerAge")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("playerFirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("playerGender")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("playerLastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("teamId")
+                        .HasColumnType("int");
+
+                    b.HasKey("playerId");
+
+                    b.HasIndex("teamId");
+
+                    b.ToTable("playerInformations");
+                });
 
             modelBuilder.Entity("WebApp.Models.RefereeModel", b =>
                 {
@@ -42,31 +191,110 @@ namespace WebApp.Migrations
                     b.ToTable("referees");
                 });
 
-            modelBuilder.Entity("WebApp.Models.UserModel", b =>
+            modelBuilder.Entity("WebApp.Models.TeamModel", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("teamId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<string>("Email")
+                    b.Property<string>("playerCounts")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("MobileNumber")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Password")
+                    b.Property<string>("teamDescription")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserName")
+                    b.Property<string>("teamImage")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserRole")
+                    b.Property<string>("teamLocation")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.Property<string>("teamName")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.ToTable("user");
+                    b.HasKey("teamId");
+
+                    b.ToTable("teams");
+                });
+
+            modelBuilder.Entity("WebApp.Models.UserModel", b =>
+                {
+                    b.Property<int>("userId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("confirmpassword")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("mobileNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("password")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("token")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("userRole")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("username")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("userId");
+
+                    b.ToTable("users");
+                });
+
+            modelBuilder.Entity("WebApp.Models.VenueModel", b =>
+                {
+                    b.Property<int>("venueId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("venueCapacity")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("venueDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("venueImageURL")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("venueLocation")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("venueName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("venuePrice")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("venueId");
+
+                    b.ToTable("venues");
+                });
+
+            modelBuilder.Entity("WebApp.Models.PlayerModel", b =>
+                {
+                    b.HasOne("WebApp.Models.TeamModel", "Team")
+                        .WithMany("Players")
+                        .HasForeignKey("teamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Team");
+                });
+
+            modelBuilder.Entity("WebApp.Models.TeamModel", b =>
+                {
+                    b.Navigation("Players");
                 });
 #pragma warning restore 612, 618
         }
