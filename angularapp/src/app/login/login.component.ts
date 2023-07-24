@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -10,7 +10,7 @@ import { UserStoreService } from '../Services/user-store.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   type: string = 'password';
   isTest: boolean = false;
   eyeIcon: string = 'fa-eye-slash';
@@ -38,7 +38,6 @@ export class LoginComponent implements OnInit {
 
   constructor(private auth: AuthServiceService, private route: Router, private toast: ToastrService, private userStore: UserStoreService) { }
 
-  ngOnInit(): void { }
   public role: string = '';
   onLogin() {
     if (this.loginForm.valid) {

@@ -337,11 +337,11 @@ export class BookEventComponent implements OnInit {
     this.emailDetails.Message =
       '<p> Dear <b>' +
       this.emailDetails.applicantName +
-      '</b>,</p>     <p>We hope this email finds you well. We are writing to inform you that your event booking request for <b>' +
+      '</b>,</p> <p>I am delighted to inform you that you have been selected as the Head for the upcoming baseball event at <b>' +
       this.bookEventForm.eventName +
-      '</b> has been booked successfully. To confirm your booking, we send the further details if there is any updation.</p> <p>If you have any questions or require further assistance, please feel free to contact our customer support team at <b>[+91-9876543210]</b>. We are here to help!</p>  <p>Thank you for choosing our services. We look forward to hosting you at <b>' +
-      this.bookEventForm.eventName +
-      '</b>.</p>  <p><b>Best Regards</b>,<br><b>Admin</b><br><b>Baseball Event Management</b><br><b>+91-98765432010</b></p>';
+      '</b> from <b>' + this.selectedFromDate +
+      '</b> to <b>' + this.selectedToDate +
+      '</b> . Congratulations on being chosen for this important role! We are confident that your passion for baseball and organizational skills will make this event a grand success.</p> <p>As the Head of the event, you will be leading a team of dedicated individuals, including team members, who will work collaboratively to ensure that every aspect of the baseball event is meticulously planned and executed.</p> <p>Please feel free to reach out to me at [organiser@gmail.com] if you need any assistance or have any questions before our kick-off meeting. I look forward to working closely with you and the rest of the team to make this baseball event an unforgettable experience for all participants.</p> <p><b>Best Regards</b>,<br><b>Organiser</b><br><b>Baseball Event Management</b><br><b>+91-98765432010</b></p>';
 
     console.log(this.emailDetails);
 
@@ -424,7 +424,7 @@ export class BookEventComponent implements OnInit {
 
 
 
-    if (isHidden == true && isHidden1 == true && isHidden2 == true && isHidden3 == true) {
+    if (isHidden && isHidden1 && isHidden2 && isHidden3) {
       // Clear the selected date if it's hidden
       this.selectedFromDate = null;
 
@@ -519,7 +519,7 @@ export class BookEventComponent implements OnInit {
       );
     }
 
-    if (isHidden == true && (!isHidden1 && !isHidden2 && !isHidden3)) {
+    if (isHidden && (!isHidden1 && !isHidden2 && !isHidden3)) {
       // Clear the selected date if it's hidden
       this.selectedFromDate = null;
 
@@ -581,7 +581,7 @@ export class BookEventComponent implements OnInit {
         new Date(hiddenDate).setHours(0, 0, 0, 0) === selectedDateTime
     );
 
-    if (isHidden == true && isHidden1 == true && isHidden2 == true && isHidden3 == true) {
+    if (isHidden && isHidden1 && isHidden2 && isHidden3) {
       // Clear the selected date if it's hidden
       this.selectedToDate = null;
 
@@ -676,7 +676,7 @@ export class BookEventComponent implements OnInit {
       );
     }
 
-    if (isHidden == true && (!isHidden1 && !isHidden2 && !isHidden3)) {
+    if (isHidden && (!isHidden1 && !isHidden2 && !isHidden3)) {
       // Clear the selected date if it's hidden
       this.selectedToDate = null;
 

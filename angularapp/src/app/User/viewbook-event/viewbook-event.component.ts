@@ -44,7 +44,7 @@ export class ViewbookEventComponent implements OnInit {
   emailDetails = {
     applicantName: '',
     To: '',
-    Subject: 'Successfullt Delete the Booking!',
+    Subject: ' Cancellation of the Baseball Event!',
     Message: '',
   };
 
@@ -54,9 +54,9 @@ export class ViewbookEventComponent implements OnInit {
     this.emailDetails.To = email;
     this.emailDetails.applicantName = name;
     this.emailDetails.Message =
-      '<p>Dear ' +
-      this.emailDetails.applicantName +
-      ',</p>   <p>You have successfully delete the Event which you booked.</p>  <p><b>Best Regards</b>,<br><b>Admin</b><br><b>Baseball Event Management</b><br><b>+91-9876543210</b></p>';
+    '<p> Dear <b>' +
+    this.emailDetails.applicantName +
+    '</b>, </p>   <p>I hope this email finds you well. I am writing to inform you with regret that the baseball event, which you were selected to head, has been cancelled by the organizer.</p> <p>This decision comes with deep disappointment, as we were looking forward to having you lead the event and contribute your valuable expertise and passion for baseball. Unfortunately, due to unforeseen circumstances beyond our control, the organizer has had to make the difficult decision to cancel the event.</p> <p>If you have any questions or concerns regarding the cancellation or any other matter, please feel free to reach out to us at [organiser@gmail.com].</p> <p>Once again, we extend our sincere apologies for the cancellation of the event. We truly value your interest and involvement in our initiatives, and we hope to have the chance to collaborate with you in the future.</p>  <p><b>Best Regards</b>,<br><b>Admin</b><br><b>Baseball Event Management</b><br><b>+91-9876543210</b></p>';
 
     //Delete Event
     this.bookEventService.deleteEvent(id).subscribe({
