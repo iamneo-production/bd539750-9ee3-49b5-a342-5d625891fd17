@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthServiceService } from 'src/app/Services/auth-service.service';
 import { EmailService } from 'src/app/Services/email.service';
 
 @Component({
   selector: 'app-organiser-list',
-  templateUrl: './organiser-list.component.html',
-  styleUrls: ['./organiser-list.component.css']
+  templateUrl: './organiser-list.component.html'
 })
 export class OrganiserListComponent implements OnInit {
 
-  constructor(private authService: AuthServiceService, private emailService: EmailService) { }
+  constructor(private authService: AuthServiceService, private route: Router, private emailService: EmailService) { }
 
   OrganiserDetails = [];
   //Emails Variables

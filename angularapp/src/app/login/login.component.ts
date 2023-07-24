@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthServiceService } from '../Services/auth-service.service';
@@ -9,7 +9,7 @@ import { UserStoreService } from '../Services/user-store.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   type: string = 'password';
   isTest: boolean = false;
   eyeIcon: string = 'fa-eye-slash';
@@ -18,13 +18,19 @@ export class LoginComponent implements OnInit {
   //Hide and Show password
   hideShow() {
     this.isTest = !this.isTest;
-    this.isTest ? (this.eyeIcon = 'fa-eye') : (this.eyeIcon = 'fa-eye-slash');
-    this.isTest ? (this.type = 'text') : (this.type = 'password');
+    if (this.isTest) {
+      this.eyeIcon = 'fa-eye';
+      this.type = 'text';
+    }
+    else{
+      this.eyeIcon = 'fa-eye-slash';
+      this.type = 'password';
+    }
   }
 
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required,Validators.pattern(/^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]+$/)]),
+    password: new FormControl('', [Validators.required, Validators.pattern(/^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]+$/)]),
   });
 
 
@@ -37,7 +43,6 @@ export class LoginComponent implements OnInit {
 
   constructor(private auth: AuthServiceService, private route: Router, private userStore: UserStoreService) { }
 
-  ngOnInit(): void { }
   public role: string = '';
   onLogin() {
     if (this.loginForm.valid) {

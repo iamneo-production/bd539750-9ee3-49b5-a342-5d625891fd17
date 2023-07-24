@@ -1,98 +1,98 @@
 <div>
-    <div class="row heading">
-      <div class="col text-center">
-        <img src="/assets/logo.jpg" width="55" alt="" style="position: relative; top: 2.5rem" class="me-3" />
-        <h1 style="position: relative; top: 2.5rem">
-          Baseball League Management System
-        </h1>
-      </div>
+  <div class="row heading">
+    <div class="col text-center">
+      <img src="/assets/logo.jpg" width="55" alt="" style="position: relative; top: 2.5rem" class="me-3" />
+      <h1 style="position: relative; top: 2.5rem">
+        Baseball League Management System
+      </h1>
     </div>
-    <div class="login-container row m-auto p-3" style="position: relative; top: 4rem">
-      <div class="col-6 p-0 text-center">
-        <img src="/assets/login-img.jpg" alt="" style="width: 60%; margin-left: 5rem" />
-      </div>
-      <div class="col-md-4 form-container p-5">
-  
-        <!--Login Form-->
-        <form [formGroup]="loginForm">
-          <div class="mb-2">
-            <h2 class="fw-bold">Login</h2>
-          </div>
-  
-          <!--Email-->
-          <div class="mb-2">
-            <label for="" class="form-label">Email</label>
-            <div class="input-group flex-nowrap">
-              <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-envelope"></i></span>
-              <input type="email" class="form-control p-2" id="email" placeholder="Enter Email" formControlName="email" />
-            </div>
-  
-            <div *ngIf="Email.errors && (Email.touched || Email.dirty)">
-              <div class="form-text text-danger" *ngIf="Email.errors.required" id="errorEmail">
-                Email is required.
-              </div>
-  
-              <div class="form-text text-danger" *ngIf="Email.errors.email" id="errorEmail">
-                Invalid Email Format.
-              </div>
-            </div>
-          </div>
-  
-          <!-- Password -->
-          <div class="mb-2">
-            <label for="" class="form-label">Password</label>
-            <div class="input-group flex-nowrap">
-              <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-key"></i></span>
-              <input formControlName="password" [type]="type" class="form-control p-2" id="password"
-                placeholder="Password" style="
-                  border-top-right-radius: 5px;
-                  border-bottom-right-radius: 5px;
-                " />
-              <span (click)="hideShow()" style="position: absolute; right: 10px; top: 8px"><i
-                  class="fa-solid {{ eyeIcon }}"></i></span>
-            </div>
-  
-            <div *ngIf="Password.errors && (Password.touched || Password.dirty)">
-              <div class="form-text text-danger" *ngIf="Password.errors.required" id="errorPassword">
-                Password is required.
-              </div>
-  
-              <div class="form-text text-danger" *ngIf="Password.errors.pattern" id="errorPassword">
-  
-                <p> Invalid Password Format!
-                  <br>
-                  Required atleast one special character!
-                  <br>
-                  Required atleast one lowecase & uppercase character!
-                </p>
-              </div>
-            </div>
-          </div>
-  
-          <!--Submit Button-->
-          <div class="mt-3">
-            <button type="submit" (click)="onLogin()" id="loginButton" class="btn btn-primary ps-3 pe-3">
-              Login
-            </button>
-          </div>
-  
-          <!--Signup-->
-          <div class="mt-3 text-center">
-            <p>
-              Don't have an account?
-              <a routerLink="/signup" id="signupLink">Signup</a>
-            </p>
-          </div>
-  
-          <!--Social Media Login's-->
-          <div class="text-center">
-            <span class="icon"><a href=""><i class="fa-brands fa-google" style="color: #e0271a"></i></a></span>
-            <span class="icon"><a href=""><i class="fa-brands fa-square-facebook" style="color: #1862e2"></i></a></span>
-            <span class="icon"><a href=""><i class="fa-brands fa-github" style="color: #0c1017"></i></a></span>
-          </div>
-        </form>
-      </div>
-    </div>
-  
-    <img src="/assets/wave.jpg" alt="" class="w-100 wave" />
   </div>
+  <div class="login-container row m-auto p-3" style="position: relative; top: 4rem">
+    <div class="col-6 p-0 text-center">
+      <img src="/assets/login-img.jpg" alt="" style="width: 60%; margin-left: 5rem" />
+    </div>
+    <div class="col-md-4 form-container p-5">
+
+      <!--Login Form-->
+      <form [formGroup]="loginForm">
+        <div class="mb-2">
+          <h2 class="fw-bold">Login</h2>
+        </div>
+
+        <!--Email-->
+        <div class="mb-2">
+          <label for="" class="form-label">Email</label>
+          <div class="input-group flex-nowrap">
+            <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-envelope"></i></span>
+            <input type="email" class="form-control p-2" id="email" placeholder="Enter Email" formControlName="email" />
+          </div>
+
+          <div *ngIf="Email.errors && (Email.touched || Email.dirty)">
+            <div class="form-text text-danger" *ngIf="Email.errors.required" id="errorEmail">
+              Email is required.
+            </div>
+
+            <div class="form-text text-danger" *ngIf="Email.errors.email" id="errorEmail">
+              Invalid Email Format.
+            </div>
+          </div>
+        </div>
+
+        <!-- Password -->
+        <div class="mb-2">
+          <label for="" class="form-label">Password</label>
+          <div class="input-group flex-nowrap">
+            <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-key"></i></span>
+            <input formControlName="password" [type]="type" class="form-control p-2" id="password"
+              placeholder="Password" style="
+                border-top-right-radius: 5px;
+                border-bottom-right-radius: 5px;
+              " />
+            <span (click)="hideShow()" style="position: absolute; right: 10px; top: 8px"><i
+                class="fa-solid {{ eyeIcon }}"></i></span>
+          </div>
+
+          <div *ngIf="Password.errors && (Password.touched || Password.dirty)">
+            <div class="form-text text-danger" *ngIf="Password.errors.required" id="errorPassword">
+              Password is required.
+            </div>
+
+            <div class="form-text text-danger" *ngIf="Password.errors.pattern" id="errorPassword">
+
+              <p> Invalid Password Format!
+                <br>
+                Required atleast one special character!
+                <br>
+                Required atleast one lowecase & uppercase character!
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!--Submit Button-->
+        <div class="mt-3">
+          <button type="submit" (click)="onLogin()" id="loginButton" class="btn btn-primary ps-3 pe-3">
+            Login
+          </button>
+        </div>
+
+        <!--Signup-->
+        <div class="mt-3 text-center">
+          <p>
+            Don't have an account?
+            <a routerLink="/signup" id="signupLink">Signup</a>
+          </p>
+        </div>
+
+        <!--Social Media Login's-->
+        <div class="text-center">
+          <span class="icon"><a href=""><i class="fa-brands fa-google" style="color: #e0271a"></i></a></span>
+          <span class="icon"><a href=""><i class="fa-brands fa-square-facebook" style="color: #1862e2"></i></a></span>
+          <span class="icon"><a href=""><i class="fa-brands fa-github" style="color: #0c1017"></i></a></span>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <img src="/assets/wave.jpg" alt="" class="w-100 wave" />
+</div>
