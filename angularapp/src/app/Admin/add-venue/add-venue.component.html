@@ -1,0 +1,164 @@
+<app-admin-header></app-admin-header>
+
+<div class="container-fluid-md">
+
+    <form [formGroup]="addVenueForm" class="p-5 ">
+
+        <!--Venue Name-->
+        <div class="row">
+            <div class="col-md-5 mt-2">
+                <div class="input-group flex-nowrap">
+                    <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-pen-fancy"></i></span>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="venueName" formControlName="venueName"
+                            placeholder="name@example.com">
+                        <label for="floatingInput">Enter the Venue name</label>
+                    </div>
+                </div>
+
+                <!--Validation Venue Name-->
+                <div class="ms-2"
+                    *ngIf="addVenueForm.get('venueName').errors && (addVenueForm.get('venueName').touched ||addVenueForm.get('venueName').dirty)">
+                    <div class="form-text text-danger" *ngIf="addVenueForm.get('venueName').errors.required">
+                        Venue Name is required!
+                    </div>
+
+                    <div class="form-text text-danger" *ngIf="addVenueForm.get('venueName').errors.pattern">
+                        Invalid Name Format!
+                    </div>
+
+                    <div class="form-text text-danger" *ngIf="addVenueForm.get('venueName').errors.minlength">
+                        Venue Name is short!
+                    </div>
+                </div>
+            </div>
+
+            <!--Image-->
+            <div class="col-md-5 mt-2">
+                <div class="input-group flex-nowrap">
+                    <span class="input-group-text" id="addon-wrapping"><i class="fa-regular fa-images"></i></span>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="imageUrl" formControlName="venueImageURL"
+                            placeholder="name@example.com">
+                        <label for="floatingInput">Enter the Venue image URL</label>
+                    </div>
+                </div>
+
+                <!--Validation Venue Image-->
+                <div class="ms-2"
+                    *ngIf="addVenueForm.get('venueImageURL').errors && (addVenueForm.get('venueImageURL').touched ||addVenueForm.get('venueImageURL').dirty)">
+                    <div class="form-text text-danger" *ngIf="addVenueForm.get('venueImageURL').errors.required">
+                        Venue Image is required!
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Location-->
+
+        <div class="row mt-2">
+            <div class="col-md-5 mt-2">
+                <div class="input-group flex-nowrap">
+                    <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-location-dot"></i></span>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="venueLocation" formControlName="venueLocation"
+                            placeholder="name@example.com">
+                        <label for="floatingInput">Enter the Venue location</label>
+                    </div>
+                </div>
+
+                <!--Validation Venue Location-->
+                <div class="ms-2"
+                    *ngIf="addVenueForm.get('venueLocation').errors && (addVenueForm.get('venueLocation').touched ||addVenueForm.get('venueLocation').dirty)">
+                    <div class="form-text text-danger" *ngIf="addVenueForm.get('venueLocation').errors.required">
+                        Venue Location is required!
+                    </div>
+
+                    <div class="form-text text-danger" *ngIf="addVenueForm.get('venueLocation').errors.pattern">
+                        Invalid Location Format!
+                    </div>
+
+                    <div class="form-text text-danger" *ngIf="addVenueForm.get('venueLocation').errors.minlength">
+                        Minimum 10 character required!
+                    </div>
+                </div>
+            </div>
+
+            <!--Capacity-->
+            <div class="col-md-5 mt-2">
+                <div class="input-group flex-nowrap">
+                    <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-user-group"></i></span>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="capacityOfVenue" formControlName="venueCapacity"
+                            placeholder="name@example.com">
+                        <label for="floatingInput">Enter the Venue capacity</label>
+                    </div>
+                </div>
+
+                <!--Validation Venue Capacity-->
+                <div class="ms-2"
+                    *ngIf="addVenueForm.get('venueCapacity').errors && (addVenueForm.get('venueCapacity').touched ||addVenueForm.get('venueCapacity').dirty)">
+                    <div class="form-text text-danger" *ngIf="addVenueForm.get('venueCapacity').errors.required">
+                        Venue Capacity is required!
+                    </div>
+
+                    <div class="form-text text-danger" *ngIf="addVenueForm.get('venueCapacity').errors.pattern">
+                        Invalid Format!
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!--Price-->
+        <div class="row mt-2">
+            <div class="col-md-10">
+                <div class="input-group flex-nowrap">
+                    <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-wallet"></i></span>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="venuePrice" formControlName="venuePrice"
+                            placeholder="name@example.com">
+                        <label for="floatingInput">Enter the Venue Price</label>
+                    </div>
+                </div>
+            </div>
+
+            <!--Validation Venue Price-->
+            <div class="ms-2"
+                *ngIf="addVenueForm.get('venuePrice').errors && (addVenueForm.get('venuePrice').touched ||addVenueForm.get('venuePrice').dirty)">
+                <div class="form-text text-danger" *ngIf="addVenueForm.get('venuePrice').errors.required">
+                    Venue Price is required!
+                </div>
+
+                <div class="form-text text-danger" *ngIf="addVenueForm.get('venuePrice').errors.pattern">
+                    Invalid Price Format!
+                </div>
+            </div>
+        </div>
+
+        <!--Comments-->
+        <div class="row mt-2">
+            <div class="col-md-10 mt-2">
+                <div class="form-floating">
+                    <textarea class="form-control" placeholder="Leave a comment here" id="venueDescription"
+                        style="height: 14rem" formControlName="venueDescription"></textarea>
+                    <label for="floatingTextarea2">Venue Description</label>
+                </div>
+            </div>
+
+            
+            <!--Validation Venue Description-->
+            <div class="ms-2"
+                *ngIf="addVenueForm.get('venueDescription').errors && (addVenueForm.get('venueDescription').touched ||addVenueForm.get('venueDescription').dirty)">
+                <div class="form-text text-danger" *ngIf="addVenueForm.get('venueDescription').errors.required">
+                    Venue Description is required!
+                </div>
+            </div>
+
+        </div>
+
+        <div class="mt-3 offset-8">
+            <button (click)="addVenueList()" class="btn btn-primary p-2">Submit Venue Details</button>
+        </div>
+    </form>
+</div>
