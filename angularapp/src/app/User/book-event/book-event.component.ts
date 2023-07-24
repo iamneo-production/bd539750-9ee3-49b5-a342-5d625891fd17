@@ -419,10 +419,6 @@ export class BookEventComponent implements OnInit {
         new Date(hiddenDate).setHours(0, 0, 0, 0) === selectedDateTime
     );
 
-    console.log(isHidden);
-    console.log(isHidden1);
-
-
 
     if (isHidden && isHidden1 && isHidden2 && isHidden3) {
       // Clear the selected date if it's hidden
@@ -433,7 +429,7 @@ export class BookEventComponent implements OnInit {
       );
     }
 
-    if (isHidden && isHidden1 && isHidden2 && (!isHidden3)) {
+    else if (isHidden && isHidden1 && isHidden2 && (!isHidden3)) {
       // Clear the selected date if it's hidden
       this.selectedFromDate = null;
 
@@ -442,21 +438,21 @@ export class BookEventComponent implements OnInit {
       );
     }
 
-    if (isHidden && isHidden1 && isHidden3 && (!isHidden2)) {
+    else if (isHidden && isHidden1 && isHidden3 && (!isHidden2)) {
       // Clear the selected date if it's hidden
       this.selectedFromDate = null;
 
       this.toast.error('Venue, Team-1 and Referee already booked for this date!');
     }
 
-    if (isHidden && isHidden2 && isHidden3 && (!isHidden1)) {
+    else if (isHidden && isHidden2 && isHidden3 && (!isHidden1)) {
       // Clear the selected date if it's hidden
       this.selectedFromDate = null;
 
       this.toast.error('Venue, Team-2 and Referee already booked for this date!');
     }
 
-    if (isHidden1 && isHidden2 && isHidden3 && !isHidden) {
+    else if (isHidden1 && isHidden2 && isHidden3 && !isHidden) {
       // Clear the selected date if it's hidden
       this.selectedFromDate = null;
 
@@ -465,7 +461,7 @@ export class BookEventComponent implements OnInit {
       );
     }
 
-    if (isHidden && isHidden1 && (!isHidden2 && !isHidden3)) {
+    else if (isHidden && isHidden1 && (!isHidden2 && !isHidden3)) {
       // Clear the selected date if it's hidden
       this.selectedFromDate = null;
 
@@ -474,7 +470,7 @@ export class BookEventComponent implements OnInit {
       );
     }
 
-    if (isHidden && isHidden2 && (!isHidden1 && !isHidden3)) {
+    else if (isHidden && isHidden2 && (!isHidden1 && !isHidden3)) {
       // Clear the selected date if it's hidden
       this.selectedFromDate = null;
 
@@ -483,7 +479,7 @@ export class BookEventComponent implements OnInit {
       );
     }
 
-    if (isHidden && isHidden3 && (!isHidden2 && !isHidden1)) {
+   else if (isHidden && isHidden3 && (!isHidden2 && !isHidden1)) {
       // Clear the selected date if it's hidden
       this.selectedFromDate = null;
 
@@ -492,7 +488,7 @@ export class BookEventComponent implements OnInit {
       );
     }
 
-    if (isHidden1 && isHidden2 && (!isHidden && !isHidden3)) {
+    else if (isHidden1 && isHidden2 && (!isHidden && !isHidden3)) {
       // Clear the selected date if it's hidden
       this.selectedFromDate = null;
 
@@ -501,7 +497,7 @@ export class BookEventComponent implements OnInit {
       );
     }
 
-    if (isHidden1 && isHidden3 && (!isHidden2 && !isHidden)) {
+    else if (isHidden1 && isHidden3 && (!isHidden2 && !isHidden)) {
       // Clear the selected date if it's hidden
       this.selectedFromDate = null;
 
@@ -510,7 +506,7 @@ export class BookEventComponent implements OnInit {
       );
     }
 
-    if (isHidden2 && isHidden3 && (!isHidden && !isHidden1)) {
+    else if (isHidden2 && isHidden3 && (!isHidden && !isHidden1)) {
       // Clear the selected date if it's hidden
       this.selectedFromDate = null;
 
@@ -519,7 +515,7 @@ export class BookEventComponent implements OnInit {
       );
     }
 
-    if (isHidden && (!isHidden1 && !isHidden2 && !isHidden3)) {
+    else if (isHidden && (!isHidden1 && !isHidden2 && !isHidden3)) {
       // Clear the selected date if it's hidden
       this.selectedFromDate = null;
 
@@ -528,7 +524,7 @@ export class BookEventComponent implements OnInit {
       );
     }
 
-    if (isHidden1 && (!isHidden && !isHidden2 && !isHidden3)) {
+    else if (isHidden1 && (!isHidden && !isHidden2 && !isHidden3)) {
       // Clear the selected date if it's hidden
       this.selectedFromDate = null;
 
@@ -537,7 +533,7 @@ export class BookEventComponent implements OnInit {
       );
     }
 
-    if (isHidden2 && (!isHidden && !isHidden1 && !isHidden3)) {
+    else if (isHidden2 && (!isHidden && !isHidden1 && !isHidden3)) {
       // Clear the selected date if it's hidden
       this.selectedFromDate = null;
 
@@ -546,7 +542,7 @@ export class BookEventComponent implements OnInit {
       );
     }
 
-    if (isHidden3 && (!isHidden && !isHidden2 && !isHidden1)) {
+    else {
       // Clear the selected date if it's hidden
       this.selectedFromDate = null;
 
@@ -590,7 +586,7 @@ export class BookEventComponent implements OnInit {
       );
     }
 
-    if (isHidden && isHidden1 && isHidden2 && (!isHidden3)) {
+    else if (isHidden && isHidden1 && isHidden2 && (!isHidden3)) {
       // Clear the selected date if it's hidden
       this.selectedToDate = null;
 
@@ -599,21 +595,21 @@ export class BookEventComponent implements OnInit {
       );
     }
 
-    if (isHidden && isHidden1 && isHidden3 && (!isHidden2)) {
+    else if (isHidden && isHidden1 && isHidden3 && (!isHidden2)) {
       // Clear the selected date if it's hidden
       this.selectedToDate = null;
 
       this.toast.error('Venue, Team-1 and Referee already booked for this date!');
     }
 
-    if (isHidden && isHidden2 && isHidden3 && (!isHidden1)) {
+    else if (isHidden && isHidden2 && isHidden3 && (!isHidden1)) {
       // Clear the selected date if it's hidden
       this.selectedToDate = null;
 
       this.toast.error('Venue, Team-2 and Referee already booked for this date!');
     }
 
-    if (isHidden1 && isHidden2 && isHidden3 && !isHidden) {
+    else if (isHidden1 && isHidden2 && isHidden3 && !isHidden) {
       // Clear the selected date if it's hidden
       this.selectedToDate = null;
 
@@ -622,7 +618,7 @@ export class BookEventComponent implements OnInit {
       );
     }
 
-    if (isHidden && isHidden1 && (!isHidden2 && !isHidden3)) {
+    else if (isHidden && isHidden1 && (!isHidden2 && !isHidden3)) {
       // Clear the selected date if it's hidden
       this.selectedToDate = null;
 
@@ -631,7 +627,7 @@ export class BookEventComponent implements OnInit {
       );
     }
 
-    if (isHidden && isHidden2 && (!isHidden1 && !isHidden3)) {
+    else if (isHidden && isHidden2 && (!isHidden1 && !isHidden3)) {
       // Clear the selected date if it's hidden
       this.selectedToDate = null;
 
@@ -640,7 +636,7 @@ export class BookEventComponent implements OnInit {
       );
     }
 
-    if (isHidden && isHidden3 && (!isHidden2 && !isHidden1)) {
+    else if (isHidden && isHidden3 && (!isHidden2 && !isHidden1)) {
       // Clear the selected date if it's hidden
       this.selectedToDate = null;
 
@@ -649,7 +645,7 @@ export class BookEventComponent implements OnInit {
       );
     }
 
-    if (isHidden1 && isHidden2 && (!isHidden && !isHidden3)) {
+    else if (isHidden1 && isHidden2 && (!isHidden && !isHidden3)) {
       // Clear the selected date if it's hidden
       this.selectedToDate = null;
 
@@ -658,7 +654,7 @@ export class BookEventComponent implements OnInit {
       );
     }
 
-    if (isHidden1 && isHidden3 && (!isHidden2 && !isHidden)) {
+    else if (isHidden1 && isHidden3 && (!isHidden2 && !isHidden)) {
       // Clear the selected date if it's hidden
       this.selectedToDate = null;
 
@@ -667,7 +663,7 @@ export class BookEventComponent implements OnInit {
       );
     }
 
-    if (isHidden2 && isHidden3 && (!isHidden && !isHidden1)) {
+    else if (isHidden2 && isHidden3 && (!isHidden && !isHidden1)) {
       // Clear the selected date if it's hidden
       this.selectedToDate = null;
 
@@ -676,7 +672,7 @@ export class BookEventComponent implements OnInit {
       );
     }
 
-    if (isHidden && (!isHidden1 && !isHidden2 && !isHidden3)) {
+    else if (isHidden && (!isHidden1 && !isHidden2 && !isHidden3)) {
       // Clear the selected date if it's hidden
       this.selectedToDate = null;
 
@@ -685,7 +681,7 @@ export class BookEventComponent implements OnInit {
       );
     }
 
-    if (isHidden1 && (!isHidden && !isHidden2 && !isHidden3)) {
+    else if (isHidden1 && (!isHidden && !isHidden2 && !isHidden3)) {
       // Clear the selected date if it's hidden
       this.selectedToDate = null;
 
@@ -694,7 +690,7 @@ export class BookEventComponent implements OnInit {
       );
     }
 
-    if (isHidden2 && (!isHidden && !isHidden1 && !isHidden3)) {
+    else if (isHidden2 && (!isHidden && !isHidden1 && !isHidden3)) {
       // Clear the selected date if it's hidden
       this.selectedToDate = null;
 
@@ -703,7 +699,7 @@ export class BookEventComponent implements OnInit {
       );
     }
 
-    if (isHidden3 && (!isHidden && !isHidden2 && !isHidden1)) {
+    else {
       // Clear the selected date if it's hidden
       this.selectedToDate = null;
 
