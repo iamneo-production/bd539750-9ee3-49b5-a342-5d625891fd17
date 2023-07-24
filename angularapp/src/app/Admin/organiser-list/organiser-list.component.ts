@@ -6,8 +6,7 @@ import { EmailService } from 'src/app/Services/email.service';
 
 @Component({
   selector: 'app-organiser-list',
-  templateUrl: './organiser-list.component.html',
-  styleUrls: ['./organiser-list.component.css']
+  templateUrl: './organiser-list.component.html'
 })
 export class OrganiserListComponent implements OnInit {
 

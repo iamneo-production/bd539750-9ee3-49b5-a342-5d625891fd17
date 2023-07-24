@@ -6,8 +6,7 @@ import { VenueServiceService } from 'src/app/Services/venue-service.service';
 
 @Component({
   selector: 'app-schedules',
-  templateUrl: './schedules.component.html',
-  styleUrls: ['./schedules.component.css']
+  templateUrl: './schedules.component.html'
 })
 export class SchedulesComponent implements OnInit {
 

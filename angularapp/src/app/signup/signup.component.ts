@@ -35,8 +35,14 @@ export class SignupComponent implements OnInit {
 
   hideShow() {
     this.isTest = !this.isTest;
-    this.isTest ? (this.eyeIcon = 'fa-eye') : (this.eyeIcon = 'fa-eye-slash');
-    this.isTest ? (this.type = 'text') : (this.type = 'password');
+    if (this.isTest) {
+      this.eyeIcon = 'fa-eye';
+      this.type = 'text';
+    }
+    else{
+      this.eyeIcon = 'fa-eye-slash';
+      this.type = 'password';
+    }
   }
 
   type1: string = 'password';
@@ -45,10 +51,14 @@ export class SignupComponent implements OnInit {
 
   hideShow1() {
     this.isTest1 = !this.isTest1;
-    this.isTest1
-      ? (this.eyeIcon1 = 'fa-eye')
-      : (this.eyeIcon1 = 'fa-eye-slash');
-    this.isTest1 ? (this.type1 = 'text') : (this.type1 = 'password');
+    if (this.isTest1) {
+      this.eyeIcon1 = 'fa-eye';
+      this.type1 = 'text';
+    }
+    else{
+      this.eyeIcon1 = 'fa-eye-slash';
+      this.type1 = 'password';
+    }
   }
 
   //Password Check, bot are same or not

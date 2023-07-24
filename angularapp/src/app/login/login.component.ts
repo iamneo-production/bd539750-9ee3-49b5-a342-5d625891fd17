@@ -19,13 +19,19 @@ export class LoginComponent {
   //Hide and Show password
   hideShow() {
     this.isTest = !this.isTest;
-    this.isTest ? (this.eyeIcon = 'fa-eye') : (this.eyeIcon = 'fa-eye-slash');
-    this.isTest ? (this.type = 'text') : (this.type = 'password');
+    if (this.isTest) {
+      this.eyeIcon = 'fa-eye';
+      this.type = 'text';
+    }
+    else{
+      this.eyeIcon = 'fa-eye-slash';
+      this.type = 'password';
+    }
   }
 
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required,Validators.pattern(/^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]+$/)]),
+    password: new FormControl('', [Validators.required, Validators.pattern(/^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]+$/)]),
   });
 
 

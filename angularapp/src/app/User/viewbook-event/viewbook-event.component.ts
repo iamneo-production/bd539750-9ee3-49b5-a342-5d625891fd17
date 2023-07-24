@@ -7,7 +7,6 @@ import { VenueServiceService } from 'src/app/Services/venue-service.service';
 @Component({
   selector: 'app-viewbook-event',
   templateUrl: './viewbook-event.component.html',
-  styleUrls: ['./viewbook-event.component.css']
 })
 export class ViewbookEventComponent implements OnInit {
 

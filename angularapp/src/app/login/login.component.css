@@ -1,6 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@800&display=swap');
+
 .heading h1 {
-  font-family: "Raleway","sans-serif";
+  font-family:'Times New Roman', Times, serif;
+  font-weight: bold;
 }
 
 
