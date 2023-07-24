@@ -77,9 +77,9 @@ export class BookEventComponent implements OnInit {
             console.log(this.Events);
 
             //pushed the dates to dateArray[]
-            for (let i = 0; i < this.Events.length; i++) {
-              this.fromDate = this.Events[i].eventFromDate;
-              this.toDate = this.Events[i].eventToDate;
+            for (let event of this.Events) {
+              this.fromDate = event.eventFromDate;
+              this.toDate = event.eventToDate;
 
               while (this.fromDate <= this.toDate) {
                 this.dateArray.push(this.fromDate);
@@ -105,9 +105,9 @@ export class BookEventComponent implements OnInit {
     this.teamService.getAllTeamDetails().subscribe((result) => {
       this.teamArray = result;
 
-      for (let i = 0; i < this.teamArray.length; i++) {
-        this.firstTeamOptions.push(this.teamArray[i].teamName);
-        this.secondTeamOptions.push(this.teamArray[i].teamName);
+      for (let team of this.teamArray) {
+        this.firstTeamOptions.push(team.teamName);
+        this.secondTeamOptions.push(team.teamName);
       }
 
     });
@@ -118,8 +118,8 @@ export class BookEventComponent implements OnInit {
       this.refreeArray = result;
 
 
-      for (let i = 0; i < this.refreeArray.length; i++) {
-        this.refreeOptions.push(this.refreeArray[i].refereeName);
+      for (let referee of this.refreeArray) {
+        this.refreeOptions.push(referee.refereeName);
 
       }
 
@@ -192,9 +192,9 @@ export class BookEventComponent implements OnInit {
 
 
       //pushed the dates to dateArrayReferee[]
-      for (let i = 0; i < this.EventsReferee.length; i++) {
-        this.fromDate = this.EventsReferee[i].eventFromDate;
-        this.toDate = this.EventsReferee[i].eventToDate;
+      for (let eventreferee of this.EventsReferee) {
+        this.fromDate = eventreferee.eventFromDate;
+        this.toDate = eventreferee.eventToDate;
 
         while (this.fromDate <= this.toDate) {
           this.dateArrayReferee.push(this.fromDate);
@@ -228,9 +228,9 @@ export class BookEventComponent implements OnInit {
 
 
       //pushed the dates to dateArrayTeamOne[]
-      for (let i = 0; i < this.EventsTeamOne.length; i++) {
-        this.fromDate = this.EventsTeamOne[i].eventFromDate;
-        this.toDate = this.EventsTeamOne[i].eventToDate;
+      for (let eventTeamOne of this.EventsTeamOne) {
+        this.fromDate = eventTeamOne.eventFromDate;
+        this.toDate = eventTeamOne.eventToDate;
 
         while (this.fromDate <= this.toDate) {
           this.dateArrayTeamOne.push(this.fromDate);
@@ -262,9 +262,9 @@ export class BookEventComponent implements OnInit {
 
 
       //pushed the dates to dateArrayTeamTwo[]
-      for (let i = 0; i < this.EventsTeamTwo.length; i++) {
-        this.fromDate = this.EventsTeamTwo[i].eventFromDate;
-        this.toDate = this.EventsTeamTwo[i].eventToDate;
+      for (let eventTeamTwo of this.EventsTeamTwo) {
+        this.fromDate = eventTeamTwo.eventFromDate;
+        this.toDate = eventTeamTwo.eventToDate;
 
         while (this.fromDate <= this.toDate) {
           this.dateArrayTeamTwo.push(this.fromDate);
@@ -357,7 +357,7 @@ export class BookEventComponent implements OnInit {
       if (this.bookEventForm.valid) {
         console.log('hello hello');
         this.eventService
-          .setEventDetails(<any>this.bookEventForm.value, this.VenueId)
+          .setEventDetails(this.bookEventForm.value, this.VenueId)
           .subscribe({
             next: (result) => {
               this.toast.success(
