@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { AddRefereeComponent } from './Admin/add-referee/add-referee.component';
 import { AddTeamComponent } from './Admin/add-team/add-team.component';
 import { AddVenueComponent } from './Admin/add-venue/add-venue.component';
-import { AdminHeaderComponent } from './Admin/admin-header/admin-header.component';
 import { AdminVenueListComponent } from './Admin/admin-venue-list/admin-venue-list.component';
 import { EditVenueComponent } from './Admin/edit-venue/edit-venue.component';
 import { OrganiserListComponent } from './Admin/organiser-list/organiser-list.component';

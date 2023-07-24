@@ -17,7 +17,7 @@ export class VenueListComponent implements OnInit {
   ) { }
 
 
-  VenueList = [];
+  VenueList:any = [];
 
   TeamList = [];
 
@@ -27,15 +27,15 @@ export class VenueListComponent implements OnInit {
 
   ngOnInit() {
     this.venueService.getAllVenue().subscribe((result) => {
-      this.VenueList = <any>result;
+      this.VenueList = result;
     });
 
     this.teamService.getAllTeamDetails().subscribe((result) => {
-      this.TeamList = <any>result;
+      this.TeamList = result;
     });
 
     this.refereeService.getAllRefreeDetails().subscribe((result) => {
-      this.RefereeList = <any>result;
+      this.RefereeList =result;
     });
 
   }

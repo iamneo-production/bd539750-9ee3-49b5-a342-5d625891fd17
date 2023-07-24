@@ -4,6 +4,7 @@
     <div class="row">
         <div class="col-md-8 m-auto">
             <table class="table table-striped-columns text-center">
+
                 <thead>
                     <tr>
                         <th>Venue Name</th>
@@ -24,7 +25,8 @@
                         <td>{{event.eventToDate}}</td>
                         <td>{{event.eventPrice}}</td>
                         <td>{{event.matchingId}}</td>
-                        <td><a style="cursor:pointer" (click)="deleteEvent(event.eventId,event.applicantEmail,event.applicantName)"><i
+                        <td><a style="cursor:pointer"
+                                (click)="deleteEvent(event.eventId,event.applicantEmail,event.applicantName)"><i
                                     class="fa-solid fa-trash-can"></i></a></td>
 
                     </tr>

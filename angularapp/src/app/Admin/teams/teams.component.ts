@@ -123,7 +123,7 @@ export class TeamsComponent implements OnInit {
       this.EditPlayerCount.teamLocation = result.teamLocation;
       this.EditPlayerCount.teamDescription = result.teamDescription;
       this.EditPlayerCount.teamId = result.teamId;
-      var x = Number(result.playerCounts) - 1;
+      let x = Number(result.playerCounts) - 1;
       this.EditPlayerCount.playerCounts = String(x);
       console.log(this.EditPlayerCount);
 
@@ -173,7 +173,7 @@ export class TeamsComponent implements OnInit {
             this.EditPlayerCount.teamLocation = result.teamLocation;
             this.EditPlayerCount.teamDescription = result.teamDescription;
             this.EditPlayerCount.teamId = result.teamId;
-            var x = Number(result.playerCounts) + 1;
+            let x = Number(result.playerCounts) + 1;
             this.EditPlayerCount.playerCounts = String(x);
             console.log(this.EditPlayerCount);
 
