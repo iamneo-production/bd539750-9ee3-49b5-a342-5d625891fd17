@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthServiceService } from 'src/app/Services/auth-service.service';
+import { AuthServiceService } from '../Services/auth-service.service';
 
 @Component({
   selector: 'app-signup',
@@ -16,17 +16,14 @@ export class SignupComponent implements OnInit {
   ngOnInit() {
     this.registerForm = new FormGroup(
       {
-        userRole: new FormControl('',[Validators.required]),
+        userRole: new FormControl('', [Validators.required]),
         email: new FormControl('', [Validators.required, Validators.email]),
         username: new FormControl(''),
-        mobileNumber: new FormControl('', [
-          Validators.required,
-          Validators.pattern(/^\d{10}$/),
-        ]),
-        password: new FormControl('', [Validators.required]),
-        confirmpassword: new FormControl(''),
+        mobileNumber: new FormControl('', [Validators.required,Validators.pattern('^(\\+91)?[6-9]\\d{9}$')]),
+        password: new FormControl('', [Validators.required, Validators.minLength(8), Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}$/)]),
+        confirmpassword: new FormControl('', [Validators.minLength(8)]),
       },
-      { validators: this.checkPasswords }
+      { validators: this.checkPasswords}
     );
 
   }
@@ -37,8 +34,14 @@ export class SignupComponent implements OnInit {
 
   hideShow() {
     this.isTest = !this.isTest;
-    this.isTest ? (this.eyeIcon = 'fa-eye') : (this.eyeIcon = 'fa-eye-slash');
-    this.isTest ? (this.type = 'text') : (this.type = 'password');
+    if (this.isTest) {
+      this.eyeIcon = 'fa-eye';
+      this.type = 'text';
+    }
+    else{
+      this.eyeIcon = 'fa-eye-slash';
+      this.type = 'password';
+    }
   }
 
   type1: string = 'password';
@@ -47,10 +50,14 @@ export class SignupComponent implements OnInit {
 
   hideShow1() {
     this.isTest1 = !this.isTest1;
-    this.isTest1
-      ? (this.eyeIcon1 = 'fa-eye')
-      : (this.eyeIcon1 = 'fa-eye-slash');
-    this.isTest1 ? (this.type1 = 'text') : (this.type1 = 'password');
+    if (this.isTest1) {
+      this.eyeIcon1 = 'fa-eye';
+      this.type1 = 'text';
+    }
+    else{
+      this.eyeIcon1 = 'fa-eye-slash';
+      this.type1 = 'password';
+    }
   }
 
   //Password Check, bot are same or not
@@ -89,7 +96,14 @@ export class SignupComponent implements OnInit {
           alert(result.message);
           this.route.navigate(['/login']);
         },
+        error: (err) => {
+          alert(err?.error.message);
+        },
       });
+    }
+    else {
+      this.registerForm.markAllAsTouched();
+      alert("Please fill all the required fields");
     }
   }
 }
