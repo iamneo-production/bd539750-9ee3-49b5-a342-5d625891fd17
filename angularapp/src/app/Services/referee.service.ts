@@ -14,7 +14,7 @@ export class RefereeService {
   }
 
   updateRefree(id: any, data: any) {
-    return this.http.put(this.url + id, data);
+    return this.http.put(this.url + '/' + id, data);
   }
 
   getAllRefreeDetails() {
@@ -22,10 +22,10 @@ export class RefereeService {
   }
 
   getRefreeDetails(id: any) {
-    return this.http.get<any>(this.url + id);
+    return this.http.get<any>(this.url + '/' + id);
   }
 
   deleteRefree(id: any) {
-    return this.http.delete(this.url + id);
+    return this.http.delete(this.url + '/' + id);
   }
 }
