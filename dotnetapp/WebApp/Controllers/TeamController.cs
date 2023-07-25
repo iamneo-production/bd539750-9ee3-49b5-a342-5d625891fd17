@@ -44,7 +44,21 @@ namespace WebApp.Controllers
         }
 
 
-        [HttpGet("/getplayerDetails/{id}")]
+        [HttpGet("playerDetail_Using_PlayerId/{id}")]
+        public async Task<ActionResult<PlayersDetails>> getplayer(int id)
+        {
+            var player = await _context.playerInformations.FindAsync(id);
+
+            if (player == null)
+            {
+                return NotFound();
+            }
+
+            return player;
+        }
+
+
+        [HttpGet("/getplayerDetails_using_TeamId/{id}")]
         public async Task<ActionResult<PlayersDetails>> GetPlayer(int id)
         {
             var player = _context.playerInformations.Where(c => c.teamId == id);
@@ -88,14 +102,71 @@ namespace WebApp.Controllers
             return NoContent();
         }
 
+
+        //Edit Players using playerId
+        [HttpPut("/editPlayers/{id}")]
+        public async Task<IActionResult> PutPlayer(int id, PlayersDetails players)
+        {
+            if (id != players.playerId)
+            {
+                return BadRequest();
+            }
+
+            _context.Entry(players).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!PlayerExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
+
         // POST: api/Teams
         [HttpPost]
         public async Task<ActionResult<TeamModel>> addTeam(TeamModel team)
         {
+
+            //Check Team
+            if (await CheckTeamExistAsync(team.teamName))
+            {
+                return BadRequest(new { Message = "Team Already Exist" });
+            }
             _context.teams.Add(team);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetTeam", new { id = team.teamId }, team);
+        }
+
+
+         //Post(Save Player)
+
+        [HttpPost("/saveplayer")]
+        public async Task<ActionResult<PlayersDetails>> PostPlayer(PlayersDetails player)
+        {
+
+              //Check player
+            if (await CheckPlayerExistAsync(player.playerFirstName,player.playerLastName,player.playerAge))
+            {
+                return BadRequest(new { Message = "Player Already Exist" });
+            }
+
+            _context.playerInformations.Add(player);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetPlayer", new { id = player.playerId }, player);
         }
 
         // DELETE: api/Teams/id
@@ -114,9 +185,36 @@ namespace WebApp.Controllers
             return NoContent();
         }
 
+
+        //Delete Player
+        [HttpDelete("/deletePlayers/{id}")]
+        public async Task<IActionResult> DeletePlayers(int id)
+        {
+            var player = await _context.playerInformations.FindAsync(id);
+            if (player == null)
+            {
+                return NotFound();
+            }
+
+            _context.playerInformations.Remove(player);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+
         private bool TeamExists(int id)
         {
             return _context.teams.Any(e => e.teamId == id);
         }
+
+         private bool PlayerExists(int id)
+        {
+            return _context.playerInformations.Any(e => e.playerId == id);
+        }
+
+
+         private Task<bool> CheckPlayerExistAsync(string firstname, string lastname, string age) => _context.playerInformations.AnyAsync(x => x.playerFirstName==firstname && x.playerLastName==lastname && x.playerAge==age);
+         private Task<bool> CheckTeamExistAsync(string teamName) => _context.teams.AnyAsync(x => x.teamName==teamName);
     }
 }

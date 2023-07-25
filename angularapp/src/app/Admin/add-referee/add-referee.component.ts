@@ -56,7 +56,8 @@ export class AddRefereeComponent implements OnInit {
   UpdateRefree() {
     this.refereeService.updateRefree(this.EditRefree.refereeId, this.EditRefree).subscribe({
       next: (response) => {
-        // this.toast.success("Referee Updated Successfully!","Success");
+        //this.toast.success("Referee Updated Successfully!","Success");
+        alert("Referee Update Successfully");
        location.reload();
       },
     });

@@ -4,12 +4,14 @@
 <div class="main container-fluid-md pb-5 ">
 
 
-    <!--Search Refree-->
+
+    <!--Search Referee-->
     <nav class="navbar bg-light">
-        <div class="container-fluid text justify-content-center">
+        <div class="container-fluid text justify-content-center mt-2">
             <form class="d-flex" role="search">
-                <input id="searchButton" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search"
+                    [(ngModel)]="input"/>
+                <button (click)="onSearch()" class="btn btn-outline-success" type="submit">Search</button>
             </form>
         </div>
     </nav>
@@ -19,7 +21,8 @@
     <!--Refree Card-->
 
     <div class="row mt-5 venues-card" style="width: 80%; margin: auto;">
-        <div id="umpireGrid1" class="col-md-4 mb-3" *ngFor="let ref of RefreeList">
+        <div id="umpireGrid1" class="col-md-4 mb-3"
+            *ngFor="let ref of RefreeList | filterPipe : searchInput:'refereeName';">
             <a class="nav-link">
                 <div class="card">
                     <img src={{ref.refereeImage}} class="card-img-top" alt="...">
@@ -28,10 +31,13 @@
                         <p class="card-text">Refree Experience : {{ref.noOfMatches}}</p>
 
 
-                        <span class="float-end fs-4 me-2"><a id="deleteAmpire" (click)="deleteRefreeDetails(ref.refereeId)"
-                                style="cursor:pointer"><i class="fa-solid fa-trash-can"></i></a></span>
-                        <span class="float-end fs-4 me-2"><a id="editAmpire" (click)="RefDetails(ref.refereeId)" data-bs-toggle="modal" data-bs-target="#exampleModal1"
-                                style="color: rgb(55, 52, 52);"><i class="fa-solid fa-pen-to-square"></i></a></span>
+                        <span class="float-end fs-4 me-2"><a id="deleteAmpire"
+                                (click)="deleteRefreeDetails(ref.refereeId)" style="cursor:pointer"><i
+                                    class="fa-solid fa-trash-can"></i></a></span>
+                        <span class="float-end fs-4 me-2"><a id="editAmpire" (click)="RefDetails(ref.refereeId)"
+                                data-bs-toggle="modal" data-bs-target="#exampleModal1"
+                                style="color: rgb(55, 52, 52); cursor: pointer;"><i
+                                    class="fa-solid fa-pen-to-square"></i></a></span>
 
                     </div>
                 </div>
@@ -82,12 +88,20 @@
                                         <label for="floatingInput">Enter the Refree name</label>
                                     </div>
                                 </div>
-                                <!-- <div class="ms-2"
-                                    *ngIf="refereeForm.get('refereeName').errors && (refereeForm.get('refereeName).touched ||refereeForm('refereeName).dirty)">
-                                    <div class="form-text text-danger" *ngIf="refereeForm('refereeName').errors.required">
-                                        Team Locations is required.
+
+                                <!--Validation Referee Name-->
+                                <div class="ms-2"
+                                    *ngIf="refereeForm.get('refereeName').errors && (refereeForm.get('refereeName').touched ||refereeForm.get('refereeName').dirty)">
+                                    <div class="form-text text-danger"
+                                        *ngIf="refereeForm.get('refereeName').errors.required">
+                                        Referee Name is required!
                                     </div>
-                                </div> -->
+
+                                    <div class="form-text text-danger"
+                                        *ngIf="refereeForm.get('refereeName').errors.pattern">
+                                        Invalid Referee Name Format!
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -102,6 +116,15 @@
                                         <input type="text" class="form-control" id="floatingInput"
                                             formControlName="refereeImage" placeholder="name@example.com">
                                         <label for="floatingInput">Enter the Refree image URL</label>
+                                    </div>
+                                </div>
+
+                                <!--Validation Referee Image-->
+                                <div class="ms-2"
+                                    *ngIf="refereeForm.get('refereeImage').errors && (refereeForm.get('refereeImage').touched ||refereeForm.get('refereeImage').dirty)">
+                                    <div class="form-text text-danger"
+                                        *ngIf="refereeForm.get('refereeImage').errors.required">
+                                        Referee Image is required!
                                     </div>
                                 </div>
                             </div>
@@ -120,6 +143,20 @@
                                         <label for="floatingInput">Enter the Refree Experience</label>
                                     </div>
                                 </div>
+
+                                <!--Validation Referee Experience-->
+                                <div class="ms-2"
+                                    *ngIf="refereeForm.get('noOfMatches').errors && (refereeForm.get('noOfMatches').touched ||refereeForm.get('noOfMatches').dirty)">
+                                    <div class="form-text text-danger"
+                                        *ngIf="refereeForm.get('noOfMatches').errors.required">
+                                        Referee Experience is required!
+                                    </div>
+
+                                    <div class="form-text text-danger"
+                                        *ngIf="refereeForm.get('noOfMatches').errors.pattern">
+                                        Invalid Referee Experience Format!
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -135,6 +172,20 @@
                                         <input type="text" class="form-control" id="addRefereeLocation"
                                             formControlName="refereeLocation" placeholder="name@example.com">
                                         <label for="floatingInput">Enter the Refree Location</label>
+                                    </div>
+                                </div>
+
+                                <!--Validation Referee Location-->
+                                <div class="ms-2"
+                                    *ngIf="refereeForm.get('refereeLocation').errors && (refereeForm.get('refereeLocation').touched ||refereeForm.get('refereeLocation').dirty)">
+                                    <div class="form-text text-danger"
+                                        *ngIf="refereeForm.get('refereeLocation').errors.required">
+                                        Referee Location is required!
+                                    </div>
+
+                                    <div class="form-text text-danger"
+                                        *ngIf="refereeForm.get('refereeLocation').errors.pattern">
+                                        Invalid Referee Location Format!
                                     </div>
                                 </div>
                             </div>
@@ -162,9 +213,9 @@
                 </div>
                 <div class="modal-body">
 
-                    <div class=" main container-fluid-md text-center">
+                    <div class=" main container-fluid-md">
 
-                        <form class="p-5" #form="ngForm" (ngSubmit)="UpdateRefree()">
+                        <form [formGroup]="EditrefereeForm" class="p-5">
 
                             <div class="row">
                                 <div class="col">
@@ -180,9 +231,22 @@
                                                 class="fa-solid fa-pen-fancy"></i></span>
                                         <div class="form-floating">
                                             <input type="text" class="form-control" id="floatingInput"
-                                                name="refereeName" [(ngModel)]="EditRefree.refereeName"
-                                                placeholder="name@example.com">
+                                                formControlName="refereeName" placeholder="name@example.com">
                                             <label for="floatingInput">Enter the Refree name</label>
+                                        </div>
+                                    </div>
+
+                                    <!--Validation Referee Name-->
+                                    <div class="ms-2"
+                                        *ngIf="EditrefereeForm.get('refereeName').errors && (EditrefereeForm.get('refereeName').touched ||EditrefereeForm.get('refereeName').dirty)">
+                                        <div class="form-text text-danger"
+                                            *ngIf="EditrefereeForm.get('refereeName').errors.required">
+                                            Referee Name is required!
+                                        </div>
+
+                                        <div class="form-text text-danger"
+                                            *ngIf="EditrefereeForm.get('refereeName').errors.pattern">
+                                            Invalid Referee Name Format!
                                         </div>
                                     </div>
                                 </div>
@@ -197,9 +261,17 @@
                                                 class="fa-solid fa-images"></i></span>
                                         <div class="form-floating">
                                             <input type="text" class="form-control" id="floatingInput"
-                                                name="refereeImage" [(ngModel)]="EditRefree.refereeImage"
-                                                placeholder="name@example.com">
+                                                formControlName="refereeImage" placeholder="name@example.com">
                                             <label for="floatingInput">Enter the Refree image URL</label>
+                                        </div>
+                                    </div>
+
+                                    <!--Validation Referee Image-->
+                                    <div class="ms-2"
+                                        *ngIf="EditrefereeForm.get('refereeImage').errors && (EditrefereeForm.get('refereeImage').touched ||EditrefereeForm.get('refereeImage').dirty)">
+                                        <div class="form-text text-danger"
+                                            *ngIf="EditrefereeForm.get('refereeImage').errors.required">
+                                            Referee Image is required!
                                         </div>
                                     </div>
                                 </div>
@@ -214,9 +286,22 @@
                                                 class="fa-solid fa-ranking-star"></i></span>
                                         <div class="form-floating">
                                             <input type="text" class="form-control" id="floatingInput"
-                                                name="noOfMatches" [(ngModel)]="EditRefree.noOfMatches"
-                                                placeholder="name@example.com">
+                                                formControlName="noOfMatches" placeholder="name@example.com">
                                             <label for="floatingInput">Enter the Refree Experience</label>
+                                        </div>
+                                    </div>
+
+                                    <!--Validation Referee Experience-->
+                                    <div class="ms-2"
+                                        *ngIf="EditrefereeForm.get('noOfMatches').errors && (EditrefereeForm.get('noOfMatches').touched ||EditrefereeForm.get('noOfMatches').dirty)">
+                                        <div class="form-text text-danger"
+                                            *ngIf="EditrefereeForm.get('noOfMatches').errors.required">
+                                            Referee Experience is required!
+                                        </div>
+
+                                        <div class="form-text text-danger"
+                                            *ngIf="EditrefereeForm.get('noOfMatches').errors.pattern">
+                                            Invalid Referee Experience Format!
                                         </div>
                                     </div>
                                 </div>
@@ -232,9 +317,22 @@
                                                 class="fa-solid fa-location-dot"></i></span>
                                         <div class="form-floating">
                                             <input type="text" class="form-control" id="floatingInput"
-                                                name="refereeLocation" [(ngModel)]="EditRefree.refereeLocation"
-                                                placeholder="name@example.com">
+                                                formControlName="refereeLocation" placeholder="name@example.com">
                                             <label for="floatingInput">Enter the Refree Location</label>
+                                        </div>
+                                    </div>
+
+                                    <!--Validation Referee Location-->
+                                    <div class="ms-2"
+                                        *ngIf="EditrefereeForm.get('refereeLocation').errors && (EditrefereeForm.get('refereeLocation').touched ||EditrefereeForm.get('refereeLocation').dirty)">
+                                        <div class="form-text text-danger"
+                                            *ngIf="EditrefereeForm.get('refereeLocation').errors.required">
+                                            Referee Location is required!
+                                        </div>
+
+                                        <div class="form-text text-danger"
+                                            *ngIf="EditrefereeForm.get('refereeLocation').errors.pattern">
+                                            Invalid Referee Location Format!
                                         </div>
                                     </div>
                                 </div>

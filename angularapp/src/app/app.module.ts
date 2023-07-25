@@ -8,6 +8,7 @@ import { AddRefereeComponent } from './Admin/add-referee/add-referee.component';
 import { AddTeamComponent } from './Admin/add-team/add-team.component';
 import { TeamsComponent } from './Admin/teams/teams.component';
 import { AdminHeaderComponent } from './Admin/admin-header/admin-header.component';
+import { FilterPipePipe } from './Pipes/filter-pipe.pipe';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { AdminHeaderComponent } from './Admin/admin-header/admin-header.componen
     AddTeamComponent,
     TeamsComponent,
     AdminHeaderComponent,
+    FilterPipePipe,
     
     
   ],
