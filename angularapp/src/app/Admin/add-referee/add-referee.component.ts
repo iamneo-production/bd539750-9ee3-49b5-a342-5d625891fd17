@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-// import { ToastrService } from 'ngx-toastr';
 import { RefereeService } from 'src/app/Services/referee.service';
-
 
 @Component({
   selector: 'app-add-referee',
@@ -14,32 +11,29 @@ export class AddRefereeComponent implements OnInit {
 
   refereeForm: any;
   RefreeList = [];
-  EditRefree = {
-    refereeId: '',
-    refereeName: '',
-    refereeImage: '',
-    noOfMatches: '',
-    refereeLocation: '',
-  };
 
-  constructor(
-    private refereeService: RefereeService,
-    // private toast: ToastrService,
-    private route:Router,
-  ) { }
+  EditrefereeForm = new FormGroup({
+    refereeId: new FormControl(''),
+    refereeName: new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-Z\s]*$/)]),
+    refereeImage: new FormControl('', [Validators.required]),
+    noOfMatches: new FormControl('', [Validators.required, Validators.pattern(/^(?!0+$)\d+$/)]),
+    refereeLocation: new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-Z\s]*$/)]),
+  });
+
+  constructor( private refereeService: RefereeService  ) { }
 
   ngOnInit(): void {
 
     this.refereeForm = new FormGroup({
-      refereeName: new FormControl('', [Validators.required]),
+      refereeName: new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-Z\s]*$/)]),
       refereeImage: new FormControl('', [Validators.required]),
-      noOfMatches: new FormControl('', [Validators.required]),
-      refereeLocation: new FormControl('', [Validators.required]),
+      noOfMatches: new FormControl('', [Validators.required, Validators.pattern(/^(?!0+$)\d+$/)]),
+      refereeLocation: new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-Z\s]*$/)]),
     });
 
     //Get All Refree Details
     this.refereeService.getAllRefreeDetails().subscribe((result) => {
-      this.RefreeList = <any>result;
+      this.RefreeList = result;
     });
 
   }
@@ -47,19 +41,24 @@ export class AddRefereeComponent implements OnInit {
   //Fetch particular Referee detail for update
   RefDetails(id: any) {
     this.refereeService.getRefreeDetails(id).subscribe((result) => {
-      this.EditRefree = result;
-      console.log(this.EditRefree);
+      this.EditrefereeForm.get('refereeId').setValue(result.refereeId);
+      this.EditrefereeForm.get('refereeName').setValue(result.refereeName);
+      this.EditrefereeForm.get('noOfMatches').setValue(result.noOfMatches);
+      this.EditrefereeForm.get('refereeImage').setValue(result.refereeImage);
+      this.EditrefereeForm.get('refereeLocation').setValue(result.refereeLocation);
     });
   }
 
 
   UpdateRefree() {
-    this.refereeService.updateRefree(this.EditRefree.refereeId, this.EditRefree).subscribe({
+    this.refereeService.updateRefree(this.EditrefereeForm.get('refereeId').value, this.EditrefereeForm.value).subscribe({
       next: (response) => {
-        //this.toast.success("Referee Updated Successfully!","Success");
-        alert("Referee Update Successfully");
-       location.reload();
+        alert("Referee Updated Successfully!");
+        location.reload();
       },
+      error: (err) => {
+        alert(err.message);
+      }
     });
   }
 
@@ -67,31 +66,37 @@ export class AddRefereeComponent implements OnInit {
   addRefreeList() {
     if (this.refereeForm.valid) {
       this.refereeService
-        .setRefreeDetails(<any>this.refereeForm.value)
+        .setRefreeDetails(this.refereeForm.value)
         .subscribe({
           next: (result) => {
-            // this.toast.success("Referee Added Successfully!", "Success");
-             
-            alert("Referee Added success");
-
-
+            alert("Referee Added Successfully!");
             location.reload();
           },
           error: (err) => {
-            // this.toast.error(err.message, "Error");
             alert(err.message);
-          },
+          }
         });
     }
   }
 
 
   deleteRefreeDetails(id: any) {
+    console.log(id);
     this.refereeService.deleteRefree(id).subscribe({
       next: (result) => {
+        alert("Referee Deleted Successfully!");
         location.reload();
       },
+      error: (err) => {
+        alert(err.message);
+      }
     });
+  }
+
+  input = '';
+  searchInput = '';
+  onSearch() {
+    this.searchInput = this.input;
   }
 
 }

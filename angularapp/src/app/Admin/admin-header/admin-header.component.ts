@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { AuthServiceService } from 'src/app/Services/auth-service.service';
 
 @Component({
   selector: 'app-admin-header',
@@ -8,7 +7,7 @@ import { AuthServiceService } from 'src/app/Services/auth-service.service';
 })
 export class AdminHeaderComponent {
 
-  constructor(private auth:AuthServiceService) { }
+  constructor() { }
   
   logOut(){
    alert("Heloo")

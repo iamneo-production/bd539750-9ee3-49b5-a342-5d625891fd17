@@ -73,7 +73,8 @@ export class AddTeamComponent implements OnInit {
           },
         });
       }
-    } else {
+    } 
+    else {
 
       // this.toast.error('Enter ' + (this.teamCount - this.idx) + ' more Players', "Error");
     }
