@@ -14,6 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { UserHomepageComponent } from './User/user-homepage/user-homepage.component';
 import { UserHeaderComponent } from './User/user-header/user-header.component';
 import { AdminHeaderComponent } from './Admin/admin-header/admin-header.component';
+import { ViewbookEventComponent } from './User/viewbook-event/viewbook-event.component';
 
 const routes:Routes =[
   {
@@ -44,7 +45,8 @@ const routes:Routes =[
     BookEventComponent,
     UserHomepageComponent,
     UserHeaderComponent,
-    AdminHeaderComponent
+    AdminHeaderComponent,
+    ViewbookEventComponent
     
     
     
