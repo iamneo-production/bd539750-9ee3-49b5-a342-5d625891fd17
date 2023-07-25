@@ -8,22 +8,22 @@ export class RefereeService {
   constructor(private http: HttpClient) {}
 
   setRefreeDetails(data: any) {
-    return this.http.post<any>(`https://8080-dffcfdfcebbadcdbbaadcffdfcbdfeeeb.project.examly.io/admin/addReferee/`, data);
+    return this.http.post<any>(`https://8080-dffcfdfcebbadcdbbaadcffdbacbaecbeeec.project.examly.io/admin/addReferee/`, data);
   }
 
   updateRefree(id: any, data: any) {
-    return this.http.put(`https://8080-dffcfdfcebbadcdbbaadcffdfcbdfeeeb.project.examly.io/admin/editReferee/` + id, data);
+    return this.http.put(`https://8080-dffcfdfcebbadcdbbaadcffdbacbaecbeeec.project.examly.io/admin/editReferee/` + id, data);
   }
 
   getAllRefreeDetails() {
-    return this.http.get<any>(`https://8080-dffcfdfcebbadcdbbaadcffdfcbdfeeeb.project.examly.io/admin/getReferee`);
+    return this.http.get<any>(`https://8080-dffcfdfcebbadcdbbaadcffdbacbaecbeeec.project.examly.io/admin/getReferee`);
   }
 
   getRefreeDetails(id: any) {
-    return this.http.get<any>(`https://8080-dffcfdfcebbadcdbbaadcffdfcbdfeeeb.project.examly.io/admin/getRefereeById/` + id);
+    return this.http.get<any>(`https://8080-dffcfdfcebbadcdbbaadcffdbacbaecbeeec.project.examly.io/admin/getRefereeById/` + id);
   }
 
   deleteRefree(id: any) {
-    return this.http.delete(`https://8080-dffcfdfcebbadcdbbaadcffdfcbdfeeeb.project.examly.io/admin/deleteReferee/` + id);
+    return this.http.delete(`https://8080-dffcfdfcebbadcdbbaadcffdbacbaecbeeec.project.examly.io/admin/deleteReferee/` + id);
   }
 }
