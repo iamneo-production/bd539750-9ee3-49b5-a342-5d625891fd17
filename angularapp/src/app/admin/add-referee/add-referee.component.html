@@ -1,0 +1,254 @@
+<app-admin-header></app-admin-header>
+
+
+<div class="main container-fluid-md pb-5 ">
+
+
+    <!--Search Refree-->
+    <nav class="navbar bg-light">
+        <div class="container-fluid text justify-content-center">
+            <form class="d-flex" role="search">
+                <input id="searchButton" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+
+
+
+    <!--Refree Card-->
+
+    <div class="row mt-5 venues-card" style="width: 80%; margin: auto;">
+        <div id="umpireGrid1" class="col-md-4 mb-3" *ngFor="let ref of RefreeList">
+            <a class="nav-link">
+                <div class="card">
+                    <img src={{ref.refereeImage}} class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold">{{ref.refereeName}}</h5>
+                        <p class="card-text">Refree Experience : {{ref.noOfMatches}}</p>
+
+
+                        <span class="float-end fs-4 me-2"><a id="deleteAmpire" (click)="deleteRefreeDetails(ref.refereeId)"
+                                style="cursor:pointer"><i class="fa-solid fa-trash-can"></i></a></span>
+                        <span class="float-end fs-4 me-2"><a id="editAmpire" (click)="RefDetails(ref.refereeId)" data-bs-toggle="modal" data-bs-target="#exampleModal1"
+                                style="color: rgb(55, 52, 52);"><i class="fa-solid fa-pen-to-square"></i></a></span>
+
+                    </div>
+                </div>
+            </a>
+        </div>
+
+
+        <!--Add Refree Button-->
+        <div class="row mt-3">
+            <div class="col">
+                <button type="submit" class="btn btn-success p-2 fw-bold" data-bs-toggle="modal"
+                    data-bs-target="#exampleModal">Add Referee</button>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!--Add Referee Popup Form-->
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Referee Details...</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+
+                    <form class="p-5" [formGroup]="refereeForm">
+
+                        <div class="row">
+                            <div class="col">
+                                <h2>Register Refree...</h2>
+                            </div>
+                        </div>
+
+                        <!--Refree Name-->
+                        <div class="row justify-content-center">
+                            <div class="col-md mt-2">
+                                <div class="input-group flex-nowrap">
+                                    <span class="input-group-text" id="addon-wrapping"><i
+                                            class="fa-solid fa-pen-fancy"></i></span>
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="addRefereeName"
+                                            formControlName="refereeName" placeholder="name@example.com">
+                                        <label for="floatingInput">Enter the Refree name</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!--Refree image-->
+                        <div class="row justify-content-center">
+                            <div class="col-md mt-2">
+                                <div class="input-group flex-nowrap">
+                                    <span class="input-group-text" id="addon-wrapping"><i
+                                            class="fa-solid fa-images"></i></span>
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="floatingInput"
+                                            formControlName="refereeImage" placeholder="name@example.com">
+                                        <label for="floatingInput">Enter the Refree image URL</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!--Refree Match Exprience-->
+                        <div class="row justify-content-center">
+                            <div class="col-md mt-2">
+                                <div class="input-group flex-nowrap">
+                                    <span class="input-group-text" id="addon-wrapping"><i
+                                            class="fa-solid fa-ranking-star"></i></span>
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="addRefereeExperience"
+                                            formControlName="noOfMatches" placeholder="name@example.com">
+                                        <label for="floatingInput">Enter the Refree Experience</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <!--Match Refree Location-->
+                        <div class="row justify-content-center">
+                            <div class="col-md mt-2">
+                                <div class="input-group flex-nowrap">
+                                    <span class="input-group-text" id="addon-wrapping"><i
+                                            class="fa-solid fa-location-dot"></i></span>
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="addRefereeLocation"
+                                            formControlName="refereeLocation" placeholder="name@example.com">
+                                        <label for="floatingInput">Enter the Refree Location</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" (click)="addRefreeList()">Save Referee</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!--Edit/Update Popup Referee Form-->
+    <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Referee Details...</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <div class=" main container-fluid-md text-center">
+
+                        <form class="p-5" #form="ngForm" (ngSubmit)="UpdateRefree()">
+
+                            <div class="row">
+                                <div class="col">
+                                    <h2>Register Refree...</h2>
+                                </div>
+                            </div>
+
+                            <!--Refree Name-->
+                            <div class="row justify-content-center">
+                                <div class="col-md mt-2">
+                                    <div class="input-group flex-nowrap">
+                                        <span class="input-group-text" id="addon-wrapping"><i
+                                                class="fa-solid fa-pen-fancy"></i></span>
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control" id="floatingInput"
+                                                name="refereeName" [(ngModel)]="EditRefree.refereeName"
+                                                placeholder="name@example.com">
+                                            <label for="floatingInput">Enter the Refree name</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <!--Refree image-->
+                            <div class="row justify-content-center">
+                                <div class="col-md mt-2">
+                                    <div class="input-group flex-nowrap">
+                                        <span class="input-group-text" id="addon-wrapping"><i
+                                                class="fa-solid fa-images"></i></span>
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control" id="floatingInput"
+                                                name="refereeImage" [(ngModel)]="EditRefree.refereeImage"
+                                                placeholder="name@example.com">
+                                            <label for="floatingInput">Enter the Refree image URL</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <!--Refree Match Exprience-->
+                            <div class="row justify-content-center">
+                                <div class="col-md mt-2">
+                                    <div class="input-group flex-nowrap">
+                                        <span class="input-group-text" id="addon-wrapping"><i
+                                                class="fa-solid fa-ranking-star"></i></span>
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control" id="floatingInput"
+                                                name="noOfMatches" [(ngModel)]="EditRefree.noOfMatches"
+                                                placeholder="name@example.com">
+                                            <label for="floatingInput">Enter the Refree Experience</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <!--Match Refree Location-->
+                            <div class="row justify-content-center">
+                                <div class="col-md mt-2">
+                                    <div class="input-group flex-nowrap">
+                                        <span class="input-group-text" id="addon-wrapping"><i
+                                                class="fa-solid fa-location-dot"></i></span>
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control" id="floatingInput"
+                                                name="refereeLocation" [(ngModel)]="EditRefree.refereeLocation"
+                                                placeholder="name@example.com">
+                                            <label for="floatingInput">Enter the Refree Location</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </form>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" (click)="UpdateRefree()">Update Referee</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+</div>

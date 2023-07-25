@@ -1,11 +1,14 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { IndexComponent } from './index/index.component';
+import { AddRefereeComponent } from './admin/add-referee/add-referee.component';
+import { OrganiserListComponent } from './admin/organiser-list/organiser-list.component';
 
 const routes: Routes = [
-  {path: '', component: IndexComponent}, 
-  {path: 'admin', loadChildren: () => import('./admin/admin.module').then(a => a.AdminModule)},
-  {path: 'user', loadChildren: () => import('./user/user.module').then(s => s.UserModule)}
+  {path: '', component: AddRefereeComponent},
+  {
+    path: 'Organiserlist',
+    component:OrganiserListComponent
+  }
 ];
 
 @NgModule({
