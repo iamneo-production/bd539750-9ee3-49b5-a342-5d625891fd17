@@ -3,7 +3,8 @@ import { Router } from '@angular/router';
 import { AuthServiceService } from 'src/app/services/auth-service.service';
 import { EmailService } from 'src/app/services/email-service.service';
 
-export class OrganiserListComponent implements OnInit {
+export class OrganiserListComponent implements OnInit
+{
 
   constructor(private authService: AuthServiceService,private route: Router, private emailService: EmailService) { }
 

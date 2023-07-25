@@ -9,7 +9,7 @@ import { OrganiserListComponent } from './organiser-list/organiser-list.componen
 
 
 @NgModule({
-  declarations: [AddRefereeComponent, OrganiserListComponent],
+  declarations: [AddRefereeComponent,OrganiserListComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,
