@@ -1,13 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AuthServiceService } from './auth-service.service';
+// import { AuthServiceService } from './auth-service.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BookEventService {
+  getEventsUisngRefereeName: any;
+  getEventsUisngTeamOneName: any;
+  getEventsUisngTeamTwoName: any;
+  userIdService: any;
 
-  constructor(private http: HttpClient, private userIdService: AuthServiceService) {}
+  constructor(private http: HttpClient) {}
 
   userid: any;
 
