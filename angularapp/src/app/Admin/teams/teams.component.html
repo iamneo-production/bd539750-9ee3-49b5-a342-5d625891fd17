@@ -4,12 +4,13 @@
     <!--Venues-->
     <div class="main container-fluid-md pb-5">
 
-        <!--Search Venues-->
+        <!--Search Team-->
         <nav class="navbar bg-light">
-            <div class="container-fluid text justify-content-center mt-4">
+            <div class="container-fluid text justify-content-center mt-2">
                 <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
+                        name="search" [(ngModel)]="input" />
+                    <button (click)="onSearch()" class="btn btn-outline-success" type="submit">Search</button>
                 </form>
             </div>
         </nav>
@@ -19,7 +20,7 @@
         <!--Venues Card-->
 
         <div class="row mt-5 venues-card" style="width: 80%; margin: auto;">
-            <div class="col-md-4 mb-3" *ngFor="let team of TeamList" id="adminTeamGrid1">
+            <div class="col-md-4 mb-3" *ngFor="let team of TeamList | filterPipe : searchInput:'teamName';">
                 <a class="nav-link">
                     <div class="card">
                         <img src={{team.teamImage}} class="card-img-top" alt="...">
@@ -33,10 +34,19 @@
 
                             <div class="d-flex justify-content-between mt-2">
                                 <p class="card-text">{{team.teamLocation}}</p>
-                                <span> <a id="deleteTeam" style="cursor:pointer" (click)="deleteTeamDetails(team.teamId)"><i
-                                            class="fa-solid fa-trash-can fs-4"></i></a>
-                                    <a id="editTeam" style="color: rgb(55, 52, 52);"><i
-                                            class="fa-solid fa-pen-to-square fs-4 ms-2"></i></a></span>
+                                <span>
+                                    <a data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                        (click)="getPlayers(team.teamId)" style="cursor:pointer"
+                                        ngbTooltip="View Players" [placement]="'bottom'"><i
+                                            class="fa-solid fa-people-group fs-4"></i></a>
+
+                                    <a style="cursor:pointer" ngbTooltip="Delete Team" [placement]="'bottom'"
+                                        (click)="deleteTeamDetails(team.teamId)"><i
+                                            class="fa-solid fa-trash-can fs-4 ms-3"></i></a>
+                                    <a (click)="getTeam(team.teamId)" ngbTooltip="Edit Team" [placement]="'bottom'"
+                                        data-bs-toggle="modal" data-bs-target="#exampleModal2"
+                                        style="color: rgb(55, 52, 52); cursor: pointer;"><i
+                                            class="fa-solid fa-pen-to-square fs-4 ms-3"></i></a></span>
                             </div>
 
                         </div>
@@ -46,8 +56,395 @@
 
             <div class="row mt-3">
                 <div class="col-6">
-                    <button id="addTeamButton" type="submit" class="btn btn-success p-2 fw-bold" routerLink="/add-team">ADD TEAM</button>
+                    <button type="submit" class="btn btn-success p-2 fw-bold" routerLink="/add-team">ADD TEAM</button>
                 </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<!--Player List popup-->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Players Detail</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-striped-columns text-center">
+                    <caption>Players-Detail.</caption>
+                    <thead>
+                        <tr>
+                            <th>Player FirstName</th>
+                            <th>Player LastName</th>
+                            <th>Gender</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                    <tbody *ngFor="let player of PlayerList">
+                        <tr>
+
+                            <td>{{player.playerFirstName}}</td>
+                            <td>{{player.playerLastName}}</td>
+                            <td>{{player.playerGender}}</td>
+                            <td><a (click)="getPlayer(player.playerId)" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal1" style="color: rgb(55, 52, 52); cursor: pointer;"><i
+                                        class="fa-solid fa-pen-to-square"></i></a></td>
+                            <td><a style="cursor:pointer" (click)="deletePlayer(player.playerId)"><i
+                                        class="fa-solid fa-trash-can"></i></a></td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button data-bs-toggle="modal" data-bs-target="#exampleModal3" type="button" class="btn btn-primary">Add
+                    Player</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!--Edit Player Popup-->
+<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Player...</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form #form="ngForm">
+                    <div class="row mt-2">
+                        <div class="col">
+                            <div class="input-group flex-nowrap">
+                                <span class="input-group-text" id="addon-wrapping"><i
+                                        class="fa-solid fa-pen-fancy"></i></span>
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="floatingInput"
+                                        placeholder="name@example.com" name="playerFirstName"
+                                        [(ngModel)]="EditPlayer.playerFirstName" required>
+                                    <label for="floatingInput">Player FirstName:</label>
+                                </div>
+                            </div>
+
+                            <!--Validation Player FirstName-->
+                            <div *ngIf="form.controls.playerFirstName.invalid && form.controls.playerFirstName.touched">
+                                <div class="text-danger" *ngIf="form.controls.playerFirstName.errors?.required">
+                                    FirstName is required.
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-2">
+                        <div class="col">
+                            <div class="input-group flex-nowrap">
+                                <span class="input-group-text" id="addon-wrapping"><i
+                                        class="fa-solid fa-pen-fancy"></i></span>
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="floatingInput"
+                                        placeholder="name@example.com" name="playerLastName"
+                                        [(ngModel)]="EditPlayer.playerLastName">
+                                    <label for="floatingInput">Player LastName:</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-2">
+                        <div class="col">
+                            <div class="input-group flex-nowrap">
+                                <span class="input-group-text" id="addon-wrapping"><i
+                                        class="fa-solid fa-pen-fancy"></i></span>
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="floatingInput"
+                                        placeholder="name@example.com" name="playerAge"
+                                        [(ngModel)]="EditPlayer.playerAge">
+                                    <label for="floatingInput">Player Age:</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-2">
+                        <div class="col">
+                            <div class="input-group flex-nowrap">
+                                <span class="input-group-text" id="addon-wrapping"><i
+                                        class="fa-solid fa-pen-fancy"></i></span>
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="floatingInput" name="playerGender"
+                                        placeholder="name@example.com" [(ngModel)]="EditPlayer.playerGender">
+                                    <label for="floatingInput">Player Gender:</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" (click)="updatePlayer()" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!--Edit Team Popup-->
+<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Team</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="EditTeamForm">
+                    <div class="row mt-2">
+
+                        <!--Team Name-->
+                        <div class="col">
+                            <div class="input-group flex-nowrap">
+                                <span class="input-group-text" id="addon-wrapping"><i
+                                        class="fa-solid fa-pen-fancy"></i></span>
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="floatingInput"
+                                        placeholder="name@example.com" formControlName="teamName">
+                                    <label for="floatingInput">Team Name:</label>
+                                </div>
+                            </div>
+
+                            <!--Validation Team Name-->
+                            <div class="ms-2"
+                                *ngIf="EditTeamForm.get('teamName').errors && (EditTeamForm.get('teamName').touched ||EditTeamForm.get('teamName').dirty)">
+                                <div class="form-text text-danger" *ngIf="EditTeamForm.get('teamName').errors.required">
+                                    Team Name is required.
+                                </div>
+                            </div>
+
+                            <div class="ms-2"
+                                *ngIf="EditTeamForm.get('teamName').errors && (EditTeamForm.get('teamName').touched ||EditTeamForm.get('teamName').dirty)">
+                                <div class="form-text text-danger" *ngIf="EditTeamForm.get('teamName').errors.pattern">
+                                    Invalid Team Name.
+                                </div>
+
+                                <div class="form-text text-danger"
+                                    *ngIf="EditTeamForm.get('teamName').errors.minlength">
+                                    Team Name is short.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Team Image-->
+                    <div class="row mt-2">
+                        <div class="col">
+                            <div class="input-group flex-nowrap">
+                                <span class="input-group-text" id="addon-wrapping"><i
+                                        class="fa-solid fa-pen-fancy"></i></span>
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="floatingInput"
+                                        placeholder="name@example.com" formControlName="teamImage"> <label
+                                        for="floatingInput">Team Image:</label>
+                                </div>
+                            </div>
+
+                            <!--Validation Team Image-->
+                            <div class="ms-2"
+                                *ngIf="EditTeamForm.get('teamImage').errors && (EditTeamForm.get('teamImage').touched ||EditTeamForm.get('teamImage').dirty)">
+                                <div class="form-text text-danger"
+                                    *ngIf="EditTeamForm.get('teamImage').errors.required">
+                                    Team Image is required.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row mt-2">
+                        <div class="col">
+                            <div class="input-group flex-nowrap">
+                                <span class="input-group-text" id="addon-wrapping"><i
+                                        class="fa-solid fa-pen-fancy"></i></span>
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="floatingInput"
+                                        placeholder="name@example.com" formControlName="teamLocation">
+                                    <label for="floatingInput">Team Location:</label>
+                                </div>
+                            </div>
+
+                            <!--Validation Team Location-->
+                            <div class="ms-2"
+                                *ngIf="EditTeamForm.get('teamLocation').errors && (EditTeamForm.get('teamLocation').touched ||EditTeamForm.get('teamLocation').dirty)">
+                                <div class="form-text text-danger"
+                                    *ngIf="EditTeamForm.get('teamLocation').errors.required">
+                                    Team Location is required!
+                                </div>
+
+                                <div class="form-text text-danger"
+                                    *ngIf="EditTeamForm.get('teamLocation').errors.pattern">
+                                   Invalid Team Location!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!--Team Discription-->
+                    <div class="row mt-2">
+                        <div class="col">
+                            <div class="form-floating mt-2">
+                                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
+                                    style="height: 5rem" formControlName="teamDescription"></textarea>
+                                <label for="floatingTextarea2">Team Description:</label>
+                            </div>
+                        </div>
+
+                        <!--Validation Team Description-->
+                        <div class="ms-2"
+                            *ngIf="EditTeamForm.get('teamDescription').errors && (EditTeamForm.get('teamDescription').touched ||EditTeamForm.get('teamDescription').dirty)">
+                            <div class="form-text text-danger"
+                                *ngIf="EditTeamForm.get('teamDescription').errors.required">
+                                Team Description is required!
+                            </div>
+                        </div>
+                    </div>
+
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" (click)="updateTeam()" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--Add Player Popup-->
+<div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Add Player...</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="playerForm">
+
+                    <!--Player FirstName-->
+                    <div class="row mt-2">
+                        <div class="col">
+                            <div class="input-group flex-nowrap">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="floatingInput"
+                                        formControlName="playerFirstName" placeholder="name@example.com">
+                                    <label for="floatingInput">Enter Player Firstname</label>
+                                </div>
+                            </div>
+
+                            <!--Validation Player FirstName-->
+                            <div class="ms-2"
+                                *ngIf="playerForm.get('playerFirstName').errors && (playerForm.get('playerFirstName').touched ||playerForm.get('playerFirstName').dirty)">
+                                <div class="form-text text-danger"
+                                    *ngIf="playerForm.get('playerFirstName').errors.required">
+                                    Player FirstName is required!
+                                </div>
+
+                                <div class="form-text text-danger"
+                                    *ngIf="playerForm.get('playerFirstName').errors.pattern">
+                                    Invalid Player FirstName format!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col">
+                            <div class="input-group flex-nowrap">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="floatingInput"
+                                        formControlName="playerLastName" placeholder="name@example.com">
+                                    <label for="floatingInput">Enter Player Lastname</label>
+                                </div>
+                            </div>
+
+                            <!--Validation Player LastName-->
+                            <div class="ms-2"
+                                *ngIf="playerForm.get('playerLastName').errors && (playerForm.get('playerLastName').touched ||playerForm.get('playerLastName').dirty)">
+                                <div class="form-text text-danger"
+                                    *ngIf="playerForm.get('playerLastName').errors.required">
+                                    Player LastName is required!
+                                </div>
+
+                                <div class="form-text text-danger"
+                                    *ngIf="playerForm.get('playerLastName').errors.pattern">
+                                    Invalid Player LastName format!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row mt-2">
+                        <div class="col">
+                            <div class="input-group flex-nowrap">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="floatingInput"
+                                        formControlName="playerAge" placeholder="name@example.com">
+                                    <label for="floatingInput">Enter Player Age</label>
+                                </div>
+                            </div>
+
+                            <!--Validation Player Age-->
+                            <div class="ms-2"
+                                *ngIf="playerForm.get('playerAge').errors && (playerForm.get('playerAge').touched ||playerForm.get('playerAge').dirty)">
+                                <div class="form-text text-danger" *ngIf="playerForm.get('playerAge').errors.required">
+                                    Player Age is required!
+                                </div>
+
+                                <div class="form-text text-danger" *ngIf="playerForm.get('playerAge').errors.pattern">
+                                    Invalid Player Age format!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col">
+                            <select class="form-select p-3" aria-label="Default select example"
+                                formControlName="playerGender" id="admin/user">
+                                <option value="" disabled selected>Select Gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Others">Others</option>
+                            </select>
+
+                            <!--Validation Player LastName-->
+                            <div class="ms-2"
+                                *ngIf="playerForm.get('playerGender').errors && (playerForm.get('playerGender').touched ||playerForm.get('playerGender').dirty)">
+                                <div class="form-text text-danger"
+                                    *ngIf="playerForm.get('playerGender').errors.required">
+                                    Player Gender is required!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" (click)="addPlayer()" class="btn btn-primary">Save Changes</button>
             </div>
         </div>
     </div>

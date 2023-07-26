@@ -4,6 +4,9 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class TeamsService {
+  setPlayer: any;
+  updatePlayers: any;
+  getPlayerDetailsUsingPlayerId: any;
 
  constructor(private http: HttpClient) {}
 
