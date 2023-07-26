@@ -61,7 +61,7 @@ export class TeamsComponent implements OnInit {
     console.log(this.TeamList.values);
 
     this.teamService.getAllTeamDetails().subscribe((result) => {
-      this.TeamList =result;
+      this.TeamList = result;
     });
 
     this.playerForm = new FormGroup({
@@ -101,7 +101,7 @@ export class TeamsComponent implements OnInit {
       this.EditTeamForm.get('playerCounts').setValue(result.playerCounts);
       this.EditTeamForm.get('teamDescription').setValue(result.teamDescription);
       this.EditTeamForm.get('teamImage').setValue(result.teamImage);
-      
+
     });
   }
 
@@ -192,6 +192,11 @@ export class TeamsComponent implements OnInit {
           this.toast.error(err?.error.message, "Failed");
         },
       });
+    }
+
+    else {
+      this.playerForm.markAllAsTouched();
+      this.toast.error("Please fill all the required fields", "Error");
     }
   }
 

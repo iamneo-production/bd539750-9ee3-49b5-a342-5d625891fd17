@@ -49,12 +49,10 @@ export class LoginComponent {
     if (this.loginForm.valid) {
       this.auth.login(this.loginForm.value).subscribe({
         next: (result) => {
-
+          
           this.auth.storeToken(result.token);
-          this.userStore.getRoleFromStore().subscribe((val) => {
             let roleFromToken = this.auth.getRoleFromToken();
-            this.role = val || roleFromToken;
-
+            this.role = roleFromToken;
             if (this.role == 'user') {
               this.route.navigate(['/user-homepage']).then(() => {
                 location.reload();
@@ -63,7 +61,7 @@ export class LoginComponent {
             } else if (this.role == 'admin') {
               this.route.navigate(['/admin-venue-list']);
             }
-          });
+         
 
           this.toast.success(result.message, "Success");
         },

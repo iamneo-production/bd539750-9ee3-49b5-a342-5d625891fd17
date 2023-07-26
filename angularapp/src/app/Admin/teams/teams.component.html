@@ -20,7 +20,7 @@
         <!--Venues Card-->
 
         <div class="row mt-5 venues-card" style="width: 80%; margin: auto;">
-            <div class="col-md-4 mb-3" *ngFor="let team of TeamList | filterPipe : searchInput:'teamName';">
+            <div class="col-md-4 mb-3" *ngFor="let team of TeamList | filterPipe : searchInput : 'teamName';">
                 <a class="nav-link">
                     <div class="card">
                         <img src={{team.teamImage}} class="card-img-top" alt="...">

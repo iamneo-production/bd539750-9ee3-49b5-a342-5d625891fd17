@@ -81,6 +81,10 @@ export class AddRefereeComponent implements OnInit {
           },
         });
     }
+    else {
+      this.refereeForm.markAllAsTouched();
+      this.toast.error("Please fill all the required fields", "Error");
+    }
   }
 
 
