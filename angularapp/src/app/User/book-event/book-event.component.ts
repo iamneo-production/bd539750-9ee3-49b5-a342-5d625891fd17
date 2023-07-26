@@ -378,7 +378,6 @@ export class BookEventComponent implements OnInit {
 
     if (!this.check) {
       if (this.bookEventForm.valid) {
-        console.log('hello hello');
         this.eventService
           .setEventDetails(this.bookEventForm.value, this.VenueId)
           .subscribe({
@@ -403,6 +402,10 @@ export class BookEventComponent implements OnInit {
             this.route.navigate(['/user-homepage']);
           },
         });
+      }
+      else {
+        this.bookEventForm.markAllAsTouched();
+        this.toast.error("Please fill all the required fields", "Error");
       }
     } else {
       this.toast.error(
