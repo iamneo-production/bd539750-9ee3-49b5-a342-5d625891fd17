@@ -542,7 +542,7 @@ export class BookEventComponent implements OnInit {
       );
     }
 
-    else {
+    else if(isHidden3 && (!isHidden && !isHidden1 && !isHidden2)) {
       // Clear the selected date if it's hidden
       this.selectedFromDate = null;
 
@@ -699,7 +699,7 @@ export class BookEventComponent implements OnInit {
       );
     }
 
-    else {
+    else if(isHidden3 && (!isHidden && !isHidden1 && !isHidden2)) {
       // Clear the selected date if it's hidden
       this.selectedToDate = null;
 
