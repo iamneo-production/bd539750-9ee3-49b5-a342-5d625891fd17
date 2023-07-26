@@ -10,33 +10,36 @@ import { RefereeService } from 'src/app/services/referee.service';
 })
 export class AddRefereeComponent implements OnInit {
 
-  refereeForm: any;
+  refereeForm: FormGroup;
+
+  //Below in RefereeList we store all the referee data which we get from the backend
   RefreeList = [];
-  EditRefree = {
-    refereeId: '',
-    refereeName: '',
-    refereeImage: '',
-    noOfMatches: '',
-    refereeLocation: '',
-  };
+
+  EditrefereeForm = new FormGroup({
+    refereeId: new FormControl(''),
+    refereeName: new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-Z\s]*$/)]),
+    refereeImage: new FormControl('', [Validators.required]),
+    noOfMatches: new FormControl('', [Validators.required, Validators.pattern(/^(?!0+$)\d+$/)]),
+    refereeLocation: new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-Z\s]*$/)]),
+  });
 
   constructor(
     private refereeService: RefereeService,
-    private route:Router,
+    private route: Router,
   ) { }
 
   ngOnInit(): void {
 
     this.refereeForm = new FormGroup({
-      refereeName: new FormControl('', [Validators.required]),
+      refereeName: new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-Z\s]*$/)]),
       refereeImage: new FormControl('', [Validators.required]),
-      noOfMatches: new FormControl('', [Validators.required]),
-      refereeLocation: new FormControl('', [Validators.required]),
+      noOfMatches: new FormControl('', [Validators.required, Validators.pattern(/^(?!0+$)\d+$/)]),
+      refereeLocation: new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-Z\s]*$/)]),
     });
 
     //Get All Refree Details
     this.refereeService.getAllRefreeDetails().subscribe((result) => {
-      this.RefreeList = <any>result;
+      this.RefreeList = result;
     });
 
   }
@@ -44,17 +47,20 @@ export class AddRefereeComponent implements OnInit {
   //Fetch particular Referee detail for update
   RefDetails(id: any) {
     this.refereeService.getRefreeDetails(id).subscribe((result) => {
-      this.EditRefree = result;
-      console.log(this.EditRefree);
+      this.EditrefereeForm.get('refereeId').setValue(result.refereeId);
+      this.EditrefereeForm.get('refereeName').setValue(result.refereeName);
+      this.EditrefereeForm.get('noOfMatches').setValue(result.noOfMatches);
+      this.EditrefereeForm.get('refereeImage').setValue(result.refereeImage);
+      this.EditrefereeForm.get('refereeLocation').setValue(result.refereeLocation);
     });
   }
 
 
   UpdateRefree() {
-    this.refereeService.updateRefree(this.EditRefree.refereeId, this.EditRefree).subscribe({
+    this.refereeService.updateRefree(this.EditrefereeForm.get('refereeId').value, this.EditrefereeForm.value).subscribe({
       next: (response) => {
         alert("Referee Updated Successfully!");
-       location.reload();
+        location.reload();
       },
     });
   }
@@ -63,7 +69,7 @@ export class AddRefereeComponent implements OnInit {
   addRefreeList() {
     if (this.refereeForm.valid) {
       this.refereeService
-        .setRefreeDetails(<any>this.refereeForm.value)
+        .setRefreeDetails(this.refereeForm.value)
         .subscribe({
           next: (result) => {
             alert("Referee Added Successfully!");
@@ -84,6 +90,14 @@ export class AddRefereeComponent implements OnInit {
         location.reload();
       },
     });
+  }
+
+
+  //Search the referee
+  input = '';
+  searchInput = '';
+  onSearch() {
+    this.searchInput = this.input;
   }
 
 }
