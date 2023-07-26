@@ -19,21 +19,44 @@ import { VenueServiceService } from 'src/app/Services/venue-service.service';
 export class BookEventComponent implements OnInit {
 
   VenueId: any;
+  //In teamArray we store all the team details which we get from backend
   teamArray = [];
+
+  //In refereeArray we store all the team details which we get from backend
   refreeArray = [];
+
+  //In refereeOptions we store all the names of Referee who are present in refereeArray
   refreeOptions = [];
+
+  //In firstTeamOptions we store all the names of TeamOne name who are present in teamArray
   firstTeamOptions = [];
+
   selectedTeam1: any;
+  //In secondTeamOptions we store all the names of Teamtwo name who are present in teamArray
   secondTeamOptions = [];
+
   Events = [];
+  // In EventsTeamOne we store all the events which are booked for teamOne Name
   EventsTeamOne = [];
+
+  // In EventsTeamOne we store all the events which are booked for teamTwo Name
   EventsTeamTwo = [];
+
+  // In EventsReferee we store all the events which are booked for teamTwo Name
   EventsReferee = [];
+
+  // In dateArrayStore all the dates in which the venue is booked from Event array
   dateArray = [];
+
+  // In dateArrayTeamOne all the dates in which the TeamOne is booked is booked
   dateArrayTeamOne = [];
+
+  // In dateArrayTeamTwo all the dates in which the TeamOne is booked is booked
   dateArrayTeamTwo = [];
+
+  // In dateArrayReferee all the dates in which the TeamOne is booked is booked
   dateArrayReferee = [];
-  selectedDateArray = [];
+
   fromDate: any;
   toDate: any;
   minDate: any;
@@ -285,7 +308,7 @@ export class BookEventComponent implements OnInit {
     });
   }
 
-
+  selectedDateArray = [];
   check: boolean;
   checkFromDate: any;
   checkToDate: any;
@@ -479,7 +502,7 @@ export class BookEventComponent implements OnInit {
       );
     }
 
-   else if (isHidden && isHidden3 && (!isHidden2 && !isHidden1)) {
+    else if (isHidden && isHidden3 && (!isHidden2 && !isHidden1)) {
       // Clear the selected date if it's hidden
       this.selectedFromDate = null;
 
@@ -542,7 +565,7 @@ export class BookEventComponent implements OnInit {
       );
     }
 
-    else if(isHidden3 && (!isHidden && !isHidden1 && !isHidden2)) {
+    else if (isHidden3 && (!isHidden && !isHidden1 && !isHidden2)) {
       // Clear the selected date if it's hidden
       this.selectedFromDate = null;
 
@@ -699,7 +722,7 @@ export class BookEventComponent implements OnInit {
       );
     }
 
-    else if(isHidden3 && (!isHidden && !isHidden1 && !isHidden2)) {
+    else if (isHidden3 && (!isHidden && !isHidden1 && !isHidden2)) {
       // Clear the selected date if it's hidden
       this.selectedToDate = null;
 

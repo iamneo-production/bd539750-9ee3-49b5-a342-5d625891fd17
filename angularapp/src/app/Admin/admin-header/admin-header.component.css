@@ -37,4 +37,8 @@ nav {
     font-size: 13px;
     font-weight: bold;
   }
+
+  .iconclass{
+    display: none;
+  }
 }
