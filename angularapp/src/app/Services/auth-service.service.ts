@@ -21,19 +21,19 @@ export class AuthServiceService {
   }
 
   getAllorganiser() {
-    return this.http.get<any>(`https://8080-dffcfdfcebbadcdbbaadcffdfcbdfeeeb.project.examly.io/api/Organiser`);
+    return this.http.get<any>(`https://8080-dffcfdfcebbadcdbbaadcffdbacbaecbeeec.project.examly.io/api/Organiser`);
   }
 
   getSingleOrganiser(id) {
-    return this.http.get<any>(`https://8080-dffcfdfcebbadcdbbaadcffdfcbdfeeeb.project.examly.io/api/Organiser/` + id);
+    return this.http.get<any>(`https://8080-dffcfdfcebbadcdbbaadcffdbacbaecbeeec.project.examly.io/api/Organiser/` + id);
   }
 
   deleteOrganiser(id) {
-    return this.http.delete<any>(`https://8080-dffcfdfcebbadcdbbaadcffdfcbdfeeeb.project.examly.io/api/Organiser/` + id);
+    return this.http.delete<any>(`https://8080-dffcfdfcebbadcdbbaadcffdbacbaecbeeec.project.examly.io/api/Organiser/` + id);
   }
 
   updateOrganiser(data, id) {
-    return this.http.put<any>(`https://8080-dffcfdfcebbadcdbbaadcffdfcbdfeeeb.project.examly.io/api/Organiser/` + id, data);
+    return this.http.put<any>(`https://8080-dffcfdfcebbadcdbbaadcffdbacbaecbeeec.project.examly.io/api/Organiser/` + id, data);
   }
 
   login(loginObj: any) {
