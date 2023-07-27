@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "9zI/VBx/tXBousms/cvaJaJlTSnwjcWP73q9KoC3AV6yR65Xuxk+vnQSMumWCL1shR/67sCnM4i0zaE4158olg==",
+  "dgSpecHash": "M4OPAJgCtn1JtfXrMRCS7tjEeCr9/JWIErp3bTkd28PVbDjklh+MUPm1nVv93terHHhgJz7drro+HRfHGHNNfg==",
   "success": true,
   "projectFilePath": "/home/coder/project/workspace/dotnetapp/WebApp/WebApp.csproj",
   "expectedPackageFiles": [
@@ -171,7 +171,10 @@
     "/home/coder/.nuget/packages/system.xml.readerwriter/4.3.0/system.xml.readerwriter.4.3.0.nupkg.sha512",
     "/home/coder/.nuget/packages/system.xml.xdocument/4.3.0/system.xml.xdocument.4.3.0.nupkg.sha512",
     "/home/coder/.nuget/packages/system.xml.xmldocument/4.3.0/system.xml.xmldocument.4.3.0.nupkg.sha512",
-    "/home/coder/.nuget/packages/system.xml.xmlserializer/4.3.0/system.xml.xmlserializer.4.3.0.nupkg.sha512"
+    "/home/coder/.nuget/packages/system.xml.xmlserializer/4.3.0/system.xml.xmlserializer.4.3.0.nupkg.sha512",
+    "/home/coder/.nuget/packages/microsoft.netcore.app.ref/5.0.0/microsoft.netcore.app.ref.5.0.0.nupkg.sha512",
+    "/home/coder/.nuget/packages/microsoft.aspnetcore.app.ref/5.0.0/microsoft.aspnetcore.app.ref.5.0.0.nupkg.sha512",
+    "/home/coder/.nuget/packages/microsoft.netcore.app.host.linux-x64/5.0.17/microsoft.netcore.app.host.linux-x64.5.0.17.nupkg.sha512"
   ],
   "logs": []
 }
