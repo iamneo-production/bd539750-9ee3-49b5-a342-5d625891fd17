@@ -29,10 +29,12 @@ namespace dotnetapp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddControllersWithViews().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             //string connectionString = Configuration.GetConnectionString("myconnstring");
            // services.AddDbContext<ProductDBContext>(opt => opt.UseSqlServer(connectionString));
            // services.AddScoped<IProductService, ProductService>();
-            services.AddCors();
+            services.AddCors(option =>{option.AddPolicy("Mypolicy", builder =>{builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();});});
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -56,8 +58,12 @@ namespace dotnetapp
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            
+            app.UseCors("Mypolicy");
 
             app.UseAuthorization();
+
+            app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {

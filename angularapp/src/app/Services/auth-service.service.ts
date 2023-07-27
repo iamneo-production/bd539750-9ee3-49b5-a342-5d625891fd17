@@ -37,7 +37,7 @@ export class AuthServiceService {
   }
 
   login(loginObj: any) {
-    return this.http.post<any>(`${this.baseUrl}/admin/login`, loginObj);
+    return this.http.post<any>(`${this.baseUrl}admin/login`, loginObj);
   }
 
   storeToken(tokenValue: string) {

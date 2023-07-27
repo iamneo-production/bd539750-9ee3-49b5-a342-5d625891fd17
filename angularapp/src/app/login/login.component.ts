@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
 
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required,Validators.pattern(/^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]+$/)]),
+    password: new FormControl('', [Validators.required, Validators.pattern(/^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]+$/)]),
   });
 
 
@@ -51,16 +51,18 @@ export class LoginComponent implements OnInit {
             this.role = val || roleFromToken;
 
             if (this.role == 'user') {
+              this.toast.success("Organiser login successfully", "Success");
               this.route.navigate(['/user-homepage']).then(() => {
                 location.reload();
               });
 
             } else if (this.role == 'admin') {
+              this.toast.success("Admin login successfully", "Success");
               this.route.navigate(['/admin-venue-list']);
             }
           });
 
-          this.toast.success(result.message, "Success");
+
         },
         error: (err) => {
           this.toast.error("Incorrect email or password", "Failed");

@@ -176,6 +176,22 @@ namespace WebApp.Controllers
             return NoContent();
         }
 
+         //Delete Player
+        [HttpDelete("/deletePlayers/{id}")]
+        public async Task<IActionResult> DeletePlayers(int id)
+        {
+            var player = await _context.playerInformations.FindAsync(id);
+            if (player == null)
+            {
+                return NotFound();
+            }
+
+            _context.playerInformations.Remove(player);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
        
 
         private bool TeamExists(int id)

@@ -24,6 +24,6 @@ export class RefereeService {
   }
 
   deleteRefree(id: any) {
-    return this.http.delete(`https://8080-dffcfdfcebbadcdbbaadcffdbacbaecbeeec.project.examly.io/admin/deleteReferee/` + id);
+    return this.http.delete(`https://8080-dffcfdfcebbadcdbbaadcffdbacbaecbeeec.project.examly.io/admin/deleteRefree/` + id);
   }
 }
