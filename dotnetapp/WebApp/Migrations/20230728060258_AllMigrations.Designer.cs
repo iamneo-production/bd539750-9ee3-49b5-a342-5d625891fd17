@@ -9,8 +9,8 @@ using WebApp.Context;
 namespace WebApp.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230630035217_v5")]
-    partial class v5
+    [Migration("20230728060258_AllMigrations")]
+    partial class AllMigrations
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

@@ -9,6 +9,6 @@ export class EmailService {
   constructor(private http:HttpClient) { }
 
   sendEmail(data: any) {
-    return this.http.post<any>(`https://8080-dffcfdfcebbadcdbbaadcffdfcbdfeeeb.project.examly.io/api/Email/sendEmail`, data);
+    return this.http.post<any>(`https://8080-baaddbcbfbacadcdbbaadcffdfcbdfeeeb.project.examly.io/api/Email/sendEmail`, data);
   }
 }
