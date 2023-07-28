@@ -28,7 +28,7 @@ export class BookEventService {
   }
 
   getEventDetails(id: any) {
-    return this.http.get<any>(`https://8080-dffcfdfcebbadcdbbaadcffdbacbaecbeeec.project.examly.io/getEventUsingID/` + id);
+    return this.http.get<any>(`https://8080-dffcfdfcebbadcdbbaadcffdbacbaecbeeec.project.examly.io/getEventUsingID` + id);
   }
 
   deleteEvent(id: any) {
