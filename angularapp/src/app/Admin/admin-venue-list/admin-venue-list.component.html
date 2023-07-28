@@ -1,55 +1,93 @@
 <app-admin-header></app-admin-header>
-
-
 <div class="container-fluid">
-
     <!--Venues-->
     <div class="main container-fluid-md pb-5">
-
         <!--Search Venues-->
         <nav class="navbar bg-light">
-            <div class="container-fluid text justify-content-center">
+            <div class="container-fluid text justify-content-center mt-2">
                 <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search"
+                        [(ngModel)]="input"/>
+                    <button (click)="onSearch()" class="btn btn-outline-success" type="submit">Search</button>
                 </form>
             </div>
         </nav>
 
-
-
         <!--Venues Card-->
 
-        <div class="row mt-5 venues-card" style="width: 80%; margin: auto;">
-            <div class="col-md-4 mb-3" *ngFor="let ven of VenueList" id="adminVenueGrid1">
+        <div class="row mt-5 venues-card" style="width: 80%; margin: auto">
+            <div class="col-md-4 mb-3" *ngFor="let ven of VenueList | filterPipe : searchInput:'venueName';"
+                id="adminVenueGrid1">
                 <a class="nav-link">
                     <div class="card">
-                        <img src={{ven.venueImageURL}} class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title fw-bold">{{ven.venueName}}</h5>
-                            <p class="card-text">Place : {{ven.venueLocation}}</p>
-
-                            <span style="color: #feb900;"><i class="fa-solid fa-star"></i><i
-                                    class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
-                                    class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
-
-                            <span class="float-end fs-4 me-2"><a id="deleteVenue" (click)="deleteVenue(ven.venueId)"
-                                    style="cursor:pointer"><i class="fa-solid fa-trash-can"></i></a></span>
-                            <span class="float-end fs-4 me-2"><a id="editVenue" [routerLink]="['/edit-venue',ven.venueId]"
-                                    style="color: rgb(55, 52, 52);"><i class="fa-solid fa-pen-to-square"></i></a></span>
-
+                        <div class="row g-0">
+                            <div class="col-4 image">
+                                <img src="{{ ven.venueImageURL }}" class=" rounded-circle w-100 mt-2 p-1" alt="..." />
+                            </div>
+                            <div class="col-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ ven.venueName }}</h5>
+                                    <h6>Place: {{ ven.venueLocation }}</h6>
+                                    <span style="color: #feb900"><i class="fa-solid fa-star"></i><i
+                                            class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                            class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
+                                    <span class="float-end fs-4 me-2"><a (click)="deleteVenue(ven.venueId)"
+                                            style="cursor: pointer"><i class="fa-solid fa-trash-can"></i></a></span>
+                                    <span class="float-end fs-4 me-2"><a [routerLink]="['/edit-venue', ven.venueId]"
+                                            style="color: rgb(55, 52, 52)"><i
+                                                class="fa-solid fa-pen-to-square"></i></a></span>
+                                </div>
+                            </div>
                         </div>
+                        <div class="row">
+                            <div class="col">
+                                <p class="p-2 paragraph mt-1" style="text-align: justify">
+                                    {{ ven.venueDescription }}
+                                </p>
+                            </div>
+                        </div>
+
+                        <button data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="getVenue(ven.venueId)"
+                            class="more-button">
+                            More...
+                        </button>
                     </div>
                 </a>
             </div>
 
             <div class="row mt-3">
                 <div class="col-6">
-                    <button id="addVenue" type="submit" class="btn btn-success p-2 fw-bold" routerLink="/add-venue">ADD VENUE</button>
+                    <button id="addVenue" type="submit" class="btn btn-success p-2 fw-bold" routerLink="/add-venue">
+                        ADD VENUE
+                    </button>
                 </div>
             </div>
         </div>
+    </div>
+</div>
 
-
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="card" style="width: 100%" *ngFor="let ven1 of VenueList">
+                    <div *ngIf="VenueID == ven1.venueId">
+                        <img src="{{ ven1.venueImageURL }}" class="card-img-top" alt="..." />
+                        <div class="card-body">
+                            <h5 class="card-title">{{ ven1.venueName }}</h5>
+                            <p class="card-text">{{ ven1.venueDescription }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    Close
+                </button>
+            </div>
+        </div>
     </div>
 </div>

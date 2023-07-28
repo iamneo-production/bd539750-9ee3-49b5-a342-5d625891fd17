@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
 import { BookEventService } from 'src/app/Services/book-event.service';
 
 @Component({
@@ -15,7 +14,6 @@ export class UpdateBookEventComponent implements OnInit {
     private eventService: BookEventService,
     private router: ActivatedRoute,
     private route: Router,
-    private toast: ToastrService
   ) { }
   //Book Event
   EditEventForm: any = new FormGroup({
@@ -86,9 +84,8 @@ export class UpdateBookEventComponent implements OnInit {
       .updateEvent(this.EditEventForm.get('eventId').value, this.EditEventForm.value)
       .subscribe({
         next: (response) => {
-          this.toast.success(
+          alert(
             'SUCCESS',
-            'Event Update successfully',
           );
           this.route.navigate(['/user-homepage']);
         },

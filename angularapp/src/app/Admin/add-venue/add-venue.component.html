@@ -1,5 +1,4 @@
 <app-admin-header></app-admin-header>
-
 <div class="container-fluid-md">
 
     <form [formGroup]="addVenueForm" class="p-5 ">
@@ -79,7 +78,7 @@
                     </div>
 
                     <div class="form-text text-danger" *ngIf="addVenueForm.get('venueLocation').errors.minlength">
-                        Minimum 10 character required!
+                        Minimum 3 character required!
                     </div>
                 </div>
             </div>

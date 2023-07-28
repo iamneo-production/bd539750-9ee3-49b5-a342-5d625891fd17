@@ -1,11 +1,16 @@
 <nav class="navbar navbar-expand-lg" style="background-color:whitesmoke;">
     <div class="container-fluid" style="width: 85%;">
-        <a routerLink="/admin-venue-list" class="navbar-brand">
+        <a routerLink="/admin-venue-list" class="navbar-brand w-25">
             <!-- Logo Image -->
-            <img src="/assets/logo.png" width="55" alt="" class="d-inline-block align-middle mr-2">
-            <!-- Logo Text -->
-            <span class="text-uppercase fw-bold ms-3">Baseball Event</span>
+            <img src="/assets/logo.png" width="45" alt="" class="d-inline-block align-middle mr-2">
+            <!-- Logo Text Image -->
+            <span class=" text-logo fw-bold ms-3"><img src="/assets/logoname.png" alt="" style="width: 50%;"></span>
+            <a class="greeting navbar-link ms-3"
+                style="position: relative; top: 8px; text-decoration: none; font-weight: 500;">Hello Admin,
+                {{this.greetings}} <i class="iconclass fa-solid {{icons}} {{animation}} ms-1"
+                    style="position: relative; top: 2px; color: #feb900; font-size: 30px;"></i></a>
         </a>
+
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -17,15 +22,30 @@
                         style="font-size: 18px; cursor: pointer;">Venue</a>
                 </li>
                 <li class="nav-item">
-                    <a id="adminTeams" class="nav-link active fw-bold" routerLink="/teams" style="font-size: 18px;">Team</a>
+                    <a id="adminTeams" class="nav-link active fw-bold" routerLink="/teams"
+                        style="font-size: 18px;">Team</a>
                 </li>
                 <li class="nav-item">
-                    <a id="adminReferee" class="nav-link active fw-bold" routerLink="/add-referee" style="font-size: 18px;">Referee</a>
+                    <a id="adminReferee" class="nav-link active fw-bold" routerLink="/add-referee"
+                        style="font-size: 18px;">Referee</a>
                 </li>
-                <li class="nav-item">
-                    <a id="logout" (click)="logOut()" class="nav-link active fw-bold"
-                        style="font-size: 18px; cursor:pointer;">Logout</a>
+
+                <li class="nav-item dropdown">
+                    <a style="font-size: 18px;" class="nav-link dropdown-toggle fw-bold" role="button"
+                        (click)="toggleDropdown()">
+                        More
+                    </a>
+                    <div class="dropdown-menu" [class.show]="isDropdownOpen" (click)="closeDropdown()">
+                        <!-- Dropdown items here -->
+                        <a id="schedules" style="color: black; margin: 0px;" class="dropdown-item"
+                            routerLink="/view-schedules">Schedules</a>
+                        <a id="organisers" style="color: black; margin: 0px;" class="dropdown-item"
+                            routerLink="/organiser-list">Organisers</a>
+                        <a id="logout" style="color: black; margin: 0px; cursor:pointer" class="dropdown-item"
+                            (click)="logOut()">Logout <i class="fa-solid fa-right-from-bracket fa-fade fa-lg ms-1"></i></a>
+                    </div>
                 </li>
+
             </ul>
         </div>
     </div>

@@ -1,46 +1,53 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-// import { AuthServiceService } from './auth-service.service';
+import { AuthServiceService } from './auth-service.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BookEventService {
-  getEventsUisngRefereeName: any;
-  getEventsUisngTeamOneName: any;
-  getEventsUisngTeamTwoName: any;
-  userIdService: any;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private userIdService: AuthServiceService) { }
 
   userid: any;
 
-  setEventDetails(data: any,VenueID) {
-    this.userid = this.userIdService.getIdFromToken();
+  setEventDetails(data: any, VenueID) {
     data.matchingId = this.userid;
-    data.venueID=VenueID;
+    data.venueID = VenueID;
 
-    return this.http.post<any>(`https://8080-dffcfdfcebbadcdbbaadcffdfcbdfeeeb.project.examly.io/bookEvent`, data);
+    return this.http.post<any>(`https://8080-baaddbcbfbacadcdbbaadcffdfcbdfeeeb.project.examly.io/user/bookEvent`, data);
   }
 
   updateEvent(id: any, data: any) {
-    return this.http.put(`https://8080-dffcfdfcebbadcdbbaadcffdfcbdfeeeb.project.examly.io/editEvent/` + id, data);
+    return this.http.put(`https://8080-baaddbcbfbacadcdbbaadcffdfcbdfeeeb.project.examly.io/user/editEvent/` + id, data);
   }
 
   getAllEventDetails() {
-    return this.http.get<any>(`https://8080-dffcfdfcebbadcdbbaadcffdfcbdfeeeb.project.examly.io/user/getSchedule`);
+    return this.http.get<any>(`https://8080-baaddbcbfbacadcdbbaadcffdfcbdfeeeb.project.examly.io/user/getSchedule`);
   }
 
   getEventDetails(id: any) {
-    return this.http.get<any>(`https://8080-dffcfdfcebbadcdbbaadcffdfcbdfeeeb.project.examly.io/getEventUsingID/` + id);
+    return this.http.get<any>(`https://8080-baaddbcbfbacadcdbbaadcffdfcbdfeeeb.project.examly.io/getEventUsingID/` + id);
   }
 
   deleteEvent(id: any) {
-    return this.http.delete(`https://8080-dffcfdfcebbadcdbbaadcffdfcbdfeeeb.project.examly.io/deleteEvent/` + id);
+    return this.http.delete(`https://8080-baaddbcbfbacadcdbbaadcffdfcbdfeeeb.project.examly.io/user/deleteEvent/` + id);
   }
 
 
-  getEventsUisngVenueID(id:any){
-    return this.http.get<any>(`https://8080-dffcfdfcebbadcdbbaadcffdfcbdfeeeb.project.examly.io/FetchEvent_Using_VenueId/` + id);
+  getEventsUisngVenueID(id: any) {
+    return this.http.get<any>(`https://8080-baaddbcbfbacadcdbbaadcffdfcbdfeeeb.project.examly.io/FetchEvent_Using_VenueId/` + id);
+  }
+
+  getEventsUisngTeamOneName(name: any) {
+    return this.http.get<any>(`https://8080-baaddbcbfbacadcdbbaadcffdfcbdfeeeb.project.examly.io/FetchEvent_Using_TeamOneName/` + name);
+  }
+
+  getEventsUisngTeamTwoName(name: any) {
+    return this.http.get<any>(`https://8080-baaddbcbfbacadcdbbaadcffdfcbdfeeeb.project.examly.io/FetchEvent_Using_TeamTwoName/` + name);
+  }
+
+  getEventsUisngRefereeName(name: any) {
+    return this.http.get<any>(`https://8080-baaddbcbfbacadcdbbaadcffdfcbdfeeeb.project.examly.io/FetchEvent_Using_RefereeeeName/` + name);
   }
 }

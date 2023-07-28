@@ -16,19 +16,31 @@
     justify-content: center;
 }
 
+
 .venues-card img {
-    height: 30vh;
+    height: 17vh;
 }
 
 .card {
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
-        rgba(0, 0, 0, 0.22) 0px 10px 10px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+        rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
     border-radius: 15px;
 }
 
-.card img {
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
+.more-button {
+    background-color: #f0f0f0;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.paragraph {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    line-height: 28px;
+    word-spacing: -3px;
+    overflow: hidden;
 }
 
 @media only screen and (max-width: 768px) {
