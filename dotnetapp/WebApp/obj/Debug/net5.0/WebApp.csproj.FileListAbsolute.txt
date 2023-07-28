@@ -5,7 +5,6 @@
 /home/coder/project/workspace/dotnetapp/WebApp/bin/Debug/net5.0/WebApp.runtimeconfig.json
 /home/coder/project/workspace/dotnetapp/WebApp/bin/Debug/net5.0/WebApp.runtimeconfig.dev.json
 /home/coder/project/workspace/dotnetapp/WebApp/bin/Debug/net5.0/WebApp.dll
-/home/coder/project/workspace/dotnetapp/WebApp/bin/Debug/net5.0/ref/WebApp.dll
 /home/coder/project/workspace/dotnetapp/WebApp/bin/Debug/net5.0/WebApp.pdb
 /home/coder/project/workspace/dotnetapp/WebApp/bin/Debug/net5.0/Microsoft.AspNetCore.Razor.Language.dll
 /home/coder/project/workspace/dotnetapp/WebApp/bin/Debug/net5.0/Microsoft.CodeAnalysis.dll
@@ -87,7 +86,6 @@
 /home/coder/project/workspace/dotnetapp/WebApp/obj/Debug/net5.0/WebApp.csproj.CoreCompileInputs.cache
 /home/coder/project/workspace/dotnetapp/WebApp/obj/Debug/net5.0/WebApp.MvcApplicationPartsAssemblyInfo.cache
 /home/coder/project/workspace/dotnetapp/WebApp/obj/Debug/net5.0/staticwebassets/WebApp.StaticWebAssets.Manifest.cache
-/home/coder/project/workspace/dotnetapp/WebApp/obj/Debug/net5.0/staticwebassets/WebApp.StaticWebAssets.xml
 /home/coder/project/workspace/dotnetapp/WebApp/obj/Debug/net5.0/scopedcss/bundle/WebApp.styles.css
 /home/coder/project/workspace/dotnetapp/WebApp/obj/Debug/net5.0/WebApp.RazorTargetAssemblyInfo.cache
 /home/coder/project/workspace/dotnetapp/WebApp/obj/Debug/net5.0/WebApp.csproj.CopyComplete
@@ -135,6 +133,11 @@
 /home/coder/project/workspace/dotnetapp/WebApp/bin/Debug/net5.0/Microsoft.AspNetCore.JsonPatch.dll
 /home/coder/project/workspace/dotnetapp/WebApp/bin/Debug/net5.0/Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 /home/coder/project/workspace/dotnetapp/WebApp/bin/Debug/net5.0/Newtonsoft.Json.Bson.dll
+<<<<<<< HEAD
 /home/coder/project/workspace/dotnetapp/WebApp/bin/Debug/net5.0/MailKit.dll
 /home/coder/project/workspace/dotnetapp/WebApp/bin/Debug/net5.0/MimeKit.dll
 /home/coder/project/workspace/dotnetapp/WebApp/bin/Debug/net5.0/BouncyCastle.Crypto.dll
+=======
+>>>>>>> 6efa8c015fdb3981cc7250d7cce8df99786d8e32
+/home/coder/project/workspace/dotnetapp/WebApp/bin/Debug/net5.0/ref/WebApp.dll
+/home/coder/project/workspace/dotnetapp/WebApp/obj/Debug/net5.0/staticwebassets/WebApp.StaticWebAssets.xml
