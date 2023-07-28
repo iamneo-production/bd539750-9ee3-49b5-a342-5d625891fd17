@@ -1,0 +1,65 @@
+<app-user-header></app-user-header>
+
+<div class="container-fluid mt-5">
+    <div class="row">
+        <div class="col-md-8 m-auto">
+            <table class="table table-striped-columns text-center">
+                <caption>All-Schedules booked by You</caption>
+                <thead>
+                    <tr>
+                        <th>Venue Name</th>
+                        <th>Time</th>
+                        <th>From Date</th>
+                        <th>To Date</th>
+                        <th>Total Price</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tbody *ngFor="let event of EventDetails">
+                    <tr *ngIf="event.matchingId==userId">
+
+                        <td>{{event.eventName}}</td>
+                        <td>{{event.time}}</td>
+                        <td>{{event.eventFromDate}}</td>
+                        <td>{{event.eventToDate}}</td>
+                        <td>{{event.eventPrice}}</td>
+
+                        <td><a style="color: rgb(55, 52, 52);" [routerLink]="['/update-book-event', event.eventId]"><i
+                                    class="fa-solid fa-pen-to-square"></i></a></td>
+                        <td><a style="cursor:pointer"
+                                (click)="deleteEvent(event.eventId,event.applicantEmail,event.applicantName)"><i
+                                    class="fa-solid fa-trash-can"></i></a></td>
+
+                        <td><button type="button" (click)="getEventDetails(event.eventId)" class="btn btn-primary"
+                                data-bs-toggle="modal" data-bs-target="#exampleModal">More Details</button></td>
+
+                    </tr>
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Event Details</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <ul class="list-group" *ngFor="let item of SingleEventDetails | keyvalue">
+                    <li class="list-group-item"> {{ item.key }} : {{ item.value }} </li>
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

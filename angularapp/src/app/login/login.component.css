@@ -1,7 +1,9 @@
-@import url("https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap");
+
 .heading h1 {
-  font-family: "Permanent Marker";
+  font-family:'Times New Roman', Times, serif;
+  font-weight: bold;
 }
+
 
 .heading .col {
   display: flex;

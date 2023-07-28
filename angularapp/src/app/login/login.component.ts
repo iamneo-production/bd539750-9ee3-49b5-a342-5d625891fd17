@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -10,7 +10,7 @@ import { UserStoreService } from '../Services/user-store.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   type: string = 'password';
   isTest: boolean = false;
   eyeIcon: string = 'fa-eye-slash';
@@ -19,13 +19,19 @@ export class LoginComponent implements OnInit {
   //Hide and Show password
   hideShow() {
     this.isTest = !this.isTest;
-    this.isTest ? (this.eyeIcon = 'fa-eye') : (this.eyeIcon = 'fa-eye-slash');
-    this.isTest ? (this.type = 'text') : (this.type = 'password');
+    if (this.isTest) {
+      this.eyeIcon = 'fa-eye';
+      this.type = 'text';
+    }
+    else{
+      this.eyeIcon = 'fa-eye-slash';
+      this.type = 'password';
+    }
   }
 
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required]),
+    password: new FormControl('', [Validators.required, Validators.pattern(/^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]+$/)]),
   });
 
 
@@ -38,27 +44,24 @@ export class LoginComponent implements OnInit {
 
   constructor(private auth: AuthServiceService, private route: Router, private toast: ToastrService, private userStore: UserStoreService) { }
 
-  ngOnInit(): void { }
   public role: string = '';
   onLogin() {
     if (this.loginForm.valid) {
       this.auth.login(this.loginForm.value).subscribe({
         next: (result) => {
-
+          
           this.auth.storeToken(result.token);
-          this.userStore.getRoleFromStore().subscribe((val) => {
             let roleFromToken = this.auth.getRoleFromToken();
-            this.role = val || roleFromToken;
-
+            this.role = roleFromToken;
             if (this.role == 'user') {
               this.route.navigate(['/user-homepage']).then(() => {
-                window.location.reload();
+                location.reload();
               });
 
             } else if (this.role == 'admin') {
               this.route.navigate(['/admin-venue-list']);
             }
-          });
+         
 
           this.toast.success(result.message, "Success");
         },
@@ -66,6 +69,10 @@ export class LoginComponent implements OnInit {
           this.toast.error("Incorrect email or password", "Failed");
         },
       });
+    }
+    else {
+      this.loginForm.markAllAsTouched();
+      this.toast.error("Please fill all the required fields", "ERROR");
     }
   }
 }
